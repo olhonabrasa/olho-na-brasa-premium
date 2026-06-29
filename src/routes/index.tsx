@@ -171,7 +171,7 @@ const trustCards: TrustCard[] = [
   {
     image: iconParcelamento.url,
     title: "ATÉ 10X S/ JUROS no cartão e 5% Off no Pix",
-    description: "Feito nas medidas exatas da sua churrasqueira",
+    description: "Feito nas medidas exatas da sua churrasqueira e seu bolso",
   },
   {
     image: iconFrete.url,
