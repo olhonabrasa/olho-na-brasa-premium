@@ -1,0 +1,5 @@
+Faça upload do arquivo "Guia_Completo_Antes_de_Comprar_Olho_na_Brasa.pdf" aqui em /public/ com o nome:
+
+  guia-olho-na-brasa.pdf
+
+O link de download direto do popup já aponta para /guia-olho-na-brasa.pdf.
