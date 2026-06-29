@@ -670,10 +670,14 @@ function TrustBand() {
     <RevealSection className="section-alt border-y border-border/40">
       <div className="mx-auto grid max-w-(--container-max) gap-4 px-5 md:grid-cols-4">
         {trustCards.map((card) => (
-          <article key={card.title} className="glass-panel grid min-h-[150px] gap-3 rounded-[var(--card-radius)] border border-border bg-card/85 p-5">
-            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/12 text-primary">
-              {card.icon}
-            </div>
+          <article key={card.title} className="glass-panel flex min-h-[150px] items-center gap-4 rounded-[var(--card-radius)] border border-border bg-card/85 p-5">
+            <img
+              src={card.image}
+              alt=""
+              aria-hidden="true"
+              className="h-14 w-14 shrink-0 object-contain"
+              loading="lazy"
+            />
             <div>
               <h2 className="text-base font-semibold text-foreground">{card.title}</h2>
               <p className="mt-2 text-sm leading-6 text-secondary-foreground">{card.description}</p>
