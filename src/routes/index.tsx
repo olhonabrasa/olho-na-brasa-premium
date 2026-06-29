@@ -1177,14 +1177,6 @@ function ConsultiveModal({
                       Vídeo do Rodrigo ensinando a medir.
                     </video>
                   </div>
-                </div>
-              ) : null}
-
-              {measurementState === "no" ? (
-                <div className="space-y-4 rounded-[var(--card-radius)] border border-border bg-background/50 p-4">
-                  <div className="overflow-hidden rounded-xl border border-border bg-card">
-                    <img src={measurementGuideAsset.url} alt="Ilustração mostrando como medir a churrasqueira corretamente" className="w-full object-cover" loading="lazy" />
-                  </div>
                   <div className="rounded-xl border border-dashed border-border-strong bg-card px-4 py-4 text-sm leading-6 text-secondary-foreground">
                     <p className="font-semibold text-foreground">▶ Assista ao vídeo do Rodrigo ensinando a medir</p>
                     <p className="mt-1">Em 2 minutos você aprende a tirar as medidas certinhas.</p>
