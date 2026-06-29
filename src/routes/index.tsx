@@ -485,20 +485,20 @@ function LandingPage() {
 
         <main className="snap-y snap-mandatory md:snap-none">
           <HeroSection onOpenModal={openConsultiveModal} />
-          <VideoSection videoOpen={videoOpen} onPlay={() => setVideoOpen(true)} />
+          <VideoSection videoOpen={videoOpen} onPlay={() => setVideoOpen(true)} onOpenModal={openConsultiveModal} />
           <TrustBand />
-          <DifferentialsSection />
-          <BeforeAfterSection />
-          <ProcessSection />
-          <GallerySection onOpenLightbox={setLightboxImage} />
-          <TestimonialsSection />
-          <WhoItsForSection />
-          <FaqSection />
+          <DifferentialsSection onOpenModal={openConsultiveModal} />
+          <BeforeAfterSection onOpenModal={openConsultiveModal} />
+          <ProcessSection onOpenModal={openConsultiveModal} />
+          <GallerySection onOpenLightbox={setLightboxImage} onOpenModal={openConsultiveModal} />
+          <TestimonialsSection onOpenModal={openConsultiveModal} />
+          <WhoItsForSection onOpenModal={openConsultiveModal} />
+          <FaqSection onOpenModal={openConsultiveModal} />
           <FinalCtaSection onOpenModal={openConsultiveModal} />
         </main>
 
         <Footer />
-        <FloatingWhatsappButton />
+        <FloatingWhatsappButton onOpenModal={openConsultiveModal} />
       </div>
 
       <ConsultiveModal
