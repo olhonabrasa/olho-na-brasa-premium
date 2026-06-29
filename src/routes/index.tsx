@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useId, useMemo, useState, type ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -1321,32 +1321,13 @@ function Lightbox({ item, onClose }: { item: GalleryItem; onClose: () => void })
 }
 
 function RevealSection({ id, className, as = "section", children, style }: RevealProps) {
+  const generatedId = useId().replace(/:/g, "");
   const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const element = document.getElementById(id || "");
-    if (!element) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.18, rootMargin: "0px 0px -12% 0px" },
-    );
-
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, [id]);
-
   const Component = as;
-  const localId = id ?? `section-${Math.random().toString(36).slice(2, 9)}`;
+  const elementId = id ?? `section-${generatedId}`;
 
   useEffect(() => {
-    if (id) return;
-    const element = document.getElementById(localId);
+    const element = document.getElementById(elementId);
     if (!element) return;
 
     const observer = new IntersectionObserver(
@@ -1361,10 +1342,10 @@ function RevealSection({ id, className, as = "section", children, style }: Revea
 
     observer.observe(element);
     return () => observer.disconnect();
-  }, [id, localId]);
+  }, [elementId]);
 
   return (
-    <Component id={localId} style={style} className={cn("scroll-mt-24 snap-start px-0 py-20 md:py-28", visible ? "fade-visible" : "fade-hidden", className)}>
+    <Component id={elementId} style={style} className={cn("scroll-mt-24 snap-start px-0 py-20 md:py-28", visible ? "fade-visible" : "fade-hidden", className)}>
       {children}
     </Component>
   );
