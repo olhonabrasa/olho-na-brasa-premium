@@ -90,6 +90,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Olho na Brasa" },
+      { name: "description", content: "OLHO NA BRASA - ELEVANDO SEU CHURRASCO A UM PATAMAR DE ELEGÂNCIA E PRATICIDADE!" },
+      { property: "og:description", content: "OLHO NA BRASA - ELEVANDO SEU CHURRASCO A UM PATAMAR DE ELEGÂNCIA E PRATICIDADE!" },
+      { name: "twitter:description", content: "OLHO NA BRASA - ELEVANDO SEU CHURRASCO A UM PATAMAR DE ELEGÂNCIA E PRATICIDADE!" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/EIiqy9FqIve2pb32RYkRfjz0mts1/social-images/social-1782766957521-291045086_379509394171377_7657345755289909230_n.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/EIiqy9FqIve2pb32RYkRfjz0mts1/social-images/social-1782766957521-291045086_379509394171377_7657345755289909230_n.webp" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
