@@ -20,6 +20,10 @@ import {
   Truck,
   X,
 } from "lucide-react";
+import iconFabrica from "@/assets/icon-fabrica.webp.asset.json";
+import iconGarantia from "@/assets/icon-garantia.webp.asset.json";
+import iconParcelamento from "@/assets/icon-parcelamento.webp.asset.json";
+import iconFrete from "@/assets/icon-frete.webp.asset.json";
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
