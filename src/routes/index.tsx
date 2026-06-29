@@ -624,7 +624,7 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
   );
 }
 
-function VideoSection({ videoOpen, onPlay }: { videoOpen: boolean; onPlay: () => void }) {
+function VideoSection({ videoOpen: _videoOpen, onPlay: _onPlay, onOpenModal }: { videoOpen: boolean; onPlay: () => void; onOpenModal: () => void }) {
   return (
     <RevealSection className="section-dark border-t border-border/40">
       <SectionHeading
@@ -651,6 +651,7 @@ function VideoSection({ videoOpen, onPlay }: { videoOpen: boolean; onPlay: () =>
           </div>
         </div>
       </div>
+      <SectionCta label="MONTAR MEU KIT" onClick={onOpenModal} />
     </RevealSection>
   );
 }
