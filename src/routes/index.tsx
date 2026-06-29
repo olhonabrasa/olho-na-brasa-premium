@@ -38,6 +38,20 @@ import processInspectionAsset from "@/assets/processo-inspecao-qualidade.jpg.ass
 import processPackagingAsset from "@/assets/processo-embalagem-segura.png.asset.json";
 import measurementGuideAsset from "@/assets/guia-medidas.png.asset.json";
 import videoAsset from "@/assets/video-cinematografico.mp4.asset.json";
+import rodrigoSuporte from "@/assets/rodrigo-suporte.png.asset.json";
+import card1Antes from "@/assets/card1-antes.jpg.asset.json";
+import card1Depois from "@/assets/card1-depois.jpg.asset.json";
+import card2Antes from "@/assets/card2-antes.jpg.asset.json";
+import card2Depois from "@/assets/card2-depois.jpg.asset.json";
+import card3Antes from "@/assets/card3-antes.jpg.asset.json";
+import card3Depois from "@/assets/card3-depois.jpg.asset.json";
+import projeto1 from "@/assets/projeto-instalado-1.jpg.asset.json";
+import projeto2 from "@/assets/projeto-instalado-2.jpg.asset.json";
+import projeto3 from "@/assets/projeto-instalado-3.jpg.asset.json";
+import projeto4 from "@/assets/projeto-instalado-4.png.asset.json";
+import projeto5 from "@/assets/projeto-instalado-5.jpg.asset.json";
+import projeto6 from "@/assets/projeto-instalado-6.jpg.asset.json";
+import rodrigoMedidasVideo from "@/assets/rodrigo-medidas.mp4.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -251,42 +265,42 @@ const processSteps: ProcessStep[] = [
 
 const galleryItems: GalleryItem[] = [
   {
-    title: "Kit Premium instalado",
-    location: "Projeto residencial — litoral de SC",
-    image: afterProjectAsset.url,
-    alt: "Churrasqueira com kit premium em inox 304 instalado",
+    title: "Kit Premium em ação",
+    location: "Carnes na brasa com suporte suspenso",
+    image: projeto1.url,
+    alt: "Kit premium em inox 304 instalado em churrasqueira com carnes assando",
     featured: true,
   },
   {
-    title: "Projeto em obra",
-    location: "Antes da instalação",
-    image: beforeProjectAsset.url,
-    alt: "Churrasqueira de alvenaria sem equipamento antes da instalação do kit",
+    title: "Acabamento espelhado",
+    location: "Churrasqueira em mármore",
+    image: projeto2.url,
+    alt: "Kit Olho na Brasa instalado em churrasqueira com moldura em mármore",
   },
   {
-    title: "Engenharia própria",
-    location: "Fabricação interna em SC",
-    image: processPolishAsset.url,
-    alt: "Detalhe do inox polido com gravação da marca Olho na Brasa",
-  },
-  {
-    title: "Controle final",
-    location: "Inspeção de acabamento",
-    image: processInspectionAsset.url,
-    alt: "Inspeção de qualidade final das grelhas e estruturas em inox",
+    title: "Encaixe perfeito",
+    location: "Churrasqueira em tijolo aparente",
+    image: projeto3.url,
+    alt: "Kit premium em inox instalado em churrasqueira de tijolo aparente",
     featured: true,
   },
   {
-    title: "Montagem premium",
-    location: "Testes antes do envio",
-    image: processAssemblyAsset.url,
-    alt: "Montagem manual de estrutura premium em inox sobre bancada",
+    title: "Projeto em pedra natural",
+    location: "Área gourmet rústica",
+    image: projeto4.url,
+    alt: "Kit Olho na Brasa instalado em churrasqueira com revestimento em pedra natural",
   },
   {
-    title: "Entrega protegida",
-    location: "Embalagem reforçada",
-    image: processPackagingAsset.url,
-    alt: "Estrutura em inox protegida por embalagem reforçada",
+    title: "Área gourmet contemporânea",
+    location: "Bancada em granito",
+    image: projeto5.url,
+    alt: "Kit premium instalado em churrasqueira de bancada de área gourmet contemporânea",
+  },
+  {
+    title: "Nicho premium",
+    location: "Projeto residencial",
+    image: projeto6.url,
+    alt: "Kit Olho na Brasa instalado em nicho de churrasqueira residencial premium",
   },
 ];
 
@@ -591,22 +605,18 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
         <div className="relative order-1 min-h-[62svh] overflow-hidden md:order-2 md:min-h-[720px] md:rounded-[calc(var(--card-radius)+8px)] md:border md:border-border-strong">
           <div className="hero-placeholder absolute inset-0" aria-hidden="true" />
           <div className="hero-smoke absolute inset-x-0 bottom-0 h-3/4" aria-hidden="true" />
-          <div className="absolute inset-0 bg-linear-to-t from-background via-background/45 to-transparent md:hidden" aria-hidden="true" />
+          <img
+            src={rodrigoSuporte.url}
+            alt="Rodrigo, dono da Olho na Brasa, segurando o Kit Suporte Suspenso em inox"
+            className="absolute inset-0 z-[1] h-full w-full object-contain object-bottom drop-shadow-[0_30px_60px_rgba(0,0,0,0.55)]"
+            loading="eager"
+          />
+          <div className="absolute inset-0 z-[2] bg-linear-to-t from-background via-background/45 to-transparent md:hidden" aria-hidden="true" />
           <div className="absolute right-5 top-5 z-10 rounded-full border border-border-strong bg-card/85 px-4 py-2 text-right text-xs font-semibold text-foreground shadow-soft backdrop-blur-xl md:right-6 md:top-6">
             15 anos de garantia real
           </div>
-          <div className="absolute inset-x-5 bottom-8 z-10 md:hidden">
-            <div className="rounded-[var(--card-radius)] border border-border bg-card/45 px-4 py-4 backdrop-blur-sm">
-              <p className="text-center text-xs font-medium tracking-[0.14em] text-muted-foreground">IMAGEM DO RODRIGO COM KIT</p>
-            </div>
-          </div>
-          <div className="absolute inset-0 hidden items-end justify-center p-8 md:flex">
-            <div className="grid h-full w-full place-items-center rounded-[calc(var(--card-radius)+4px)] border border-dashed border-border-strong/80 bg-card/25 text-center backdrop-blur-[2px]">
-              <div>
-                <p className="text-sm font-semibold tracking-[0.16em] text-muted-foreground">ESTRUTURA PRONTA PARA FOTO/VÍDEO DO RODRIGO</p>
-                <p className="mt-2 text-sm text-secondary-foreground">Área preparada para receber imagem com parallax leve no desktop.</p>
-              </div>
-            </div>
+          <div className="absolute left-5 bottom-5 z-10 rounded-full border border-border-strong bg-card/85 px-4 py-2 text-xs font-semibold text-foreground shadow-soft backdrop-blur-xl md:left-6 md:bottom-6">
+            Rodrigo · fundador da Olho na Brasa
           </div>
         </div>
       </section>
@@ -706,13 +716,35 @@ function BeforeAfterSection() {
       />
 
       <div className="mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible">
-        {[1, 2, 3].map((item) => (
-          <article key={item} className="min-w-[88%] snap-start overflow-hidden rounded-[calc(var(--card-radius)+2px)] border border-border bg-card shadow-soft md:min-w-0">
+        {[
+          {
+            before: card1Antes.url,
+            after: card1Depois.url,
+            title: "Churrasqueira de alvenaria → Com Kit Premium instalado",
+            beforeAlt: "Churrasqueira de alvenaria sem equipamento antes da instalação",
+            afterAlt: "Churrasqueira com Kit Premium Olho na Brasa instalado",
+          },
+          {
+            before: card2Antes.url,
+            after: card2Depois.url,
+            title: "Churrasqueira antiga e enferrujada → Grelhas novas em inox",
+            beforeAlt: "Churrasqueira antiga com grelhas enferrujadas",
+            afterAlt: "Mesma churrasqueira com grelhas novas em inox 304 Olho na Brasa",
+          },
+          {
+            before: card3Antes.url,
+            after: card3Depois.url,
+            title: "Churrasqueira de obra crua → Kit completo com suporte suspenso",
+            beforeAlt: "Churrasqueira de obra crua, sem grelhas nem acessórios",
+            afterAlt: "Kit completo Olho na Brasa com suporte suspenso instalado",
+          },
+        ].map((pair) => (
+          <article key={pair.title} className="min-w-[88%] snap-start overflow-hidden rounded-[calc(var(--card-radius)+2px)] border border-border bg-card shadow-soft md:min-w-0">
             <div className="grid grid-cols-2">
               <div className="relative aspect-[4/5] overflow-hidden border-r border-border">
                 <img
-                  src={beforeProjectAsset.url}
-                  alt="Churrasqueira de alvenaria sem equipamento antes da transformação"
+                  src={pair.before}
+                  alt={pair.beforeAlt}
                   className="h-full w-full object-cover"
                   loading="lazy"
                 />
@@ -722,8 +754,8 @@ function BeforeAfterSection() {
               </div>
               <div className="relative aspect-[4/5] overflow-hidden">
                 <img
-                  src={afterProjectAsset.url}
-                  alt="Churrasqueira com kit premium em inox Olho na Brasa instalado"
+                  src={pair.after}
+                  alt={pair.afterAlt}
                   className="h-full w-full object-cover"
                   loading="lazy"
                 />
@@ -733,14 +765,8 @@ function BeforeAfterSection() {
               </div>
             </div>
             <div className="space-y-2 p-5">
-              <h3 className="text-base font-semibold text-foreground">
-                {item === 1
-                  ? "Churrasqueira de alvenaria sem equipamento → Com Kit Premium instalado"
-                  : item === 2
-                    ? "Churrasqueira antiga → Grelhas novas em inox"
-                    : "Churrasqueira em obra → Kit completo com suporte suspenso"}
-              </h3>
-              <p className="text-sm leading-6 text-secondary-foreground">Comparativo visual pensado para mostrar encaixe, acabamento e percepção premium.</p>
+              <h3 className="text-base font-semibold text-foreground">{pair.title}</h3>
+              <p className="text-sm leading-6 text-secondary-foreground">Encaixe perfeito, acabamento espelhado e a percepção premium que só o inox 304 entrega.</p>
             </div>
           </article>
         ))}
@@ -1123,13 +1149,34 @@ function ConsultiveModal({
                       <input type="number" inputMode="numeric" min="0" value={form.height} onChange={(event) => onChangeField("height", event.target.value)} className="field-base" />
                     </LabelField>
                   </div>
-                  <div className="overflow-hidden rounded-xl border border-border bg-card">
-                    <img src={measurementGuideAsset.url} alt="Guia visual indicando largura, comprimento, altura e largura interna da churrasqueira" className="w-full object-cover" loading="lazy" />
+                  <div className="overflow-hidden rounded-xl border border-border bg-black">
+                    <video
+                      src={rodrigoMedidasVideo.url}
+                      controls
+                      playsInline
+                      poster={measurementGuideAsset.url}
+                      className="aspect-video w-full object-contain"
+                    >
+                      Vídeo do Rodrigo ensinando a medir.
+                    </video>
                   </div>
-                  <p className="text-sm leading-6 text-secondary-foreground">Meça por dentro da churrasqueira, de parede a parede.</p>
-                  <a href="#video" onClick={(event) => event.preventDefault()} className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-strong">
-                    <Play className="h-4 w-4" aria-hidden="true" /> Assista ao vídeo do Rodrigo ensinando a medir (2 min)
-                  </a>
+                  <p className="text-sm leading-6 text-secondary-foreground">Meça por dentro da churrasqueira, de parede a parede. No vídeo, o Rodrigo mostra o passo a passo.</p>
+                </div>
+              ) : null}
+
+              {measurementState === "no" ? (
+                <div className="space-y-4 rounded-[var(--card-radius)] border border-border bg-background/50 p-4">
+                  <div className="overflow-hidden rounded-xl border border-border bg-black">
+                    <video
+                      src={rodrigoMedidasVideo.url}
+                      controls
+                      playsInline
+                      poster={measurementGuideAsset.url}
+                      className="aspect-video w-full object-contain"
+                    >
+                      Vídeo do Rodrigo ensinando a medir.
+                    </video>
+                  </div>
                 </div>
               ) : null}
 
