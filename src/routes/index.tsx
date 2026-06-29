@@ -20,6 +20,10 @@ import {
   Truck,
   X,
 } from "lucide-react";
+import iconFabrica from "@/assets/icon-fabrica.webp.asset.json";
+import iconGarantia from "@/assets/icon-garantia.webp.asset.json";
+import iconParcelamento from "@/assets/icon-parcelamento.webp.asset.json";
+import iconFrete from "@/assets/icon-frete.webp.asset.json";
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
@@ -102,7 +106,7 @@ type SectionHeadingProps = {
 };
 
 type TrustCard = {
-  icon: ReactNode;
+  image: string;
   title: string;
   description: string;
 };
@@ -141,22 +145,22 @@ const INSTAGRAM_URL = "https://www.instagram.com/olhonabrasa/";
 
 const trustCards: TrustCard[] = [
   {
-    icon: <Factory className="h-5 w-5" aria-hidden="true" />,
+    image: iconFabrica.url,
     title: "Direto da fábrica",
     description: "Sem intermediário, preço justo",
   },
   {
-    icon: <ShieldCheck className="h-5 w-5" aria-hidden="true" />,
+    image: iconGarantia.url,
     title: "15 anos de garantia",
     description: "Confiança na qualidade que fabricamos",
   },
   {
-    icon: <Ruler className="h-5 w-5" aria-hidden="true" />,
-    title: "Projeto sob medida",
+    image: iconParcelamento.url,
+    title: "ATÉ 10X S/ JUROS no cartão e 5% Off no Pix",
     description: "Feito nas medidas exatas da sua churrasqueira",
   },
   {
-    icon: <Truck className="h-5 w-5" aria-hidden="true" />,
+    image: iconFrete.url,
     title: "Frete grátis Sul/Sudeste",
     description: "Envio seguro para todo Brasil",
   },
@@ -621,39 +625,19 @@ function VideoSection({ videoOpen, onPlay }: { videoOpen: boolean; onPlay: () =>
 
       <div className="mx-auto max-w-(--container-max) px-5">
         <div className="glass-panel overflow-hidden rounded-[calc(var(--card-radius)+2px)] border border-border">
-          <div className="relative aspect-video overflow-hidden bg-card">
-            {videoOpen ? (
-              <video
-                className="h-full w-full object-cover"
-                src={videoAsset.url}
-                controls
-                autoPlay
-                playsInline
-                poster={afterProjectAsset.url}
-              >
-                Seu navegador não suporta vídeo HTML5.
-              </video>
-            ) : (
-              <button
-                type="button"
-                onClick={onPlay}
-                className="group relative flex h-full w-full items-center justify-center overflow-hidden"
-                aria-label="Reproduzir vídeo cinematográfico do kit premium"
-              >
-                <img
-                  src={afterProjectAsset.url}
-                  alt="Kit premium em inox instalado em churrasqueira de alto padrão"
-                  className="h-full w-full object-cover opacity-65 transition-transform duration-500 group-hover:scale-[1.02]"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-background via-background/30 to-transparent" aria-hidden="true" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(255,107,0,0.18),transparent_45%)]" aria-hidden="true" />
-                <span className="absolute inset-0 grid place-items-center">
-                  <span className="flex h-20 w-20 items-center justify-center rounded-full border border-white/15 bg-background/55 text-foreground shadow-fire backdrop-blur-md transition-transform duration-300 group-hover:scale-105">
-                    <Play className="ml-1 h-8 w-8 fill-current" aria-hidden="true" />
-                  </span>
-                </span>
-              </button>
-            )}
+          <div className="relative aspect-video overflow-hidden bg-black">
+            <video
+              className="h-full w-full object-contain"
+              src={videoAsset.url}
+              controls
+              autoPlay
+              loop
+              muted
+              playsInline
+              poster={afterProjectAsset.url}
+            >
+              Seu navegador não suporta vídeo HTML5.
+            </video>
           </div>
         </div>
       </div>
@@ -666,10 +650,14 @@ function TrustBand() {
     <RevealSection className="section-alt border-y border-border/40">
       <div className="mx-auto grid max-w-(--container-max) gap-4 px-5 md:grid-cols-4">
         {trustCards.map((card) => (
-          <article key={card.title} className="glass-panel grid min-h-[150px] gap-3 rounded-[var(--card-radius)] border border-border bg-card/85 p-5">
-            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/12 text-primary">
-              {card.icon}
-            </div>
+          <article key={card.title} className="glass-panel flex min-h-[150px] items-center gap-4 rounded-[var(--card-radius)] border border-border bg-card/85 p-5">
+            <img
+              src={card.image}
+              alt=""
+              aria-hidden="true"
+              className="h-14 w-14 shrink-0 object-contain"
+              loading="lazy"
+            />
             <div>
               <h2 className="text-base font-semibold text-foreground">{card.title}</h2>
               <p className="mt-2 text-sm leading-6 text-secondary-foreground">{card.description}</p>
