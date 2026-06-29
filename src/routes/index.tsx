@@ -10,7 +10,6 @@ import {
   ExternalLink,
   Factory,
   FileDown,
-  Flame,
   Hammer,
   Image as ImageIcon,
   Play,
@@ -19,7 +18,6 @@ import {
   ShieldCheck,
   Star,
   Truck,
-  Wrench,
   X,
 } from "lucide-react";
 
@@ -362,15 +360,10 @@ const benefits = [
   "Frete grátis Sul/Sudeste",
 ];
 
-const coldGuideFeatures = [
-  "Ver kits e preços no site",
-  "Baixar guia gratuito de medidas",
-];
 
 function LandingPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalStage, setModalStage] = useState<ModalStage>("stage");
-  const [projectMoment, setProjectMoment] = useState<ProjectMoment>(null);
   const [measurementState, setMeasurementState] = useState<MeasurementState>("unknown");
   const [showMeasurementsForm, setShowMeasurementsForm] = useState(false);
   const [headerVisible, setHeaderVisible] = useState(false);
@@ -439,7 +432,6 @@ function LandingPage() {
   const openConsultiveModal = () => {
     setModalOpen(true);
     setModalStage("stage");
-    setProjectMoment(null);
     setMeasurementState("unknown");
     setShowMeasurementsForm(false);
   };
@@ -447,7 +439,7 @@ function LandingPage() {
   const closeConsultiveModal = () => {
     setModalOpen(false);
     setModalStage("stage");
-    setProjectMoment(null);
+    
     setMeasurementState("unknown");
     setShowMeasurementsForm(false);
   };
@@ -494,14 +486,13 @@ function LandingPage() {
       <ConsultiveModal
         open={modalOpen}
         stage={modalStage}
-        projectMoment={projectMoment}
+        
         measurementState={measurementState}
         showMeasurementsForm={showMeasurementsForm}
         form={contactForm}
         formattedWhatsapp={formattedWhatsapp}
         onClose={closeConsultiveModal}
         onMomentSelect={(moment) => {
-          setProjectMoment(moment);
           if (moment === "planejando") {
             setModalStage("cold");
           } else {
@@ -862,7 +853,7 @@ function TestimonialsSection() {
               item.accent ? "border-primary/40 bg-primary/8" : "border-border",
             )}
           >
-            <div className="mb-4 flex gap-1 text-[--color-star]">
+            <div className="mb-4 flex gap-1 text-star">
               {Array.from({ length: 5 }).map((_, index) => (
                 <Star key={index} className="h-4 w-4 fill-current" aria-hidden="true" />
               ))}
@@ -1031,7 +1022,6 @@ function FloatingWhatsappButton() {
 function ConsultiveModal({
   open,
   stage,
-  projectMoment,
   measurementState,
   showMeasurementsForm,
   form,
@@ -1049,7 +1039,6 @@ function ConsultiveModal({
 }: {
   open: boolean;
   stage: ModalStage;
-  projectMoment: ProjectMoment;
   measurementState: MeasurementState;
   showMeasurementsForm: boolean;
   form: ContactForm;

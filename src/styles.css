@@ -42,6 +42,7 @@
   --color-whatsapp-foreground: var(--whatsapp-foreground);
   --color-header: var(--header);
   --color-footer: var(--footer);
+  --color-star: var(--star);
 }
 
 :root {
