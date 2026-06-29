@@ -701,7 +701,7 @@ function DifferentialsSection({ onOpenModal }: { onOpenModal: () => void }) {
   );
 }
 
-function BeforeAfterSection() {
+function BeforeAfterSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <RevealSection className="section-alt border-y border-border/40">
       <SectionHeading
@@ -716,21 +716,21 @@ function BeforeAfterSection() {
           {
             before: card1Antes.url,
             after: card1Depois.url,
-            title: "Churrasqueira de alvenaria → Com Kit Premium instalado",
+            title: "Churrasqueira de alvenaria, Com Kit Premium instalado",
             beforeAlt: "Churrasqueira de alvenaria sem equipamento antes da instalação",
             afterAlt: "Churrasqueira com Kit Premium Olho na Brasa instalado",
           },
           {
             before: card2Antes.url,
             after: card2Depois.url,
-            title: "Churrasqueira antiga e enferrujada → Grelhas novas em inox",
+            title: "Churrasqueira antiga e enferrujada, Grelhas novas em inox",
             beforeAlt: "Churrasqueira antiga com grelhas enferrujadas",
             afterAlt: "Mesma churrasqueira com grelhas novas em inox 304 Olho na Brasa",
           },
           {
             before: card3Antes.url,
             after: card3Depois.url,
-            title: "Churrasqueira de obra crua → Kit completo com suporte suspenso",
+            title: "Churrasqueira de obra crua, Kit completo com suporte suspenso",
             beforeAlt: "Churrasqueira de obra crua, sem grelhas nem acessórios",
             afterAlt: "Kit completo Olho na Brasa com suporte suspenso instalado",
           },
@@ -767,6 +767,7 @@ function BeforeAfterSection() {
           </article>
         ))}
       </div>
+      <SectionCta label="TRANSFORMAR MINHA CHURRASQUEIRA" onClick={onOpenModal} />
     </RevealSection>
   );
 }
