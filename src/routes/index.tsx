@@ -797,6 +797,7 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
           </article>
         ))}
       </div>
+      <SectionCta label="QUERO UM KIT DESSES" onClick={onOpenModal} />
     </RevealSection>
   );
 }
