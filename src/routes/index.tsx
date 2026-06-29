@@ -924,11 +924,12 @@ function WhoItsForSection({ onOpenModal }: { onOpenModal: () => void }) {
           </ul>
         </article>
       </div>
+      <SectionCta label="SIM, QUERO O MEU" onClick={onOpenModal} />
     </RevealSection>
   );
 }
 
-function FaqSection() {
+function FaqSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <RevealSection className="section-dark">
       <SectionHeading title="Dúvidas frequentes" centered />
