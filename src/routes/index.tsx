@@ -1088,7 +1088,7 @@ function ConsultiveModal({
   const canContinueMeasurements = showMeasurementsForm
     ? Boolean(form.width.trim() && form.depth.trim())
     : measurementState === "no";
-  const canContinueContact = Boolean(form.name.trim() && form.whatsapp.trim() && form.city.trim());
+  const canContinueContact = Boolean(form.name.trim() && form.whatsapp.trim() && form.city.trim() && form.email.trim());
   const canSendGuide = Boolean(form.email.trim());
 
   return (
