@@ -946,6 +946,7 @@ function FaqSection({ onOpenModal }: { onOpenModal: () => void }) {
           ))}
         </Accordion>
       </div>
+      <SectionCta label="AINDA TEM DÚVIDA? FALE CONOSCO" onClick={onOpenModal} />
     </RevealSection>
   );
 }
