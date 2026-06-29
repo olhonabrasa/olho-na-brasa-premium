@@ -679,15 +679,9 @@ function TrustBand() {
   );
 }
 
-function DifferentialsSection() {
+function DifferentialsSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <RevealSection className="section-dark">
-      <SectionHeading
-        eyebrow="POR QUE OLHO NA BRASA"
-        title="Não vendemos churrasqueira. Entregamos o equipamento que seu churrasco merece."
-        centered
-      />
-
       <div className="mx-auto grid max-w-(--container-max) gap-4 px-5 md:grid-cols-2">
         {differentials.map((item) => (
           <article key={item.title} className="rounded-[var(--card-radius)] border border-border bg-card p-5 shadow-soft transition-colors duration-300 hover:bg-card-hover">
@@ -701,6 +695,7 @@ function DifferentialsSection() {
           </article>
         ))}
       </div>
+      <SectionCta label="FALAR COM ESPECIALISTA" onClick={onOpenModal} />
     </RevealSection>
   );
 }
