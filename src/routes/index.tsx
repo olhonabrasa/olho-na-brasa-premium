@@ -802,7 +802,7 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
   );
 }
 
-function GallerySection({ onOpenLightbox }: { onOpenLightbox: (item: GalleryItem) => void }) {
+function GallerySection({ onOpenLightbox, onOpenModal }: { onOpenLightbox: (item: GalleryItem) => void; onOpenModal: () => void }) {
   return (
     <RevealSection className="section-alt border-y border-border/40">
       <SectionHeading
