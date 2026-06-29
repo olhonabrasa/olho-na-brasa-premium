@@ -847,11 +847,12 @@ function GallerySection({ onOpenLightbox, onOpenModal }: { onOpenLightbox: (item
           </button>
         ))}
       </div>
+      <SectionCta label="COMEÇAR MEU PROJETO" onClick={onOpenModal} />
     </RevealSection>
   );
 }
 
-function TestimonialsSection() {
+function TestimonialsSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <RevealSection className="section-dark">
       <SectionHeading eyebrow="CLIENTES QUE LEVAM O CHURRASCO A SÉRIO" title="Quem instala percebe a diferença no primeiro uso." centered />
