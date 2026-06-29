@@ -969,7 +969,7 @@ function FinalCtaSection({ onOpenModal }: { onOpenModal: () => void }) {
               className="min-h-13 w-full max-w-sm rounded-[var(--button-radius)] bg-primary px-6 text-sm font-bold tracking-[0.08em] text-primary-foreground shadow-fire transition-transform duration-300 hover:-translate-y-0.5 hover:bg-primary-strong"
               onClick={onOpenModal}
             >
-              QUERO MEU PROJETO <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              QUERO MEU PROJETO AGORA <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Button>
           </div>
           <p className="relative mt-5 text-sm leading-6 text-muted-foreground">
