@@ -1229,6 +1229,9 @@ function ConsultiveModal({
                 <LabelField label="Cidade / Estado">
                   <input value={form.city} onChange={(event) => onChangeField("city", event.target.value)} className="field-base" />
                 </LabelField>
+                <LabelField label="E-mail">
+                  <input type="email" value={form.email} onChange={(event) => onChangeField("email", event.target.value)} className="field-base" placeholder="voce@email.com" />
+                </LabelField>
               </div>
               <Button type="button" size="lg" disabled={!canContinueContact} className="min-h-13 w-full rounded-[var(--button-radius)] bg-primary text-sm font-bold tracking-[0.08em] text-primary-foreground hover:bg-primary-strong disabled:bg-primary/35" onClick={onContinueContact}>
                 CONTINUAR <ArrowRight className="h-4 w-4" aria-hidden="true" />
