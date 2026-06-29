@@ -880,11 +880,12 @@ function TestimonialsSection({ onOpenModal }: { onOpenModal: () => void }) {
           </article>
         ))}
       </div>
+      <SectionCta label="FAZER COMO ESSES CLIENTES" onClick={onOpenModal} />
     </RevealSection>
   );
 }
 
-function WhoItsForSection() {
+function WhoItsForSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <RevealSection className="section-alt border-y border-border/40">
       <SectionHeading title="O Kit Olho na Brasa é para quem leva o churrasco a sério." centered />
