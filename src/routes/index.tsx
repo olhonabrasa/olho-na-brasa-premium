@@ -171,7 +171,7 @@ const trustCards: TrustCard[] = [
   {
     image: iconParcelamento.url,
     title: "ATÉ 10X S/ JUROS no cartão e 5% Off no Pix",
-    description: "Feito nas medidas exatas da sua churrasqueira",
+    description: "Feito nas medidas exatas da sua churrasqueira e seu bolso",
   },
   {
     image: iconFrete.url,
@@ -207,7 +207,7 @@ const differentials: FeatureItem[] = [
       "Mais ergonomia e praticidade. Libera espaço dentro da churrasqueira e facilita a limpeza após o churrasco.",
   },
   {
-    title: "Estrutura reforçada — quadro 6mm, varões 5mm",
+    title: "Estrutura reforçada, quadro 6mm, varões 5mm",
     description:
       "Aguenta o peso de carnes pesadas e uso intenso sem deformar. Feito para durar décadas, não meses.",
   },
@@ -485,20 +485,20 @@ function LandingPage() {
 
         <main className="snap-y snap-mandatory md:snap-none">
           <HeroSection onOpenModal={openConsultiveModal} />
-          <VideoSection videoOpen={videoOpen} onPlay={() => setVideoOpen(true)} />
+          <VideoSection videoOpen={videoOpen} onPlay={() => setVideoOpen(true)} onOpenModal={openConsultiveModal} />
           <TrustBand />
-          <DifferentialsSection />
-          <BeforeAfterSection />
-          <ProcessSection />
-          <GallerySection onOpenLightbox={setLightboxImage} />
-          <TestimonialsSection />
-          <WhoItsForSection />
-          <FaqSection />
+          <DifferentialsSection onOpenModal={openConsultiveModal} />
+          <BeforeAfterSection onOpenModal={openConsultiveModal} />
+          <ProcessSection onOpenModal={openConsultiveModal} />
+          <GallerySection onOpenLightbox={setLightboxImage} onOpenModal={openConsultiveModal} />
+          <TestimonialsSection onOpenModal={openConsultiveModal} />
+          <WhoItsForSection onOpenModal={openConsultiveModal} />
+          <FaqSection onOpenModal={openConsultiveModal} />
           <FinalCtaSection onOpenModal={openConsultiveModal} />
         </main>
 
         <Footer />
-        <FloatingWhatsappButton />
+        <FloatingWhatsappButton onOpenModal={openConsultiveModal} />
       </div>
 
       <ConsultiveModal
@@ -624,7 +624,7 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
   );
 }
 
-function VideoSection({ videoOpen, onPlay }: { videoOpen: boolean; onPlay: () => void }) {
+function VideoSection({ videoOpen: _videoOpen, onPlay: _onPlay, onOpenModal }: { videoOpen: boolean; onPlay: () => void; onOpenModal: () => void }) {
   return (
     <RevealSection className="section-dark border-t border-border/40">
       <SectionHeading
@@ -651,6 +651,7 @@ function VideoSection({ videoOpen, onPlay }: { videoOpen: boolean; onPlay: () =>
           </div>
         </div>
       </div>
+      <SectionCta label="MONTAR MEU KIT" onClick={onOpenModal} />
     </RevealSection>
   );
 }
@@ -679,15 +680,9 @@ function TrustBand() {
   );
 }
 
-function DifferentialsSection() {
+function DifferentialsSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <RevealSection className="section-dark">
-      <SectionHeading
-        eyebrow="POR QUE OLHO NA BRASA"
-        title="Não vendemos churrasqueira. Entregamos o equipamento que seu churrasco merece."
-        centered
-      />
-
       <div className="mx-auto grid max-w-(--container-max) gap-4 px-5 md:grid-cols-2">
         {differentials.map((item) => (
           <article key={item.title} className="rounded-[var(--card-radius)] border border-border bg-card p-5 shadow-soft transition-colors duration-300 hover:bg-card-hover">
@@ -701,11 +696,12 @@ function DifferentialsSection() {
           </article>
         ))}
       </div>
+      <SectionCta label="FALAR COM ESPECIALISTA" onClick={onOpenModal} />
     </RevealSection>
   );
 }
 
-function BeforeAfterSection() {
+function BeforeAfterSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <RevealSection className="section-alt border-y border-border/40">
       <SectionHeading
@@ -720,21 +716,21 @@ function BeforeAfterSection() {
           {
             before: card1Antes.url,
             after: card1Depois.url,
-            title: "Churrasqueira de alvenaria → Com Kit Premium instalado",
+            title: "Churrasqueira de alvenaria, Com Kit Premium instalado",
             beforeAlt: "Churrasqueira de alvenaria sem equipamento antes da instalação",
             afterAlt: "Churrasqueira com Kit Premium Olho na Brasa instalado",
           },
           {
             before: card2Antes.url,
             after: card2Depois.url,
-            title: "Churrasqueira antiga e enferrujada → Grelhas novas em inox",
+            title: "Churrasqueira antiga e enferrujada, Grelhas novas em inox",
             beforeAlt: "Churrasqueira antiga com grelhas enferrujadas",
             afterAlt: "Mesma churrasqueira com grelhas novas em inox 304 Olho na Brasa",
           },
           {
             before: card3Antes.url,
             after: card3Depois.url,
-            title: "Churrasqueira de obra crua → Kit completo com suporte suspenso",
+            title: "Churrasqueira de obra crua, Kit completo com suporte suspenso",
             beforeAlt: "Churrasqueira de obra crua, sem grelhas nem acessórios",
             afterAlt: "Kit completo Olho na Brasa com suporte suspenso instalado",
           },
@@ -771,11 +767,12 @@ function BeforeAfterSection() {
           </article>
         ))}
       </div>
+      <SectionCta label="TRANSFORMAR MINHA CHURRASQUEIRA" onClick={onOpenModal} />
     </RevealSection>
   );
 }
 
-function ProcessSection() {
+function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <RevealSection className="section-dark">
       <SectionHeading
@@ -800,11 +797,12 @@ function ProcessSection() {
           </article>
         ))}
       </div>
+      <SectionCta label="QUERO UM KIT DESSES" onClick={onOpenModal} />
     </RevealSection>
   );
 }
 
-function GallerySection({ onOpenLightbox }: { onOpenLightbox: (item: GalleryItem) => void }) {
+function GallerySection({ onOpenLightbox, onOpenModal }: { onOpenLightbox: (item: GalleryItem) => void; onOpenModal: () => void }) {
   return (
     <RevealSection className="section-alt border-y border-border/40">
       <SectionHeading
@@ -849,11 +847,12 @@ function GallerySection({ onOpenLightbox }: { onOpenLightbox: (item: GalleryItem
           </button>
         ))}
       </div>
+      <SectionCta label="COMEÇAR MEU PROJETO" onClick={onOpenModal} />
     </RevealSection>
   );
 }
 
-function TestimonialsSection() {
+function TestimonialsSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <RevealSection className="section-dark">
       <SectionHeading eyebrow="CLIENTES QUE LEVAM O CHURRASCO A SÉRIO" title="Quem instala percebe a diferença no primeiro uso." centered />
@@ -881,11 +880,12 @@ function TestimonialsSection() {
           </article>
         ))}
       </div>
+      <SectionCta label="FAZER COMO ESSES CLIENTES" onClick={onOpenModal} />
     </RevealSection>
   );
 }
 
-function WhoItsForSection() {
+function WhoItsForSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <RevealSection className="section-alt border-y border-border/40">
       <SectionHeading title="O Kit Olho na Brasa é para quem leva o churrasco a sério." centered />
@@ -924,11 +924,12 @@ function WhoItsForSection() {
           </ul>
         </article>
       </div>
+      <SectionCta label="SIM, QUERO O MEU" onClick={onOpenModal} />
     </RevealSection>
   );
 }
 
-function FaqSection() {
+function FaqSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <RevealSection className="section-dark">
       <SectionHeading title="Dúvidas frequentes" centered />
@@ -945,6 +946,7 @@ function FaqSection() {
           ))}
         </Accordion>
       </div>
+      <SectionCta label="AINDA TEM DÚVIDA? FALE CONOSCO" onClick={onOpenModal} />
     </RevealSection>
   );
 }
@@ -967,7 +969,7 @@ function FinalCtaSection({ onOpenModal }: { onOpenModal: () => void }) {
               className="min-h-13 w-full max-w-sm rounded-[var(--button-radius)] bg-primary px-6 text-sm font-bold tracking-[0.08em] text-primary-foreground shadow-fire transition-transform duration-300 hover:-translate-y-0.5 hover:bg-primary-strong"
               onClick={onOpenModal}
             >
-              QUERO MEU PROJETO <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              QUERO MEU PROJETO AGORA <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Button>
           </div>
           <p className="relative mt-5 text-sm leading-6 text-muted-foreground">
@@ -1015,13 +1017,12 @@ function Footer() {
   );
 }
 
-function FloatingWhatsappButton() {
+function FloatingWhatsappButton({ onOpenModal }: { onOpenModal: () => void }) {
   return (
-    <a
-      href={buildWhatsappHref("Olá! Vim pelo site e quero saber mais sobre o Kit Premium.")}
-      target="_blank"
-      rel="noreferrer"
-      aria-label="Falar no WhatsApp com a Olho na Brasa"
+    <button
+      type="button"
+      onClick={onOpenModal}
+      aria-label="Iniciar projeto, abrir formulário"
       className="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-whatsapp-foreground shadow-[0_18px_48px_rgba(37,211,102,0.38)] transition-transform duration-300 hover:scale-105 md:h-16 md:w-16"
     >
       <span className="whatsapp-pulse absolute inset-0 rounded-full bg-whatsapp/30" aria-hidden="true" />
@@ -1029,7 +1030,21 @@ function FloatingWhatsappButton() {
         <path d="M19.11 17.23c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.18-1.33-.81-.72-1.36-1.61-1.52-1.88-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.48-.84-2.03-.22-.53-.45-.46-.61-.47-.16-.01-.34-.01-.52-.01-.18 0-.48.07-.73.34-.25.27-.96.93-.96 2.28s.98 2.65 1.11 2.84c.14.18 1.92 2.93 4.65 4.11.65.28 1.15.44 1.55.56.65.21 1.24.18 1.71.11.52-.08 1.6-.65 1.82-1.27.22-.62.22-1.15.16-1.27-.07-.11-.25-.18-.52-.32Z" />
         <path d="M16.02 3.2c-7.07 0-12.8 5.71-12.8 12.76 0 2.25.59 4.44 1.7 6.37L3 29l6.86-1.79a12.83 12.83 0 0 0 6.16 1.57h.01c7.07 0 12.8-5.71 12.8-12.77S23.1 3.2 16.02 3.2Zm0 23.46h-.01a10.7 10.7 0 0 1-5.45-1.49l-.39-.23-4.07 1.06 1.09-3.96-.25-.41a10.62 10.62 0 0 1-1.64-5.62c0-5.89 4.82-10.68 10.73-10.68 2.87 0 5.56 1.11 7.58 3.13a10.58 10.58 0 0 1 3.15 7.55c0 5.9-4.82 10.69-10.74 10.69Z" />
       </svg>
-    </a>
+    </button>
+  );
+}
+
+function SectionCta({ label, onClick }: { label: string; onClick: () => void }) {
+  return (
+    <div className="mx-auto mt-10 flex max-w-(--container-max) justify-center px-5">
+      <Button
+        size="lg"
+        onClick={onClick}
+        className="min-h-13 w-full max-w-md rounded-[var(--button-radius)] bg-primary px-6 text-sm font-bold tracking-[0.08em] text-primary-foreground shadow-fire transition-transform duration-300 hover:-translate-y-0.5 hover:bg-primary-strong md:w-auto md:min-w-[320px]"
+      >
+        {label} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+      </Button>
+    </div>
   );
 }
 
@@ -1073,7 +1088,7 @@ function ConsultiveModal({
   const canContinueMeasurements = showMeasurementsForm
     ? Boolean(form.width.trim() && form.depth.trim())
     : measurementState === "no";
-  const canContinueContact = Boolean(form.name.trim() && form.whatsapp.trim() && form.city.trim());
+  const canContinueContact = Boolean(form.name.trim() && form.whatsapp.trim() && form.city.trim() && form.email.trim());
   const canSendGuide = Boolean(form.email.trim());
 
   return (
@@ -1213,6 +1228,9 @@ function ConsultiveModal({
                 </LabelField>
                 <LabelField label="Cidade / Estado">
                   <input value={form.city} onChange={(event) => onChangeField("city", event.target.value)} className="field-base" />
+                </LabelField>
+                <LabelField label="E-mail">
+                  <input type="email" value={form.email} onChange={(event) => onChangeField("email", event.target.value)} className="field-base" placeholder="voce@email.com" />
                 </LabelField>
               </div>
               <Button type="button" size="lg" disabled={!canContinueContact} className="min-h-13 w-full rounded-[var(--button-radius)] bg-primary text-sm font-bold tracking-[0.08em] text-primary-foreground hover:bg-primary-strong disabled:bg-primary/35" onClick={onContinueContact}>
