@@ -772,7 +772,7 @@ function BeforeAfterSection({ onOpenModal }: { onOpenModal: () => void }) {
   );
 }
 
-function ProcessSection() {
+function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <RevealSection className="section-dark">
       <SectionHeading
