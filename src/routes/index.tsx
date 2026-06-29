@@ -625,39 +625,19 @@ function VideoSection({ videoOpen, onPlay }: { videoOpen: boolean; onPlay: () =>
 
       <div className="mx-auto max-w-(--container-max) px-5">
         <div className="glass-panel overflow-hidden rounded-[calc(var(--card-radius)+2px)] border border-border">
-          <div className="relative aspect-video overflow-hidden bg-card">
-            {videoOpen ? (
-              <video
-                className="h-full w-full object-cover"
-                src={videoAsset.url}
-                controls
-                autoPlay
-                playsInline
-                poster={afterProjectAsset.url}
-              >
-                Seu navegador não suporta vídeo HTML5.
-              </video>
-            ) : (
-              <button
-                type="button"
-                onClick={onPlay}
-                className="group relative flex h-full w-full items-center justify-center overflow-hidden"
-                aria-label="Reproduzir vídeo cinematográfico do kit premium"
-              >
-                <img
-                  src={afterProjectAsset.url}
-                  alt="Kit premium em inox instalado em churrasqueira de alto padrão"
-                  className="h-full w-full object-cover opacity-65 transition-transform duration-500 group-hover:scale-[1.02]"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-background via-background/30 to-transparent" aria-hidden="true" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(255,107,0,0.18),transparent_45%)]" aria-hidden="true" />
-                <span className="absolute inset-0 grid place-items-center">
-                  <span className="flex h-20 w-20 items-center justify-center rounded-full border border-white/15 bg-background/55 text-foreground shadow-fire backdrop-blur-md transition-transform duration-300 group-hover:scale-105">
-                    <Play className="ml-1 h-8 w-8 fill-current" aria-hidden="true" />
-                  </span>
-                </span>
-              </button>
-            )}
+          <div className="relative aspect-video overflow-hidden bg-black">
+            <video
+              className="h-full w-full object-contain"
+              src={videoAsset.url}
+              controls
+              autoPlay
+              loop
+              muted
+              playsInline
+              poster={afterProjectAsset.url}
+            >
+              Seu navegador não suporta vídeo HTML5.
+            </video>
           </div>
         </div>
       </div>
