@@ -1017,13 +1017,12 @@ function Footer() {
   );
 }
 
-function FloatingWhatsappButton() {
+function FloatingWhatsappButton({ onOpenModal }: { onOpenModal: () => void }) {
   return (
-    <a
-      href={buildWhatsappHref("Olá! Vim pelo site e quero saber mais sobre o Kit Premium.")}
-      target="_blank"
-      rel="noreferrer"
-      aria-label="Falar no WhatsApp com a Olho na Brasa"
+    <button
+      type="button"
+      onClick={onOpenModal}
+      aria-label="Iniciar projeto, abrir formulário"
       className="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-whatsapp-foreground shadow-[0_18px_48px_rgba(37,211,102,0.38)] transition-transform duration-300 hover:scale-105 md:h-16 md:w-16"
     >
       <span className="whatsapp-pulse absolute inset-0 rounded-full bg-whatsapp/30" aria-hidden="true" />
@@ -1031,7 +1030,21 @@ function FloatingWhatsappButton() {
         <path d="M19.11 17.23c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.18-1.33-.81-.72-1.36-1.61-1.52-1.88-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.48-.84-2.03-.22-.53-.45-.46-.61-.47-.16-.01-.34-.01-.52-.01-.18 0-.48.07-.73.34-.25.27-.96.93-.96 2.28s.98 2.65 1.11 2.84c.14.18 1.92 2.93 4.65 4.11.65.28 1.15.44 1.55.56.65.21 1.24.18 1.71.11.52-.08 1.6-.65 1.82-1.27.22-.62.22-1.15.16-1.27-.07-.11-.25-.18-.52-.32Z" />
         <path d="M16.02 3.2c-7.07 0-12.8 5.71-12.8 12.76 0 2.25.59 4.44 1.7 6.37L3 29l6.86-1.79a12.83 12.83 0 0 0 6.16 1.57h.01c7.07 0 12.8-5.71 12.8-12.77S23.1 3.2 16.02 3.2Zm0 23.46h-.01a10.7 10.7 0 0 1-5.45-1.49l-.39-.23-4.07 1.06 1.09-3.96-.25-.41a10.62 10.62 0 0 1-1.64-5.62c0-5.89 4.82-10.68 10.73-10.68 2.87 0 5.56 1.11 7.58 3.13a10.58 10.58 0 0 1 3.15 7.55c0 5.9-4.82 10.69-10.74 10.69Z" />
       </svg>
-    </a>
+    </button>
+  );
+}
+
+function SectionCta({ label, onClick }: { label: string; onClick: () => void }) {
+  return (
+    <div className="mx-auto mt-10 flex max-w-(--container-max) justify-center px-5">
+      <Button
+        size="lg"
+        onClick={onClick}
+        className="min-h-13 w-full max-w-md rounded-[var(--button-radius)] bg-primary px-6 text-sm font-bold tracking-[0.08em] text-primary-foreground shadow-fire transition-transform duration-300 hover:-translate-y-0.5 hover:bg-primary-strong md:w-auto md:min-w-[320px]"
+      >
+        {label} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+      </Button>
+    </div>
   );
 }
 
