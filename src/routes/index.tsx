@@ -106,7 +106,7 @@ type SectionHeadingProps = {
 };
 
 type TrustCard = {
-  icon: ReactNode;
+  image: string;
   title: string;
   description: string;
 };
@@ -145,22 +145,22 @@ const INSTAGRAM_URL = "https://www.instagram.com/olhonabrasa/";
 
 const trustCards: TrustCard[] = [
   {
-    icon: <Factory className="h-5 w-5" aria-hidden="true" />,
+    image: iconFabrica.url,
     title: "Direto da fábrica",
     description: "Sem intermediário, preço justo",
   },
   {
-    icon: <ShieldCheck className="h-5 w-5" aria-hidden="true" />,
+    image: iconGarantia.url,
     title: "15 anos de garantia",
     description: "Confiança na qualidade que fabricamos",
   },
   {
-    icon: <Ruler className="h-5 w-5" aria-hidden="true" />,
-    title: "Projeto sob medida",
+    image: iconParcelamento.url,
+    title: "ATÉ 10X S/ JUROS no cartão e 5% Off no Pix",
     description: "Feito nas medidas exatas da sua churrasqueira",
   },
   {
-    icon: <Truck className="h-5 w-5" aria-hidden="true" />,
+    image: iconFrete.url,
     title: "Frete grátis Sul/Sudeste",
     description: "Envio seguro para todo Brasil",
   },
