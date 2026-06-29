@@ -207,7 +207,7 @@ const differentials: FeatureItem[] = [
       "Mais ergonomia e praticidade. Libera espaço dentro da churrasqueira e facilita a limpeza após o churrasco.",
   },
   {
-    title: "Estrutura reforçada — quadro 6mm, varões 5mm",
+    title: "Estrutura reforçada, quadro 6mm, varões 5mm",
     description:
       "Aguenta o peso de carnes pesadas e uso intenso sem deformar. Feito para durar décadas, não meses.",
   },
