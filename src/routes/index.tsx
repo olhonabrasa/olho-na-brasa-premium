@@ -428,13 +428,13 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <section
       id="top"
-      className="relative overflow-hidden bg-background pt-20 pb-10 md:pt-24 md:pb-16"
+      className="relative overflow-hidden bg-background pt-16 pb-8 md:pt-24 md:pb-16"
     >
       <div className="relative z-[3] mx-auto w-full max-w-(--container-max) px-5">
-        {/* Vídeo cinematográfico em loop, sem controles */}
-        <div className="overflow-hidden rounded-2xl border border-white/10 bg-black shadow-fire">
+        {/* Vídeo cinematográfico em loop, sem controles — full-bleed no mobile */}
+        <div className="relative -mx-5 w-auto overflow-hidden md:mx-0 md:rounded-2xl border-y border-white/10 md:border bg-black shadow-fire">
           <video
-            className="block h-auto w-full"
+            className="block h-auto w-full max-h-[62vh] md:max-h-none"
             src={videoAsset.url}
             autoPlay
             loop
