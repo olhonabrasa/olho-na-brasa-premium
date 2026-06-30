@@ -118,7 +118,7 @@ type SectionHeadingProps = {
   centered?: boolean;
 };
 
-type TrustCard = { image: string; title: string; description: string };
+
 type ProcessStep = { number: string; title: string; description: string; image: string; alt: string };
 type GalleryItem = { title: string; location: string; image?: string; alt: string; featured?: boolean };
 type Testimonial = { quote: string; author: string; accent?: boolean };
