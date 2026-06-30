@@ -13,6 +13,8 @@ import {
   Search,
   ShoppingCart,
   Star,
+  Volume2,
+  VolumeX,
   X,
 } from "lucide-react";
 
@@ -822,6 +824,7 @@ function ClientVideoCard({ video, index }: { video: ClientVideo; index: number }
 /* ===================== AUTO-PAUSE VIDEO (pausa quando sai da viewport) ===================== */
 function AutoPauseVideo({ src, poster, className }: { src: string; poster?: string; className?: string }) {
   const ref = React.useRef<HTMLVideoElement>(null);
+  const [muted, setMuted] = useState(true);
   React.useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -840,17 +843,35 @@ function AutoPauseVideo({ src, poster, className }: { src: string; poster?: stri
     io.observe(el);
     return () => io.disconnect();
   }, []);
+  const toggleMute = () => {
+    const el = ref.current;
+    if (!el) return;
+    const next = !muted;
+    el.muted = next;
+    setMuted(next);
+    if (!next) el.play().catch(() => {});
+  };
   return (
-    <video
-      ref={ref}
-      className={className}
-      src={src}
-      poster={poster}
-      loop
-      muted
-      playsInline
-      preload="metadata"
-    />
+    <>
+      <video
+        ref={ref}
+        className={className}
+        src={src}
+        poster={poster}
+        loop
+        muted={muted}
+        playsInline
+        preload="metadata"
+      />
+      <button
+        type="button"
+        onClick={toggleMute}
+        aria-label={muted ? "Ativar som do vídeo" : "Desativar som do vídeo"}
+        className="absolute bottom-3 right-3 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white backdrop-blur transition-colors hover:bg-black/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+      >
+        {muted ? <VolumeX className="h-5 w-5" aria-hidden="true" /> : <Volume2 className="h-5 w-5" aria-hidden="true" />}
+      </button>
+    </>
   );
 }
 
