@@ -175,13 +175,6 @@ const beforeAfterPairs: BeforeAfterPair[] = [
     beforeAlt: "Churrasqueira de tijolo refratário com grelhas antigas enferrujadas",
     afterAlt: "Mesma churrasqueira com suporte suspenso Olho na Brasa em inox 304",
   },
-    before: card5Antes.url,
-    after: card5Depois.url,
-    title: "Churrasqueira de tijolo refratário, transformada com inox 304",
-    subtitle: "Saiu o ferro enferrujado, entrou suporte suspenso premium com acabamento espelhado.",
-    beforeAlt: "Churrasqueira de tijolo refratário com grelhas antigas enferrujadas",
-    afterAlt: "Mesma churrasqueira com suporte suspenso Olho na Brasa em inox 304",
-  },
   {
     before: card1Antes.url,
     after: card1Depois.url,
