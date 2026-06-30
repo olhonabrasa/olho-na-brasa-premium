@@ -1004,7 +1004,7 @@ function BlockCta({ label, onClick, fullWidth }: { label: string; onClick: () =>
         size="lg"
         onClick={onClick}
         className={cn(
-          "min-h-14 rounded-xl bg-primary px-8 text-sm font-bold uppercase tracking-[0.05em] text-primary-foreground shadow-fire transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-strong",
+          "min-h-14 rounded-xl bg-primary px-4 text-[13px] font-bold uppercase tracking-[0.03em] text-primary-foreground shadow-fire transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-strong sm:px-6 sm:text-sm sm:tracking-[0.05em]",
           fullWidth ? "w-full" : "w-full max-w-md md:w-auto md:min-w-[320px]",
         )}
       >
