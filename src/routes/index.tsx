@@ -1203,8 +1203,10 @@ function ConsultiveModal({
     }
   };
 
+  const leadFired = useRef(false);
+
   const handleFinalAction = async (url: string) => {
-    await sendLeadToDataCrazy({
+    const leadData = {
       nome: form.name,
       whatsapp: form.whatsapp,
       email: form.email,
@@ -1213,7 +1215,23 @@ function ConsultiveModal({
       comprimento: form.depth,
       altura: form.height,
       temMedidas: !!(form.width || form.depth || form.height),
-    });
+    };
+
+    await sendLeadToDataCrazy(leadData);
+
+    if (!leadFired.current) {
+      leadFired.current = true;
+      if (typeof fbq !== "undefined") {
+        fbq("track", "Lead", {
+          content_name: "LP Premium - Kit Suporte Suspenso",
+          content_category: projectType ? projectTypeLabels[projectType] : "Kit completo",
+          city: form.city || "",
+          value: 3500,
+          currency: "BRL",
+        });
+      }
+    }
+
     window.open(url, "_blank");
   };
 
