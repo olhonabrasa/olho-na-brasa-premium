@@ -692,47 +692,6 @@ function GallerySection({
   );
 }
 
-/* ===================== AVALIAÇÕES ===================== */
-function TestimonialsSection({ onOpenModal }: { onOpenModal: () => void }) {
-  return (
-    <RevealSection className="section-dark section-glow">
-      <SectionHeading eyebrow="CLIENTES QUE LEVAM O CHURRASCO A SÉRIO" title="Quem instala percebe a diferença no primeiro uso." centered />
-
-      <div className="mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-4 md:overflow-visible">
-        {testimonials.map((item) => (
-          <article
-            key={item.quote}
-            className={cn(
-              "min-w-[85%] snap-start rounded-2xl p-6 shadow-soft md:min-w-0",
-              item.accent ? "border-2 border-primary/40 bg-primary/8" : "bg-white",
-            )}
-          >
-            <div className="mb-3 flex gap-0.5 text-amber-400">
-              {Array.from({ length: 5 }).map((_, index) => (
-                <Star key={index} className="h-4 w-4 fill-current" aria-hidden="true" />
-              ))}
-            </div>
-            <blockquote className={cn("text-sm leading-6", item.accent ? "text-foreground italic" : "text-neutral-800")}>
-              “{item.quote}”
-            </blockquote>
-            <div className="mt-4 flex items-center justify-between">
-              <p className={cn("text-sm font-semibold", item.accent ? "text-foreground" : "text-neutral-900")}>
-                {item.author}
-              </p>
-              {!item.accent ? (
-                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">
-                  <Check className="h-3 w-3" /> Compra verificada
-                </span>
-              ) : null}
-            </div>
-          </article>
-        ))}
-      </div>
-      <BlockCta label="FAZER COMO ESSES CLIENTES" onClick={onOpenModal} />
-    </RevealSection>
-  );
-}
-
 /* ===================== VÍDEOS DE CLIENTES ===================== */
 function ClientVideosSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
