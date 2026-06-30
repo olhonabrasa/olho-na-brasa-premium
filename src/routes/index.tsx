@@ -1164,6 +1164,59 @@ function ConsultiveModal({
     : measurementState === "no";
   const canContinueContact = Boolean(form.name.trim() && form.whatsapp.trim() && form.city.trim() && form.email.trim());
 
+  const sendLeadToDataCrazy = async (leadData: {
+    nome: string;
+    whatsapp: string;
+    email: string;
+    cidade: string;
+    largura: string;
+    comprimento: string;
+    altura: string;
+    temMedidas: boolean;
+  }) => {
+    try {
+      await fetch(
+        "https://api.datacrazy.io/v1/crm/api/crm/flows/webhooks/57af109b-a833-4f35-8081-b5ee5109d305/9d608ce0-6177-4000-9646-4b7c6d5cd750",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            whatsapp: leadData.whatsapp,
+            email: leadData.email,
+            nome: leadData.nome,
+            estagio: stage,
+            tipoProjeto: projectType ? projectTypeLabels[projectType] : "",
+            cidade: leadData.cidade,
+            largura: leadData.largura || "",
+            comprimento: leadData.comprimento || "",
+            altura: leadData.altura || "",
+            temMedidas: leadData.temMedidas ? "Sim" : "Não",
+            prazo: "Agora",
+            utm_source: new URLSearchParams(window.location.search).get("utm_source") || "direct",
+            utm_medium: new URLSearchParams(window.location.search).get("utm_medium") || "",
+            utm_content: new URLSearchParams(window.location.search).get("utm_campaign") || "",
+          }),
+        },
+      );
+    } catch (error) {
+      console.error("DataCrazy webhook error:", error);
+    }
+  };
+
+  const handleFinalAction = async (url: string) => {
+    await sendLeadToDataCrazy({
+      nome: form.name,
+      whatsapp: form.whatsapp,
+      email: form.email,
+      cidade: form.city,
+      largura: form.width,
+      comprimento: form.depth,
+      altura: form.height,
+      temMedidas: !!(form.width || form.depth || form.height),
+    });
+    window.open(url, "_blank");
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/85 p-0 md:items-center md:p-6" role="dialog" aria-modal="true" aria-labelledby="consultive-modal-title">
       <div className="relative max-h-[95svh] w-full overflow-hidden rounded-t-[28px] border border-border-strong bg-card shadow-fire md:max-h-[90svh] md:max-w-[500px] md:rounded-[28px]">
@@ -1302,7 +1355,11 @@ function ConsultiveModal({
               </div>
 
               {/* Card 1 — destaque WhatsApp */}
-              <a href={specialistMessage} target="_blank" rel="noreferrer" className="block rounded-2xl border-2 border-primary bg-primary/10 p-4 shadow-soft transition-colors hover:bg-primary/15">
+              <button
+                type="button"
+                onClick={() => handleFinalAction(specialistMessage)}
+                className="block w-full rounded-2xl border-2 border-primary bg-primary/10 p-4 text-left shadow-soft transition-colors hover:bg-primary/15"
+              >
                 <div className="flex items-start gap-3">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-whatsapp text-whatsapp-foreground">
                     <svg viewBox="0 0 32 32" className="h-5 w-5 fill-current" aria-hidden="true"><path d="M19.11 17.23c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.18-1.33-.81-.72-1.36-1.61-1.52-1.88-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.48-.84-2.03-.22-.53-.45-.46-.61-.47-.16-.01-.34-.01-.52-.01-.18 0-.48.07-.73.34-.25.27-.96.93-.96 2.28s.98 2.65 1.11 2.84c.14.18 1.92 2.93 4.65 4.11.65.28 1.15.44 1.55.56.65.21 1.24.18 1.71.11.52-.08 1.6-.65 1.82-1.27.22-.62.22-1.15.16-1.27-.07-.11-.25-.18-.52-.32Z" /><path d="M16.02 3.2c-7.07 0-12.8 5.71-12.8 12.76 0 2.25.59 4.44 1.7 6.37L3 29l6.86-1.79a12.83 12.83 0 0 0 6.16 1.57h.01c7.07 0 12.8-5.71 12.8-12.77S23.1 3.2 16.02 3.2Zm0 23.46h-.01a10.7 10.7 0 0 1-5.45-1.49l-.39-.23-4.07 1.06 1.09-3.96-.25-.41a10.62 10.62 0 0 1-1.64-5.62c0-5.89 4.82-10.68 10.73-10.68 2.87 0 5.56 1.11 7.58 3.13a10.58 10.58 0 0 1 3.15 7.55c0 5.9-4.82 10.69-10.74 10.69Z" /></svg>
@@ -1312,10 +1369,14 @@ function ConsultiveModal({
                     <p className="mt-1 text-sm leading-6 text-secondary-foreground">Resposta em minutos no WhatsApp</p>
                   </div>
                 </div>
-              </a>
+              </button>
 
               {/* Card 2 — Comprar direto no site */}
-              <a href={SITE_URL} target="_blank" rel="noreferrer" className="block rounded-2xl border border-border bg-background/50 p-4 transition-colors hover:bg-card-hover">
+              <button
+                type="button"
+                onClick={() => handleFinalAction(SITE_URL)}
+                className="block w-full rounded-2xl border border-border bg-background/50 p-4 text-left transition-colors hover:bg-card-hover"
+              >
                 <div className="flex items-start gap-3">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-card-hover text-primary">
                     <ShoppingCart className="h-5 w-5" />
@@ -1325,11 +1386,15 @@ function ConsultiveModal({
                     <p className="mt-1 text-sm leading-6 text-secondary-foreground">Veja os kits, escolha o tamanho e finalize sua compra</p>
                   </div>
                 </div>
-              </a>
+              </button>
 
-              <a href={measurementHelpMessage} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 pt-1 text-sm font-semibold text-primary hover:text-primary-strong">
+              <button
+                type="button"
+                onClick={() => handleFinalAction(measurementHelpMessage)}
+                className="inline-flex items-center gap-2 pt-1 text-sm font-semibold text-primary hover:text-primary-strong"
+              >
                 Ainda preciso de ajuda com as medidas <ExternalLink className="h-4 w-4" />
-              </a>
+              </button>
             </div>
           ) : null}
 
