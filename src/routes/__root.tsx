@@ -112,6 +112,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
     ],
+    scripts: [
+      {
+        type: "text/javascript",
+        children: META_PIXEL_SCRIPT,
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
