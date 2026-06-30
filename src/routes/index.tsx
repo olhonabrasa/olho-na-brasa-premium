@@ -466,6 +466,26 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
   );
 }
 
+/* ===================== BENEFITS MARQUEE ===================== */
+function BenefitsMarquee() {
+  // Duplica a lista para criar loop infinito sem corte
+  const items = [...benefits, ...benefits];
+  return (
+    <div className="marquee-mask mt-6 -mx-5 overflow-hidden md:mx-0">
+      <div className="marquee-track flex gap-3 py-1">
+        {items.map((item, idx) => (
+          <span
+            key={`${item}-${idx}`}
+            className="flex shrink-0 items-center gap-2 rounded-full border border-white/12 bg-black/55 px-4 py-2 text-xs font-medium text-foreground backdrop-blur-md md:text-sm"
+          >
+            <Check className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden="true" />
+            {item}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+
 /* ===================== VÍDEO ===================== */
 function VideoSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
