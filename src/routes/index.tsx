@@ -47,14 +47,11 @@ import projeto5 from "@/assets/projeto-instalado-5.jpg.asset.json";
 import projeto6 from "@/assets/projeto-instalado-6.jpg.asset.json";
 import rodrigoMedidasVideo from "@/assets/rodrigo-medidas.mp4.asset.json";
 import logoOlhoNaBrasa from "@/assets/logo-olho-na-brasa.png.asset.json";
-import card4Antes from "@/assets/card4-antes.jpg.asset.json";
-import card4Depois from "@/assets/card4-depois.jpg.asset.json";
 import card5Antes from "@/assets/card5-antes.png.asset.json";
 import card5Depois from "@/assets/card5-depois.jpg.asset.json";
 import antesNovo from "@/assets/antes-novo.jpeg.asset.json";
 import depoisNovo from "@/assets/depois-novo.png.asset.json";
 import kitRevestimento4 from "@/assets/kit-revestimento-4.png.asset.json";
-import kitRevestimento5 from "@/assets/kit-revestimento-5.jpg.asset.json";
 import videoCliente1 from "@/assets/video-cliente-1.mp4.asset.json";
 import videoCliente2 from "@/assets/video-cliente-2.mp4.asset.json";
 import videoCliente3 from "@/assets/video-cliente-3.mp4.asset.json";
@@ -168,14 +165,6 @@ const beforeAfterPairs: BeforeAfterPair[] = [
     afterAlt: "Mesma churrasqueira com Kit Premium Olho na Brasa em inox 304 instalado",
   },
   {
-    before: card4Antes.url,
-    after: card4Depois.url,
-    title: "Nicho em mármore, equipado com Kit Premium completo",
-    subtitle: "Suporte suspenso, grelhas e espetos sob medida no nicho de mármore calacatta.",
-    beforeAlt: "Nicho de churrasqueira em mármore antes da instalação do kit",
-    afterAlt: "Mesmo nicho com Kit Premium Olho na Brasa instalado em inox 304",
-  },
-  {
     before: card5Antes.url,
     after: card5Depois.url,
     title: "Churrasqueira de tijolo refratário, transformada com inox 304",
@@ -211,7 +200,6 @@ const beforeAfterPairs: BeforeAfterPair[] = [
 
 const galleryItems: GalleryItem[] = [
   { title: "Acabamento espelhado", location: "Revestimento em pedra natural", image: kitRevestimento4.url, alt: "Kit Olho na Brasa instalado em churrasqueira com revestimento em pedra natural", featured: true },
-  { title: "Kit Premium completo", location: "Nicho em mármore calacatta", image: kitRevestimento5.url, alt: "Kit Premium Olho na Brasa em nicho de mármore com lateral aberta" },
   { title: "Kit Premium em ação", location: "Carnes na brasa com suporte suspenso", image: projeto1.url, alt: "Kit premium em inox 304 com carnes assando", featured: true },
   { title: "Acabamento espelhado", location: "Churrasqueira em mármore", image: projeto2.url, alt: "Kit Olho na Brasa instalado em churrasqueira com moldura em mármore" },
   { title: "Encaixe perfeito", location: "Churrasqueira em tijolo aparente", image: projeto3.url, alt: "Kit premium em inox instalado em churrasqueira de tijolo" },
