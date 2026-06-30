@@ -49,11 +49,20 @@ import card4Antes from "@/assets/card4-antes.jpg.asset.json";
 import card4Depois from "@/assets/card4-depois.jpg.asset.json";
 import card5Antes from "@/assets/card5-antes.png.asset.json";
 import card5Depois from "@/assets/card5-depois.jpg.asset.json";
+import antesNovo from "@/assets/antes-novo.jpeg.asset.json";
+import depoisNovo from "@/assets/depois-novo.png.asset.json";
+import kitRevestimento4 from "@/assets/kit-revestimento-4.png.asset.json";
+import kitRevestimento5 from "@/assets/kit-revestimento-5.jpg.asset.json";
 import videoCliente1 from "@/assets/video-cliente-1.mp4.asset.json";
 import videoCliente2 from "@/assets/video-cliente-2.mp4.asset.json";
 import videoCliente3 from "@/assets/video-cliente-3.mp4.asset.json";
 import videoCliente4 from "@/assets/video-cliente-4.mp4.asset.json";
 import videoCliente5 from "@/assets/video-cliente-5.mp4.asset.json";
+import posterCliente1 from "@/assets/poster-cliente-1.jpg.asset.json";
+import posterCliente2 from "@/assets/poster-cliente-2.jpg.asset.json";
+import posterCliente3 from "@/assets/poster-cliente-3.jpg.asset.json";
+import posterCliente4 from "@/assets/poster-cliente-4.jpg.asset.json";
+import posterCliente5 from "@/assets/poster-cliente-5.jpg.asset.json";
 import { Play } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -149,6 +158,14 @@ const processSteps: ProcessStep[] = [
 
 const beforeAfterPairs: BeforeAfterPair[] = [
   {
+    before: antesNovo.url,
+    after: depoisNovo.url,
+    title: "Churrasqueira em granito, renovada com Kit Premium",
+    subtitle: "Saiu o ferro velho enferrujado, entrou suporte suspenso e grelhas em inox 304 espelhado.",
+    beforeAlt: "Churrasqueira em granito com grelhas e suportes enferrujados",
+    afterAlt: "Mesma churrasqueira com Kit Premium Olho na Brasa em inox 304 instalado",
+  },
+  {
     before: card4Antes.url,
     after: card4Depois.url,
     title: "Nicho em mármore, equipado com Kit Premium completo",
@@ -191,9 +208,11 @@ const beforeAfterPairs: BeforeAfterPair[] = [
 ];
 
 const galleryItems: GalleryItem[] = [
+  { title: "Acabamento espelhado", location: "Revestimento em pedra natural", image: kitRevestimento4.url, alt: "Kit Olho na Brasa instalado em churrasqueira com revestimento em pedra natural", featured: true },
+  { title: "Kit Premium completo", location: "Nicho em mármore calacatta", image: kitRevestimento5.url, alt: "Kit Premium Olho na Brasa em nicho de mármore com lateral aberta" },
   { title: "Kit Premium em ação", location: "Carnes na brasa com suporte suspenso", image: projeto1.url, alt: "Kit premium em inox 304 com carnes assando", featured: true },
   { title: "Acabamento espelhado", location: "Churrasqueira em mármore", image: projeto2.url, alt: "Kit Olho na Brasa instalado em churrasqueira com moldura em mármore" },
-  { title: "Encaixe perfeito", location: "Churrasqueira em tijolo aparente", image: projeto3.url, alt: "Kit premium em inox instalado em churrasqueira de tijolo", featured: true },
+  { title: "Encaixe perfeito", location: "Churrasqueira em tijolo aparente", image: projeto3.url, alt: "Kit premium em inox instalado em churrasqueira de tijolo" },
   { title: "Projeto em pedra natural", location: "Área gourmet rústica", image: projeto4.url, alt: "Kit instalado em churrasqueira com revestimento em pedra natural" },
   { title: "Área gourmet contemporânea", location: "Bancada em granito", image: projeto5.url, alt: "Kit premium em área gourmet contemporânea" },
   { title: "Nicho premium", location: "Projeto residencial", image: projeto6.url, alt: "Kit instalado em nicho de churrasqueira residencial premium" },
@@ -234,13 +253,13 @@ const benefits = [
   "Acabamento premium",
 ];
 
-type ClientVideo = { src: string; name: string; caption: string };
+type ClientVideo = { src: string; name: string; caption: string; poster: string };
 const clientVideos: ClientVideo[] = [
-  { src: videoCliente1.url, name: "Cliente Olho na Brasa", caption: "Kit Premium instalado" },
-  { src: videoCliente2.url, name: "Cliente Olho na Brasa", caption: "Reação ao receber o kit" },
-  { src: videoCliente3.url, name: "Cliente Olho na Brasa", caption: "Acabamento em inox 304" },
-  { src: videoCliente4.url, name: "Cliente Olho na Brasa", caption: "Encaixe sob medida" },
-  { src: videoCliente5.url, name: "Cliente Olho na Brasa", caption: "Primeiro churrasco" },
+  { src: videoCliente1.url, poster: posterCliente1.url, name: "Cliente Olho na Brasa", caption: "Kit Premium instalado" },
+  { src: videoCliente2.url, poster: posterCliente2.url, name: "Cliente Olho na Brasa", caption: "Reação ao receber o kit" },
+  { src: videoCliente3.url, poster: posterCliente3.url, name: "Cliente Olho na Brasa", caption: "Acabamento em inox 304" },
+  { src: videoCliente4.url, poster: posterCliente4.url, name: "Cliente Olho na Brasa", caption: "Encaixe sob medida" },
+  { src: videoCliente5.url, poster: posterCliente5.url, name: "Cliente Olho na Brasa", caption: "Primeiro churrasco" },
 ];
 
 function LandingPage() {
@@ -480,9 +499,9 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
 
         <BenefitsMarquee />
 
-        <div className="mt-7 max-w-md">
+        <div className="mx-auto mt-7 flex w-full max-w-md flex-col items-center md:mx-0">
           <BlockCta label="QUERO MEU PROJETO" onClick={onOpenModal} fullWidth />
-          <p className="mt-3 text-center text-xs text-muted-foreground md:text-sm">
+          <p className="mt-3 w-full text-center text-xs text-muted-foreground md:text-sm">
             Fale com um especialista ou compre direto no site
           </p>
         </div>
@@ -610,17 +629,12 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
         title="Cada kit passa por dezenas de etapas antes de chegar na sua casa."
       />
 
-      <div className="mx-auto mb-8 max-w-(--container-max) px-5">
-        <div className="glass-panel overflow-hidden rounded-2xl border border-border">
-          <div className="relative aspect-video overflow-hidden bg-black">
-            <video
+      <div className="mx-auto mb-8 flex max-w-(--container-max) flex-col items-center px-5">
+        <div className="glass-panel w-full max-w-[360px] overflow-hidden rounded-2xl border border-border">
+          <div className="relative aspect-[9/16] overflow-hidden bg-black">
+            <AutoPauseVideo
               className="h-full w-full object-cover"
               src={fabricaVideo.url}
-              controls
-              autoPlay
-              loop
-              muted
-              playsInline
               poster={processCutAsset.url}
             />
           </div>
@@ -773,6 +787,7 @@ function ClientVideoCard({ video, index }: { video: ClientVideo; index: number }
       <div className="relative aspect-[9/16] overflow-hidden bg-black">
         <video
           src={video.src}
+          poster={video.poster}
           controls={playing}
           playsInline
           preload="metadata"
@@ -788,7 +803,7 @@ function ClientVideoCard({ video, index }: { video: ClientVideo; index: number }
               if (v) { v.play(); setPlaying(true); }
             }}
             aria-label={`Reproduzir vídeo do cliente ${index + 1}`}
-            className="absolute inset-0 z-10 flex items-center justify-center bg-black/30 transition-colors hover:bg-black/45"
+            className="absolute inset-0 z-10 flex items-center justify-center bg-gradient-to-t from-black/60 via-black/10 to-transparent transition-colors hover:from-black/70"
           >
             <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/95 text-black shadow-fire transition-transform group-hover:scale-110">
               <Play className="ml-1 h-7 w-7 fill-current" aria-hidden="true" />
@@ -801,6 +816,41 @@ function ClientVideoCard({ video, index }: { video: ClientVideo; index: number }
         <p className="text-xs text-secondary-foreground md:text-sm">{video.caption}</p>
       </div>
     </article>
+  );
+}
+
+/* ===================== AUTO-PAUSE VIDEO (pausa quando sai da viewport) ===================== */
+function AutoPauseVideo({ src, poster, className }: { src: string; poster?: string; className?: string }) {
+  const ref = React.useRef<HTMLVideoElement>(null);
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+            el.play().catch(() => {});
+          } else {
+            el.pause();
+          }
+        }
+      },
+      { threshold: [0, 0.5, 1] },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <video
+      ref={ref}
+      className={className}
+      src={src}
+      poster={poster}
+      loop
+      muted
+      playsInline
+      preload="metadata"
+    />
   );
 }
 
