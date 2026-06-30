@@ -1330,6 +1330,22 @@ function OptionButton({ icon, title, description, onClick }: { icon: ReactNode; 
   );
 }
 
+function ProjectTypeCard({ active, title, subtitle, onClick }: { active: boolean; title: string; subtitle: string; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "w-full rounded-2xl border px-5 py-4 text-left transition-colors",
+        active ? "border-primary bg-primary/10" : "border-border bg-background/50 hover:bg-card-hover",
+      )}
+    >
+      <p className="text-sm font-semibold text-foreground md:text-base">{title}</p>
+      <p className="mt-1 text-xs leading-5 text-secondary-foreground md:text-sm">{subtitle}</p>
+    </button>
+  );
+}
+
 function LabelField({ label, children }: { label: string; children: ReactNode }) {
   return (
     <label className="grid gap-2 text-sm font-medium text-foreground">
