@@ -162,6 +162,22 @@ const processSteps: ProcessStep[] = [
 
 const beforeAfterPairs: BeforeAfterPair[] = [
   {
+    before: card4Antes.url,
+    after: card4Depois.url,
+    title: "Nicho em mármore, equipado com Kit Premium completo",
+    subtitle: "Suporte suspenso, grelhas e espetos sob medida no nicho de mármore calacatta.",
+    beforeAlt: "Nicho de churrasqueira em mármore antes da instalação do kit",
+    afterAlt: "Mesmo nicho com Kit Premium Olho na Brasa instalado em inox 304",
+  },
+  {
+    before: card5Antes.url,
+    after: card5Depois.url,
+    title: "Churrasqueira de tijolo refratário, transformada com inox 304",
+    subtitle: "Saiu o ferro enferrujado, entrou suporte suspenso premium com acabamento espelhado.",
+    beforeAlt: "Churrasqueira de tijolo refratário com grelhas antigas enferrujadas",
+    afterAlt: "Mesma churrasqueira com suporte suspenso Olho na Brasa em inox 304",
+  },
+  {
     before: card1Antes.url,
     after: card1Depois.url,
     title: "Churrasqueira de alvenaria, com Kit Premium instalado",
