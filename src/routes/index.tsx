@@ -15,10 +15,6 @@ import {
   Star,
   X,
 } from "lucide-react";
-import iconFabrica from "@/assets/icon-fabrica.webp.asset.json";
-import iconGarantia from "@/assets/icon-garantia.webp.asset.json";
-import iconParcelamento from "@/assets/icon-parcelamento.webp.asset.json";
-import iconFrete from "@/assets/icon-frete.webp.asset.json";
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
@@ -34,7 +30,7 @@ import processPackagingAsset from "@/assets/processo-embalagem-segura.png.asset.
 import measurementGuideAsset from "@/assets/guia-medidas.png.asset.json";
 import videoAsset from "@/assets/video-cinematografico.mp4.asset.json";
 import fabricaVideo from "@/assets/fabrica.mp4.asset.json";
-import rodrigoSuporte from "@/assets/rodrigo-suporte.png.asset.json";
+
 import card1Antes from "@/assets/card1-antes.jpg.asset.json";
 import card1Depois from "@/assets/card1-depois.jpg.asset.json";
 import card2Antes from "@/assets/card2-antes.jpg.asset.json";
@@ -122,7 +118,7 @@ type SectionHeadingProps = {
   centered?: boolean;
 };
 
-type TrustCard = { image: string; title: string; description: string };
+
 type ProcessStep = { number: string; title: string; description: string; image: string; alt: string };
 type GalleryItem = { title: string; location: string; image?: string; alt: string; featured?: boolean };
 type Testimonial = { quote: string; author: string; accent?: boolean };
@@ -141,16 +137,6 @@ const KITS_URL = "https://www.olhonabrasa.com.br/kits-premium/";
 const INSTAGRAM_URL = "https://www.instagram.com/olhonabrasa/";
 const GUIA_PDF_URL = "/guia-olho-na-brasa.pdf";
 
-const trustCards: TrustCard[] = [
-  { image: iconFabrica.url, title: "Direto da fábrica", description: "Sem intermediário, preço justo" },
-  { image: iconGarantia.url, title: "15 anos de garantia", description: "Confiança na qualidade que fabricamos" },
-  {
-    image: iconParcelamento.url,
-    title: "ATÉ 10X S/ JUROS no cartão e 5% Off no Pix",
-    description: "Feito nas medidas exatas da sua churrasqueira e seu bolso",
-  },
-  { image: iconFrete.url, title: "Frete grátis Sul/Sudeste", description: "Envio seguro para todo Brasil" },
-];
 
 const processSteps: ProcessStep[] = [
   { number: "01", title: "Corte do Inox", description: "Chapas de Inox 304 cortadas com precisão milimétrica.", image: processCutAsset.url, alt: "Corte preciso de peças em inox 304 com faíscas na fábrica" },
@@ -346,10 +332,6 @@ function LandingPage() {
         <main>
           <HeroSection onOpenModal={openConsultiveModal} />
           <Divider />
-          <VideoSection onOpenModal={openConsultiveModal} />
-          <Divider />
-          <TrustBand />
-          <Divider />
           <BeforeAfterSection onOpenModal={openConsultiveModal} onOpenLightbox={(img) => setLightboxImage(img)} />
           <Divider />
           <ProcessSection onOpenModal={openConsultiveModal} />
@@ -442,28 +424,54 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <section
       id="top"
-      className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden bg-background"
+      className="relative overflow-hidden bg-background pt-20 pb-10 md:pt-24 md:pb-16"
     >
-      {/* Imagem do Rodrigo full-screen */}
-      <img
-        src={rodrigoSuporte.url}
-        alt="Rodrigo, fundador da Olho na Brasa, segurando o Kit Suporte Suspenso em inox"
-        className="absolute inset-0 z-0 h-full w-full object-cover object-[center_20%] md:object-[center_25%]"
-        loading="eager"
-      />
+      <div className="relative z-[3] mx-auto w-full max-w-(--container-max) px-5">
+        {/* Vídeo cinematográfico em loop, sem controles */}
+        <div className="overflow-hidden rounded-2xl border border-white/10 bg-black shadow-fire">
+          <video
+            className="block h-auto w-full"
+            src={videoAsset.url}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            disablePictureInPicture
+            controlsList="nodownload noplaybackrate nofullscreen"
+            aria-hidden="true"
+          />
+        </div>
 
-      {/* Gradiente para legibilidade do texto */}
-      <div className="hero-gradient z-[1]" aria-hidden="true" />
-
-      {/* Conteúdo na parte inferior */}
-      <div className="relative z-[3] mx-auto w-full max-w-(--container-max) px-5 pb-10 pt-32 md:pb-16">
-        <h1 className="max-w-2xl font-display font-semibold leading-[1.05] text-balance text-foreground"
-            style={{ fontSize: "clamp(1.75rem, 7vw, 3.5rem)" }}>
-          Sua churrasqueira merece um upgrade de verdade.
+        {/* Headline abaixo do vídeo */}
+        <h1
+          className="mt-8 font-display text-foreground"
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontWeight: 800,
+            fontSize: "clamp(1.75rem, 7.5vw, 3.5rem)",
+            lineHeight: 1.1,
+            letterSpacing: "-0.03em",
+          }}
+        >
+          O Kit de Churrasqueira{" "}
+          <span style={{ color: "#FF6B00" }}>mais Vendido do Brasil!</span>
         </h1>
 
-        <p className="mt-4 max-w-lg text-sm leading-6 text-secondary-foreground md:text-base">
-          Kit Premium em Inox 304, feito sob medida. Direto da fábrica, com garantia de 15 anos.
+        <p
+          className="text-secondary-foreground"
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontWeight: 400,
+            fontSize: "clamp(0.95rem, 3.5vw, 1.35rem)",
+            lineHeight: 1.4,
+            letterSpacing: "0.02em",
+            color: "#B0B0B0",
+            marginTop: "12px",
+          }}
+        >
+          O Kit Suporte Suspenso da{" "}
+          <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Olho na Brasa</span>
         </p>
 
         <BenefitsMarquee />
@@ -478,6 +486,7 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
     </section>
   );
 }
+
 
 /* ===================== BENEFITS MARQUEE ===================== */
 function BenefitsMarquee() {
@@ -502,55 +511,6 @@ function BenefitsMarquee() {
 
 
 
-/* ===================== VÍDEO ===================== */
-function VideoSection({ onOpenModal }: { onOpenModal: () => void }) {
-  return (
-    <RevealSection className="section-dark section-glow">
-      <SectionHeading
-        eyebrow="VEJA O KIT EM AÇÃO"
-        title="Engenharia que você vê. Qualidade que você sente."
-        description="Cada detalhe é pensado para durar décadas e transformar seu churrasco."
-      />
-      <div className="mx-auto max-w-(--container-max) px-5">
-        <div className="glass-panel overflow-hidden rounded-2xl border border-border">
-          <div className="relative aspect-video overflow-hidden bg-black">
-            <video
-              className="h-full w-full object-contain"
-              src={videoAsset.url}
-              controls
-              autoPlay
-              loop
-              muted
-              playsInline
-              poster={afterProjectAsset.url}
-            />
-          </div>
-        </div>
-      </div>
-      <BlockCta label="MONTAR MEU KIT" onClick={onOpenModal} />
-    </RevealSection>
-  );
-}
-
-/* ===================== TRUST ===================== */
-function TrustBand() {
-  return (
-    <RevealSection className="section-alt">
-      <div className="mx-auto grid max-w-(--container-max) gap-3 px-5 md:grid-cols-4">
-        {trustCards.map((card) => (
-          <article
-            key={card.title}
-            className="group rounded-2xl border border-white/8 bg-white/[0.03] p-5 text-center transition-all duration-300 hover:border-primary/25 hover:bg-white/[0.05]"
-          >
-            <img src={card.image} alt="" aria-hidden="true" className="mx-auto mb-3 h-12 w-12 object-contain" loading="lazy" />
-            <h3 className="text-sm font-bold leading-tight text-foreground">{card.title}</h3>
-            <p className="mt-2 text-xs leading-5 text-secondary-foreground md:text-sm">{card.description}</p>
-          </article>
-        ))}
-      </div>
-    </RevealSection>
-  );
-}
 
 /* ===================== ANTES/DEPOIS ===================== */
 function BeforeAfterSection({
@@ -923,7 +883,7 @@ function FinalCtaSection({ onOpenModal }: { onOpenModal: () => void }) {
           </p>
           <BlockCta label="QUERO MEU PROJETO AGORA" onClick={onOpenModal} />
           <p className="relative mt-5 text-sm leading-6 text-muted-foreground">
-            🔥 Fábrica própria em SC &nbsp;•&nbsp; 🛡️ 15 anos de garantia &nbsp;•&nbsp; 📐 Sob medida
+            Fábrica própria em SC &nbsp;•&nbsp; 15 anos de garantia &nbsp;•&nbsp; Sob medida
           </p>
         </div>
       </section>
@@ -981,7 +941,7 @@ function BlockCta({ label, onClick, fullWidth }: { label: string; onClick: () =>
         size="lg"
         onClick={onClick}
         className={cn(
-          "min-h-14 rounded-xl bg-primary px-8 text-sm font-bold uppercase tracking-[0.05em] text-primary-foreground shadow-fire transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-strong",
+          "min-h-14 rounded-xl bg-primary px-4 text-[13px] font-bold uppercase tracking-[0.03em] text-primary-foreground shadow-fire transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-strong sm:px-6 sm:text-sm sm:tracking-[0.05em]",
           fullWidth ? "w-full" : "w-full max-w-md md:w-auto md:min-w-[320px]",
         )}
       >
