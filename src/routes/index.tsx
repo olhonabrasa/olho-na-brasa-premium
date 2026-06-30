@@ -143,7 +143,7 @@ const WHATSAPP_URL = "https://wa.me/554740420956";
 const SITE_URL = "https://www.olhonabrasa.com.br";
 const KITS_URL = "https://www.olhonabrasa.com.br/kits-premium/";
 const INSTAGRAM_URL = "https://www.instagram.com/olhonabrasa/";
-const GUIA_PDF_URL = "/guia-olho-na-brasa.pdf";
+
 
 
 const processSteps: ProcessStep[] = [
