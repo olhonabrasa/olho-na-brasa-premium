@@ -1316,10 +1316,17 @@ function buildWhatsappHref(text: string) {
   return `${WHATSAPP_URL}?text=${encodeURIComponent(text)}`;
 }
 
-function buildWhatsappMessage({ intro, form, includeMeasurements }: { intro: string; form: ContactForm; includeMeasurements: boolean }) {
+const projectTypeLabels: Record<NonNullable<ProjectType>, string> = {
+  kit: "Kit completo (grelha + suporte suspenso + espetos)",
+  suporte: "Suporte Suspenso com grelha ou espeto",
+  especial: "Projeto especial ou comercial",
+};
+
+function buildWhatsappMessage({ intro, form, includeMeasurements, projectType }: { intro: string; form: ContactForm; includeMeasurements: boolean; projectType?: ProjectType }) {
   const lines = [intro, ""];
   if (form.name) lines.push(`Nome: ${form.name}`);
   if (form.city) lines.push(`Cidade: ${form.city}`);
+  if (projectType) lines.push(`Tipo de projeto: ${projectTypeLabels[projectType]}`);
   if (includeMeasurements) {
     const measurementParts = [form.width, form.depth].filter(Boolean);
     const combined = measurementParts.length ? `${measurementParts.join("x")}cm` : "Não informadas";
