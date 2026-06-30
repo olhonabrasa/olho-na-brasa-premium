@@ -946,7 +946,7 @@ function FinalCtaSection({ onOpenModal }: { onOpenModal: () => void }) {
           </p>
           <BlockCta label="QUERO MEU PROJETO AGORA" onClick={onOpenModal} />
           <p className="relative mt-5 text-sm leading-6 text-muted-foreground">
-            🔥 Fábrica própria em SC &nbsp;•&nbsp; 🛡️ 15 anos de garantia &nbsp;•&nbsp; 📐 Sob medida
+            Fábrica própria em SC &nbsp;•&nbsp; 15 anos de garantia &nbsp;•&nbsp; Sob medida
           </p>
         </div>
       </section>
