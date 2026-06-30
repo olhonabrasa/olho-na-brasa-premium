@@ -409,8 +409,8 @@ function StickyHeader({ visible, onOpenModal }: { visible: boolean; onOpenModal:
       style={{ background: "rgb(10 10 10 / 0.9)" }}
     >
       <div className="mx-auto flex h-full max-w-(--container-max) items-center justify-between gap-3 px-5">
-        <a href="#top" className="font-display text-xs font-semibold tracking-[0.2em] text-foreground md:text-sm">
-          OLHO NA BRASA
+        <a href="#top" aria-label="Olho na Brasa — Início" className="flex items-center gap-2">
+          <img src={logoOlhoNaBrasa.url} alt="Olho na Brasa" className="h-8 w-auto md:h-9" />
         </a>
         <button
           type="button"
