@@ -769,6 +769,66 @@ function TestimonialsSection({ onOpenModal }: { onOpenModal: () => void }) {
   );
 }
 
+/* ===================== VÍDEOS DE CLIENTES ===================== */
+function ClientVideosSection({ onOpenModal }: { onOpenModal: () => void }) {
+  return (
+    <RevealSection className="section-alt section-glow">
+      <SectionHeading
+        eyebrow="CLIENTES REAIS"
+        title="Veja a reação de quem recebeu o Kit Olho na Brasa."
+        centered
+      />
+      <div className="mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible lg:grid-cols-5">
+        {clientVideos.map((video, idx) => (
+          <ClientVideoCard key={video.src} video={video} index={idx} />
+        ))}
+      </div>
+      <p className="mx-auto mt-6 max-w-2xl px-5 text-center text-sm text-secondary-foreground md:text-base">
+        Mais de 100.000 kits entregues em todo o Brasil.
+      </p>
+      <BlockCta label="QUERO RECEBER O MEU" onClick={onOpenModal} />
+    </RevealSection>
+  );
+}
+
+function ClientVideoCard({ video, index }: { video: ClientVideo; index: number }) {
+  const [playing, setPlaying] = useState(false);
+  return (
+    <article className="group min-w-[70%] snap-start overflow-hidden rounded-2xl border border-border bg-card shadow-soft md:min-w-0">
+      <div className="relative aspect-[9/16] overflow-hidden bg-black">
+        <video
+          src={video.src}
+          controls={playing}
+          playsInline
+          preload="metadata"
+          className="absolute inset-0 h-full w-full object-cover"
+          onPlay={() => setPlaying(true)}
+          onPause={() => setPlaying(false)}
+        />
+        {!playing ? (
+          <button
+            type="button"
+            onClick={(e) => {
+              const v = e.currentTarget.parentElement?.querySelector("video");
+              if (v) { v.play(); setPlaying(true); }
+            }}
+            aria-label={`Reproduzir vídeo do cliente ${index + 1}`}
+            className="absolute inset-0 z-10 flex items-center justify-center bg-black/30 transition-colors hover:bg-black/45"
+          >
+            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/95 text-black shadow-fire transition-transform group-hover:scale-110">
+              <Play className="ml-1 h-7 w-7 fill-current" aria-hidden="true" />
+            </span>
+          </button>
+        ) : null}
+      </div>
+      <div className="space-y-1 p-4">
+        <p className="text-sm font-semibold text-foreground">{video.name}</p>
+        <p className="text-xs text-secondary-foreground md:text-sm">{video.caption}</p>
+      </div>
+    </article>
+  );
+}
+
 /* ===================== PARA QUEM É ===================== */
 function WhoItsForSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
