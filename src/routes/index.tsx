@@ -1164,6 +1164,49 @@ function ConsultiveModal({
     : measurementState === "no";
   const canContinueContact = Boolean(form.name.trim() && form.whatsapp.trim() && form.city.trim() && form.email.trim());
 
+  const sendLeadToDataCrazy = async (formData: typeof form) => {
+    try {
+      await fetch(
+        "https://api.datacrazy.io/v1/crm/api/crm/flows/webhooks/57af109b-a833-4f35-8081-b5ee5109d305/9d608ce0-6177-4000-9646-4b7c6d5cd750",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            whatsapp: formData.whatsapp,
+            email: formData.email,
+            nome: formData.nome,
+            estagio: stage,
+            tipoProjeto: projectType ? projectTypeLabels[projectType] : "",
+            cidade: formData.cidade,
+            largura: formData.largura || "",
+            comprimento: formData.comprimento || "",
+            altura: formData.altura || "",
+            temMedidas: formData.temMedidas ? "Sim" : "Não",
+            prazo: "Agora",
+            utm_source: new URLSearchParams(window.location.search).get("utm_source") || "direct",
+            utm_medium: new URLSearchParams(window.location.search).get("utm_medium") || "",
+            utm_content: new URLSearchParams(window.location.search).get("utm_campaign") || "",
+          }),
+        },
+      );
+    } catch (error) {
+      console.error("DataCrazy webhook error:", error);
+    }
+  };
+
+  const handleFinalAction = async (url: string) => {
+    await sendLeadToDataCrazy({
+      ...form,
+      nome: form.name,
+      cidade: form.city,
+      largura: form.width,
+      comprimento: form.depth,
+      altura: form.height,
+      temMedidas: !!(form.width || form.depth || form.height),
+    });
+    window.open(url, "_blank");
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/85 p-0 md:items-center md:p-6" role="dialog" aria-modal="true" aria-labelledby="consultive-modal-title">
       <div className="relative max-h-[95svh] w-full overflow-hidden rounded-t-[28px] border border-border-strong bg-card shadow-fire md:max-h-[90svh] md:max-w-[500px] md:rounded-[28px]">
