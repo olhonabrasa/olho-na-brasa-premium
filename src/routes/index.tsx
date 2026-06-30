@@ -357,6 +357,8 @@ function LandingPage() {
           <Divider />
           <WhoItsForSection onOpenModal={openConsultiveModal} />
           <Divider />
+          <GoogleReviewsSection onOpenModal={openConsultiveModal} />
+          <Divider />
           <FaqSection onOpenModal={openConsultiveModal} />
           <Divider />
           <FinalCtaSection onOpenModal={openConsultiveModal} />
@@ -954,7 +956,97 @@ function WhoItsForSection({ onOpenModal }: { onOpenModal: () => void }) {
   );
 }
 
-/* ===================== FAQ ===================== */
+/* ===================== AVALIAÇÕES NO GOOGLE ===================== */
+const googleReviews = [
+  "Excelente atendimento, material de primeira qualidade e ótimo acabamento. Entrega no prazo! Recomendo",
+  "Adquiri o suporte suspenso para espetos e uma grelha de descanso. Atendimento na compra personalizado e ágil, informei as medidas da minha churrasqueira e logo recebi o link com os valores. Recebi em casa muito antes do prazo. Estou muito satisfeito. Excelente pós venda. Sensacional.",
+  "Produto de altíssima qualidade, atendimento excepcional, recomendo fortemente. Melhorou muito meus momentos de lazer na minha casa com esses acessórios para a churrasqueira.",
+];
+
+function GoogleLogo({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
+      <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
+      <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
+      <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/>
+      <path fill="#EA4335" d="M24 9.5c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 2.97 29.93 1 24 1 15.4 1 7.96 5.93 4.34 13.12l7.35 5.7C13.42 13.37 18.27 9.5 24 9.5z"/>
+    </svg>
+  );
+}
+
+function GoogleReviewsSection({ onOpenModal }: { onOpenModal: () => void }) {
+  const mapsUrl = "https://www.google.com/maps/place/Olho+na+Brasa/@-27.1016701,-48.6187495,738m/data=!3m1!1e3!4m8!3m7!1s0x94d8b100c4230f17:0x899b6cbbbfaceb99!8m2!3d-27.1016701!4d-48.6161746!9m1!1b1!16s%2Fg%2F11rzr1kln5";
+  return (
+    <RevealSection className="section-alt section-glow">
+      <SectionHeading eyebrow="AVALIAÇÕES NO GOOGLE" title="O que nossos clientes dizem no Google" centered />
+
+      <div className="mx-auto mb-10 flex max-w-md flex-col items-center gap-3 rounded-2xl border border-border bg-card/60 px-6 py-6 text-center shadow-soft">
+        <div className="flex items-center gap-2">
+          <GoogleLogo className="h-6 w-6" />
+          <span className="text-lg font-semibold text-foreground">Google</span>
+        </div>
+        <div className="text-[32px] font-bold leading-none text-foreground">4.7</div>
+        <div className="flex items-center gap-0.5" aria-label="4.7 de 5 estrelas">
+          {[0, 1, 2, 3].map((i) => (
+            <Star key={i} className="h-5 w-5 fill-current" style={{ color: "#FFB800" }} aria-hidden="true" />
+          ))}
+          <div className="relative h-5 w-5">
+            <Star className="absolute inset-0 h-5 w-5" style={{ color: "#FFB800" }} aria-hidden="true" />
+            <div className="absolute inset-0 overflow-hidden" style={{ width: "70%" }}>
+              <Star className="h-5 w-5 fill-current" style={{ color: "#FFB800" }} aria-hidden="true" />
+            </div>
+          </div>
+        </div>
+        <p className="text-sm" style={{ color: "#888" }}>41 avaliações</p>
+        <a
+          href={mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm font-semibold text-primary hover:underline"
+        >
+          Ver no Google Maps →
+        </a>
+      </div>
+
+      <div className="mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible">
+        {googleReviews.map((quote, idx) => (
+          <article
+            key={idx}
+            className="min-w-[85%] snap-start rounded-xl bg-white p-6 md:min-w-0"
+            style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }}
+          >
+            <div className="mb-3 flex items-center justify-between">
+              <GoogleLogo className="h-5 w-5" />
+              <div className="flex gap-0.5">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-current" style={{ color: "#FFB800" }} aria-hidden="true" />
+                ))}
+              </div>
+            </div>
+            <blockquote className="text-sm leading-6" style={{ color: "#333" }}>
+              “{quote}”
+            </blockquote>
+            <div className="mt-5 flex items-center gap-3 border-t border-neutral-200 pt-4">
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-neutral-200 text-neutral-500">
+                <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
+                  <path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-4 0-8 2-8 6v2h16v-2c0-4-4-6-8-6z"/>
+                </svg>
+              </div>
+              <div className="leading-tight">
+                <p className="text-sm font-semibold text-neutral-900">Cliente Google</p>
+                <p className="text-xs text-neutral-500">Avaliação do Google</p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <BlockCta label="QUERO MEU PROJETO" onClick={onOpenModal} />
+    </RevealSection>
+  );
+}
+
+
 function FaqSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <RevealSection className="section-dark">
