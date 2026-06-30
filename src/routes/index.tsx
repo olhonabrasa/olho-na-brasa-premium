@@ -309,6 +309,7 @@ function LandingPage() {
     setModalStage("stage");
     setMeasurementState("unknown");
     setShowMeasurementsForm(false);
+    setProjectType(null);
   };
 
   const closeConsultiveModal = () => {
@@ -316,6 +317,7 @@ function LandingPage() {
     setModalStage("stage");
     setMeasurementState("unknown");
     setShowMeasurementsForm(false);
+    setProjectType(null);
   };
 
   const formattedWhatsapp = formatWhatsapp(contactForm.whatsapp);
@@ -323,12 +325,14 @@ function LandingPage() {
   const specialistMessage = buildWhatsappMessage({
     intro: "Olá! Quero montar meu Kit Premium.",
     form: contactForm,
+    projectType,
     includeMeasurements: Boolean(contactForm.width || contactForm.depth || contactForm.height),
   });
 
   const measurementHelpMessage = buildWhatsappMessage({
     intro: "Olá! Quero montar meu Kit Premium, mas preciso de ajuda para definir as medidas da minha churrasqueira.",
     form: contactForm,
+    projectType,
     includeMeasurements: false,
   });
 
