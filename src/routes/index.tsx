@@ -141,16 +141,6 @@ const KITS_URL = "https://www.olhonabrasa.com.br/kits-premium/";
 const INSTAGRAM_URL = "https://www.instagram.com/olhonabrasa/";
 const GUIA_PDF_URL = "/guia-olho-na-brasa.pdf";
 
-const trustCards: TrustCard[] = [
-  { image: iconFabrica.url, title: "Direto da fábrica", description: "Sem intermediário, preço justo" },
-  { image: iconGarantia.url, title: "15 anos de garantia", description: "Confiança na qualidade que fabricamos" },
-  {
-    image: iconParcelamento.url,
-    title: "ATÉ 10X S/ JUROS no cartão e 5% Off no Pix",
-    description: "Feito nas medidas exatas da sua churrasqueira e seu bolso",
-  },
-  { image: iconFrete.url, title: "Frete grátis Sul/Sudeste", description: "Envio seguro para todo Brasil" },
-];
 
 const processSteps: ProcessStep[] = [
   { number: "01", title: "Corte do Inox", description: "Chapas de Inox 304 cortadas com precisão milimétrica.", image: processCutAsset.url, alt: "Corte preciso de peças em inox 304 com faíscas na fábrica" },
