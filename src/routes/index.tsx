@@ -485,6 +485,9 @@ function BenefitsMarquee() {
       </div>
     </div>
   );
+}
+
+
 
 /* ===================== VÍDEO ===================== */
 function VideoSection({ onOpenModal }: { onOpenModal: () => void }) {
