@@ -1291,7 +1291,11 @@ function ConsultiveModal({
                 </div>
               </a>
 
-              <a href={GUIA_PDF_URL} download className="block rounded-2xl border border-border bg-background/50 p-4 transition-colors hover:bg-card-hover">
+              <button
+                type="button"
+                onClick={() => window.open("https://drive.google.com/file/d/1y9Uy1Xy-n7mRXdiBcC5I5O1Om-hy9ka4/view?usp=sharing", "_blank")}
+                className="block w-full rounded-2xl border border-border bg-background/50 p-4 text-left transition-colors hover:bg-card-hover"
+              >
                 <div className="flex items-center gap-3">
                   <Download className="h-5 w-5 text-primary" />
                   <div>
@@ -1299,7 +1303,8 @@ function ConsultiveModal({
                     <p className="mt-1 text-sm text-secondary-foreground">PDF com tudo que você precisa saber antes de comprar.</p>
                   </div>
                 </div>
-              </a>
+              </button>
+
 
               <p className="text-sm leading-6 text-muted-foreground">Quando estiver pronto, volte e fale com nosso especialista.</p>
             </div>
