@@ -1060,6 +1060,35 @@ function ConsultiveModal({
               <OptionButton icon={<Search className="h-5 w-5" />} title="Ainda estou planejando" description="Veja kits, preços e baixe o guia de medidas" onClick={() => onMomentSelect("planejando")} />
             </div>
           ) : null}
+          {stage === "projectType" ? (
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-lg font-semibold text-foreground">Que tipo de projeto você procura?</h3>
+                <p className="mt-2 text-sm leading-6 text-secondary-foreground">Escolha a opção mais próxima — o especialista refina com você no WhatsApp.</p>
+              </div>
+              <div className="grid gap-3">
+                <ProjectTypeCard
+                  active={projectType === "kit"}
+                  title="Kit completo (grelha + suporte suspenso + espetos)"
+                  subtitle="Nosso kit mais vendido, a partir de R$2.500"
+                  onClick={() => onProjectTypeSelect("kit")}
+                />
+                <ProjectTypeCard
+                  active={projectType === "suporte"}
+                  title="Só o Suporte Suspenso com uma grelha ou espeto"
+                  subtitle="Suporte Suspenso + grelhas, espetos ou acessórios separados"
+                  onClick={() => onProjectTypeSelect("suporte")}
+                />
+                <ProjectTypeCard
+                  active={projectType === "especial"}
+                  title="Projeto especial ou comercial"
+                  subtitle="Restaurante, espetaria, evento ou medida fora do padrão"
+                  onClick={() => onProjectTypeSelect("especial")}
+                />
+              </div>
+            </div>
+          ) : null}
+
 
           {stage === "measurements" ? (
             <div className="space-y-5">
