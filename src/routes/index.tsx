@@ -336,8 +336,6 @@ function LandingPage() {
           <Divider />
           <GallerySection onOpenLightbox={(item) => setLightboxImage({ src: item.image ?? "", alt: item.alt, title: item.title, subtitle: item.location })} onOpenModal={openConsultiveModal} />
           <Divider />
-          <TestimonialsSection onOpenModal={openConsultiveModal} />
-          <Divider />
           <ClientVideosSection onOpenModal={openConsultiveModal} />
           <Divider />
           <WhoItsForSection onOpenModal={openConsultiveModal} />
