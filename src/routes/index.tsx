@@ -997,10 +997,12 @@ function ConsultiveModal({
   stage,
   measurementState,
   showMeasurementsForm,
+  projectType,
   form,
   formattedWhatsapp,
   onClose,
   onMomentSelect,
+  onProjectTypeSelect,
   onMeasurementStateChange,
   onShowMeasurementForm,
   onContinueMeasurements,
@@ -1013,10 +1015,12 @@ function ConsultiveModal({
   stage: ModalStage;
   measurementState: MeasurementState;
   showMeasurementsForm: boolean;
+  projectType: ProjectType;
   form: ContactForm;
   formattedWhatsapp: string;
   onClose: () => void;
   onMomentSelect: (moment: ProjectMoment) => void;
+  onProjectTypeSelect: (type: NonNullable<ProjectType>) => void;
   onMeasurementStateChange: (state: MeasurementState) => void;
   onShowMeasurementForm: () => void;
   onContinueMeasurements: () => void;
