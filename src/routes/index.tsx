@@ -258,6 +258,7 @@ function LandingPage() {
   const [modalStage, setModalStage] = useState<ModalStage>("stage");
   const [measurementState, setMeasurementState] = useState<MeasurementState>("unknown");
   const [showMeasurementsForm, setShowMeasurementsForm] = useState(false);
+  const [projectType, setProjectType] = useState<ProjectType>(null);
   const [headerVisible, setHeaderVisible] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string; title?: string; subtitle?: string } | null>(null);
   const [contactForm, setContactForm] = useState<ContactForm>({
