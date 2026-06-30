@@ -352,6 +352,8 @@ function LandingPage() {
           <Divider />
           <TestimonialsSection onOpenModal={openConsultiveModal} />
           <Divider />
+          <ClientVideosSection onOpenModal={openConsultiveModal} />
+          <Divider />
           <WhoItsForSection onOpenModal={openConsultiveModal} />
           <Divider />
           <FaqSection onOpenModal={openConsultiveModal} />
