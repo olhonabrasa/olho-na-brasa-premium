@@ -91,8 +91,9 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
 });
 
-type ModalStage = "stage" | "measurements" | "contact" | "path" | "cold";
+type ModalStage = "stage" | "projectType" | "measurements" | "contact" | "path" | "cold";
 type ProjectMoment = "obra" | "pronta" | "planejando" | null;
+type ProjectType = "kit" | "suporte" | "especial" | null;
 type MeasurementState = "unknown" | "yes" | "no";
 
 type ContactForm = {
