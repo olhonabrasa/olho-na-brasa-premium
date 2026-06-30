@@ -1164,7 +1164,16 @@ function ConsultiveModal({
     : measurementState === "no";
   const canContinueContact = Boolean(form.name.trim() && form.whatsapp.trim() && form.city.trim() && form.email.trim());
 
-  const sendLeadToDataCrazy = async (formData: typeof form) => {
+  const sendLeadToDataCrazy = async (leadData: {
+    nome: string;
+    whatsapp: string;
+    email: string;
+    cidade: string;
+    largura: string;
+    comprimento: string;
+    altura: string;
+    temMedidas: boolean;
+  }) => {
     try {
       await fetch(
         "https://api.datacrazy.io/v1/crm/api/crm/flows/webhooks/57af109b-a833-4f35-8081-b5ee5109d305/9d608ce0-6177-4000-9646-4b7c6d5cd750",
@@ -1172,16 +1181,16 @@ function ConsultiveModal({
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            whatsapp: formData.whatsapp,
-            email: formData.email,
-            nome: formData.nome,
+            whatsapp: leadData.whatsapp,
+            email: leadData.email,
+            nome: leadData.nome,
             estagio: stage,
             tipoProjeto: projectType ? projectTypeLabels[projectType] : "",
-            cidade: formData.cidade,
-            largura: formData.largura || "",
-            comprimento: formData.comprimento || "",
-            altura: formData.altura || "",
-            temMedidas: formData.temMedidas ? "Sim" : "Não",
+            cidade: leadData.cidade,
+            largura: leadData.largura || "",
+            comprimento: leadData.comprimento || "",
+            altura: leadData.altura || "",
+            temMedidas: leadData.temMedidas ? "Sim" : "Não",
             prazo: "Agora",
             utm_source: new URLSearchParams(window.location.search).get("utm_source") || "direct",
             utm_medium: new URLSearchParams(window.location.search).get("utm_medium") || "",
