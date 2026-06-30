@@ -1226,11 +1226,31 @@ function ConsultiveModal({
 
     if (!leadFired.current) {
       leadFired.current = true;
+
+      const formatPhone = (phone: string) => {
+        const digits = phone.replace(/\D/g, "");
+        if (digits.startsWith("55")) return digits;
+        return "55" + digits;
+      };
+
+      const formatName = (name: string) => name.trim().toLowerCase();
+      const nameParts = (form.name || "").trim().split(" ");
+      const firstName = nameParts[0] || "";
+      const lastName = nameParts.slice(1).join(" ") || "";
+
       if (typeof fbq !== "undefined") {
+        fbq("init", "560384575766988", {
+          ph: formatPhone(form.whatsapp),
+          fn: formatName(firstName),
+          ln: formatName(lastName),
+          ct: formatName(form.city || ""),
+          country: "br",
+          external_id: formatPhone(form.whatsapp),
+        });
+
         fbq("track", "Lead", {
           content_name: "LP Premium - Kit Suporte Suspenso",
           content_category: projectType ? projectTypeLabels[projectType] : "Kit completo",
-          city: form.city || "",
           value: 3500,
           currency: "BRL",
         });
