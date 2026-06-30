@@ -64,6 +64,11 @@ import posterCliente4 from "@/assets/poster-cliente-4.jpg.asset.json";
 import posterCliente5 from "@/assets/poster-cliente-5.jpg.asset.json";
 import { Play } from "lucide-react";
 
+declare global {
+  // eslint-disable-next-line no-var
+  var fbq: ((...args: unknown[]) => void) | undefined;
+}
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
