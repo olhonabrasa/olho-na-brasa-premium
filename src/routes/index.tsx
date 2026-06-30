@@ -214,7 +214,23 @@ const faqItems = [
   { question: "O Kit Premium inclui o quê?", answer: "Grelha Uruguaia Premium (quadro 6mm, varões 5mm), Grelha de Descanso, Suporte Suspenso e Espetos Duplos de brinde. Tudo em Inox 304 alimentício, sob medida." },
 ];
 
-const benefits = ["Inox 304 alimentício", "Sob medida", "15 anos de garantia", "Frete grátis Sul/Sudeste"];
+const benefits = [
+  "Inox 304 alimentício",
+  "Sob medida",
+  "15 anos de garantia",
+  "Frete grátis Sul/Sudeste",
+  "★★★★★ 100.000+ churrasqueiras entregues",
+  "Acabamento premium",
+];
+
+type ClientVideo = { src: string; name: string; caption: string };
+const clientVideos: ClientVideo[] = [
+  { src: videoCliente1.url, name: "Cliente Olho na Brasa", caption: "Kit Premium instalado" },
+  { src: videoCliente2.url, name: "Cliente Olho na Brasa", caption: "Reação ao receber o kit" },
+  { src: videoCliente3.url, name: "Cliente Olho na Brasa", caption: "Acabamento em inox 304" },
+  { src: videoCliente4.url, name: "Cliente Olho na Brasa", caption: "Encaixe sob medida" },
+  { src: videoCliente5.url, name: "Cliente Olho na Brasa", caption: "Primeiro churrasco" },
+];
 
 function LandingPage() {
   const [modalOpen, setModalOpen] = useState(false);
