@@ -30,7 +30,7 @@ import processPackagingAsset from "@/assets/processo-embalagem-segura.png.asset.
 import measurementGuideAsset from "@/assets/guia-medidas.png.asset.json";
 import videoAsset from "@/assets/video-cinematografico.mp4.asset.json";
 import fabricaVideo from "@/assets/fabrica.mp4.asset.json";
-import rodrigoSuporte from "@/assets/rodrigo-suporte.png.asset.json";
+
 import card1Antes from "@/assets/card1-antes.jpg.asset.json";
 import card1Depois from "@/assets/card1-depois.jpg.asset.json";
 import card2Antes from "@/assets/card2-antes.jpg.asset.json";
