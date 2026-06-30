@@ -1196,8 +1196,9 @@ function ConsultiveModal({
 
   const handleFinalAction = async (url: string) => {
     await sendLeadToDataCrazy({
-      ...form,
       nome: form.name,
+      whatsapp: form.whatsapp,
+      email: form.email,
       cidade: form.city,
       largura: form.width,
       comprimento: form.depth,
