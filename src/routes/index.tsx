@@ -48,6 +48,17 @@ import projeto4 from "@/assets/projeto-instalado-4.png.asset.json";
 import projeto5 from "@/assets/projeto-instalado-5.jpg.asset.json";
 import projeto6 from "@/assets/projeto-instalado-6.jpg.asset.json";
 import rodrigoMedidasVideo from "@/assets/rodrigo-medidas.mp4.asset.json";
+import logoOlhoNaBrasa from "@/assets/logo-olho-na-brasa.png.asset.json";
+import card4Antes from "@/assets/card4-antes.jpg.asset.json";
+import card4Depois from "@/assets/card4-depois.jpg.asset.json";
+import card5Antes from "@/assets/card5-antes.png.asset.json";
+import card5Depois from "@/assets/card5-depois.jpg.asset.json";
+import videoCliente1 from "@/assets/video-cliente-1.mp4.asset.json";
+import videoCliente2 from "@/assets/video-cliente-2.mp4.asset.json";
+import videoCliente3 from "@/assets/video-cliente-3.mp4.asset.json";
+import videoCliente4 from "@/assets/video-cliente-4.mp4.asset.json";
+import videoCliente5 from "@/assets/video-cliente-5.mp4.asset.json";
+import { Play } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
