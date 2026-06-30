@@ -207,20 +207,6 @@ const galleryItems: GalleryItem[] = [
   { title: "Nicho premium", location: "Projeto residencial", image: projeto6.url, alt: "Kit instalado em nicho de churrasqueira residencial premium" },
 ];
 
-const testimonials: Testimonial[] = [
-  {
-    quote:
-      "Sou churrasqueiro profissional e faço churrasco nas chácaras de meus clientes. Sempre tive o problema de depender da estrutura do cliente. Mas agora que comprei essa churrasqueira, facilitou muito meu trabalho e o churrasco fica muito melhor! Se você quer uma churrasqueira realmente boa e móvel, essa é a única opção que conheço no mercado.",
-    author: "Wesley — 12/01/2024",
-  },
-  { quote: "É outra coisa! Exatamente como na foto, gostamos muito! Para quem assim como eu ficou em dúvida, o cabo realmente não esquenta!", author: "Rian — 06/04/2024" },
-  { quote: "Obrigado por produzirem com o cabo para dentro, ficou perfeita na minha churrasqueira!", author: "Valmir — 11/03/2024" },
-  { quote: "Comprei o Kit Inteiro e ficou perfeito aqui na churrasqueira. Suporte Espeto em Aço Inox impecável.", author: "Otávio — 19/01/2024" },
-  { quote: "O produto chegou antes do esperado, a qualidade é surpreendente. O valor foi 1/3 do orçamento que fiz aqui na região e a qualidade é a mesma. Estou indicando para todo mundo!", author: "Anderson — 10/01/2024" },
-  { quote: "Supera as expectativas.", author: "Ricardo Gölzer — 02/05/2023" },
-  { quote: "Produto de excelente qualidade, recomendo!", author: "Vanderlei Knopf — 16/01/2023" },
-  { quote: "Confiamos tanto na qualidade que oferecemos 15 anos de garantia. Os produtos são feitos com qualidade máxima!", author: "Olho na Brasa", accent: true },
-];
 
 const faqItems = [
   { question: "Como sei se o Kit vai caber na minha churrasqueira?", answer: "Todos os nossos kits são fabricados sob medida. Você informa as medidas internas da sua churrasqueira (largura e comprimento) e nós fabricamos no tamanho exato. Temos um vídeo com o Rodrigo, dono da fábrica, ensinando como tirar as medidas corretamente." },
