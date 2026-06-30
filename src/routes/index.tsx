@@ -525,55 +525,6 @@ function BenefitsMarquee() {
 
 
 
-/* ===================== VÍDEO ===================== */
-function VideoSection({ onOpenModal }: { onOpenModal: () => void }) {
-  return (
-    <RevealSection className="section-dark section-glow">
-      <SectionHeading
-        eyebrow="VEJA O KIT EM AÇÃO"
-        title="Engenharia que você vê. Qualidade que você sente."
-        description="Cada detalhe é pensado para durar décadas e transformar seu churrasco."
-      />
-      <div className="mx-auto max-w-(--container-max) px-5">
-        <div className="glass-panel overflow-hidden rounded-2xl border border-border">
-          <div className="relative aspect-video overflow-hidden bg-black">
-            <video
-              className="h-full w-full object-contain"
-              src={videoAsset.url}
-              controls
-              autoPlay
-              loop
-              muted
-              playsInline
-              poster={afterProjectAsset.url}
-            />
-          </div>
-        </div>
-      </div>
-      <BlockCta label="MONTAR MEU KIT" onClick={onOpenModal} />
-    </RevealSection>
-  );
-}
-
-/* ===================== TRUST ===================== */
-function TrustBand() {
-  return (
-    <RevealSection className="section-alt">
-      <div className="mx-auto grid max-w-(--container-max) gap-3 px-5 md:grid-cols-4">
-        {trustCards.map((card) => (
-          <article
-            key={card.title}
-            className="group rounded-2xl border border-white/8 bg-white/[0.03] p-5 text-center transition-all duration-300 hover:border-primary/25 hover:bg-white/[0.05]"
-          >
-            <img src={card.image} alt="" aria-hidden="true" className="mx-auto mb-3 h-12 w-12 object-contain" loading="lazy" />
-            <h3 className="text-sm font-bold leading-tight text-foreground">{card.title}</h3>
-            <p className="mt-2 text-xs leading-5 text-secondary-foreground md:text-sm">{card.description}</p>
-          </article>
-        ))}
-      </div>
-    </RevealSection>
-  );
-}
 
 /* ===================== ANTES/DEPOIS ===================== */
 function BeforeAfterSection({
