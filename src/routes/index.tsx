@@ -442,26 +442,9 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
       {/* Gradiente para legibilidade do texto */}
       <div className="hero-gradient z-[1]" aria-hidden="true" />
 
-      {/* Badges sobrepostas */}
-      <div className="pointer-events-none absolute right-4 top-20 z-[2] md:top-24 md:right-8">
-        <span className="inline-block rounded-full border border-white/15 bg-black/55 px-3 py-1.5 text-[11px] font-semibold text-foreground backdrop-blur-md md:text-xs">
-          15 anos de garantia real
-        </span>
-      </div>
-      <div className="pointer-events-none absolute left-4 top-20 z-[2] md:top-24 md:left-8">
-        <span className="inline-block rounded-full border border-white/15 bg-black/55 px-3 py-1.5 text-[11px] font-semibold text-foreground backdrop-blur-md md:text-xs">
-          Rodrigo · fundador
-        </span>
-      </div>
-
       {/* Conteúdo na parte inferior */}
       <div className="relative z-[3] mx-auto w-full max-w-(--container-max) px-5 pb-10 pt-32 md:pb-16">
-        <div className="inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-black/55 px-3 py-1.5 text-[11px] font-semibold text-foreground backdrop-blur-md md:text-xs">
-          <Star className="h-3 w-3 fill-primary text-primary" aria-hidden="true" />
-          <span>★★★★★ 100.000+ churrasqueiras entregues</span>
-        </div>
-
-        <h1 className="mt-5 max-w-2xl font-display font-semibold leading-[1.05] text-balance text-foreground"
+        <h1 className="max-w-2xl font-display font-semibold leading-[1.05] text-balance text-foreground"
             style={{ fontSize: "clamp(1.75rem, 7vw, 3.5rem)" }}>
           Sua churrasqueira merece um upgrade de verdade.
         </h1>
@@ -470,17 +453,7 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
           Kit Premium em Inox 304, feito sob medida. Direto da fábrica, com garantia de 15 anos.
         </p>
 
-        <div className="mt-5 flex snap-x snap-mandatory gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:flex-wrap md:overflow-visible">
-          {benefits.map((item) => (
-            <span
-              key={item}
-              className="flex shrink-0 snap-start items-center gap-1.5 rounded-full border border-white/12 bg-black/55 px-3 py-1.5 text-xs text-foreground backdrop-blur-md"
-            >
-              <Check className="h-3.5 w-3.5 shrink-0 text-success" aria-hidden="true" />
-              {item}
-            </span>
-          ))}
-        </div>
+        <BenefitsMarquee />
 
         <div className="mt-7 max-w-md">
           <BlockCta label="QUERO MEU PROJETO" onClick={onOpenModal} fullWidth />
