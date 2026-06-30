@@ -132,6 +132,15 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src={META_PIXEL_NOSCRIPT_URL}
+            alt=""
+          />
+        </noscript>
         {children}
         <Scripts />
       </body>
