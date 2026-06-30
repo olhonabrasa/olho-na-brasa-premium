@@ -772,15 +772,57 @@ function ClientVideosSection({ onOpenModal }: { onOpenModal: () => void }) {
 
 function ClientVideoCard({ video, index }: { video: ClientVideo; index: number }) {
   const [playing, setPlaying] = useState(false);
+  const cardRef = React.useRef<HTMLElement>(null);
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+
+  // Promove preload de "none" para "metadata" quando o card entra na viewport
+  React.useEffect(() => {
+    const card = cardRef.current;
+    if (!card) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const v = entry.target.querySelector("video");
+            if (v) v.preload = "metadata";
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "200px" },
+    );
+    observer.observe(card);
+    return () => observer.disconnect();
+  }, []);
+
+  // Pausa o vídeo quando sai da viewport
+  React.useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            v.pause();
+          }
+        });
+      },
+      { threshold: 0.25 },
+    );
+    io.observe(v);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <article className="group min-w-[70%] snap-start overflow-hidden rounded-2xl border border-border bg-card shadow-soft md:min-w-0">
+    <article ref={cardRef} className="client-video-card group min-w-[70%] snap-start overflow-hidden rounded-2xl border border-border bg-card shadow-soft md:min-w-0">
       <div className="relative aspect-[9/16] overflow-hidden bg-black">
         <video
+          ref={videoRef}
           src={video.src}
           poster={video.poster}
           controls={playing}
           playsInline
-          preload="metadata"
+          preload="none"
           className="absolute inset-0 h-full w-full object-cover"
           onPlay={() => setPlaying(true)}
           onPause={() => setPlaying(false)}
@@ -788,9 +830,12 @@ function ClientVideoCard({ video, index }: { video: ClientVideo; index: number }
         {!playing ? (
           <button
             type="button"
-            onClick={(e) => {
-              const v = e.currentTarget.parentElement?.querySelector("video");
-              if (v) { v.play(); setPlaying(true); }
+            onClick={() => {
+              const v = videoRef.current;
+              if (v) {
+                v.preload = "metadata";
+                v.play().then(() => setPlaying(true)).catch(() => {});
+              }
             }}
             aria-label={`Reproduzir vídeo do cliente ${index + 1}`}
             className="absolute inset-0 z-10 flex items-center justify-center bg-gradient-to-t from-black/60 via-black/10 to-transparent transition-colors hover:from-black/70"
@@ -808,6 +853,7 @@ function ClientVideoCard({ video, index }: { video: ClientVideo; index: number }
     </article>
   );
 }
+
 
 /* ===================== AUTO-PAUSE VIDEO (pausa quando sai da viewport) ===================== */
 function AutoPauseVideo({ src, poster, className }: { src: string; poster?: string; className?: string }) {
