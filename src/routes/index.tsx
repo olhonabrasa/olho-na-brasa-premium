@@ -203,7 +203,6 @@ const beforeAfterPairs: BeforeAfterPair[] = [
 
 const galleryItems: GalleryItem[] = [
   { title: "Acabamento espelhado", location: "Revestimento em pedra natural", image: kitRevestimento4.url, alt: "Kit Olho na Brasa instalado em churrasqueira com revestimento em pedra natural", featured: true },
-  { title: "Kit Premium completo", location: "Nicho em mármore calacatta", image: kitRevestimento5.url, alt: "Kit Premium Olho na Brasa em nicho de mármore com lateral aberta" },
   { title: "Kit Premium em ação", location: "Carnes na brasa com suporte suspenso", image: projeto1.url, alt: "Kit premium em inox 304 com carnes assando", featured: true },
   { title: "Acabamento espelhado", location: "Churrasqueira em mármore", image: projeto2.url, alt: "Kit Olho na Brasa instalado em churrasqueira com moldura em mármore" },
   { title: "Encaixe perfeito", location: "Churrasqueira em tijolo aparente", image: projeto3.url, alt: "Kit premium em inox instalado em churrasqueira de tijolo" },
