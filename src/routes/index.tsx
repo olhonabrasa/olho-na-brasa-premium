@@ -438,28 +438,54 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <section
       id="top"
-      className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden bg-background"
+      className="relative overflow-hidden bg-background pt-20 pb-10 md:pt-24 md:pb-16"
     >
-      {/* Imagem do Rodrigo full-screen */}
-      <img
-        src={rodrigoSuporte.url}
-        alt="Rodrigo, fundador da Olho na Brasa, segurando o Kit Suporte Suspenso em inox"
-        className="absolute inset-0 z-0 h-full w-full object-cover object-[center_20%] md:object-[center_25%]"
-        loading="eager"
-      />
+      <div className="relative z-[3] mx-auto w-full max-w-(--container-max) px-5">
+        {/* Vídeo cinematográfico em loop, sem controles */}
+        <div className="overflow-hidden rounded-2xl border border-white/10 bg-black shadow-fire">
+          <video
+            className="block h-auto w-full"
+            src={videoAsset.url}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            disablePictureInPicture
+            controlsList="nodownload noplaybackrate nofullscreen"
+            aria-hidden="true"
+          />
+        </div>
 
-      {/* Gradiente para legibilidade do texto */}
-      <div className="hero-gradient z-[1]" aria-hidden="true" />
-
-      {/* Conteúdo na parte inferior */}
-      <div className="relative z-[3] mx-auto w-full max-w-(--container-max) px-5 pb-10 pt-32 md:pb-16">
-        <h1 className="max-w-2xl font-display font-semibold leading-[1.05] text-balance text-foreground"
-            style={{ fontSize: "clamp(1.75rem, 7vw, 3.5rem)" }}>
-          Sua churrasqueira merece um upgrade de verdade.
+        {/* Headline abaixo do vídeo */}
+        <h1
+          className="mt-8 font-display text-foreground"
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontWeight: 800,
+            fontSize: "clamp(1.75rem, 7.5vw, 3.5rem)",
+            lineHeight: 1.1,
+            letterSpacing: "-0.03em",
+          }}
+        >
+          O Kit de Churrasqueira{" "}
+          <span style={{ color: "#FF6B00" }}>mais Vendido do Brasil!</span>
         </h1>
 
-        <p className="mt-4 max-w-lg text-sm leading-6 text-secondary-foreground md:text-base">
-          Kit Premium em Inox 304, feito sob medida. Direto da fábrica, com garantia de 15 anos.
+        <p
+          className="text-secondary-foreground"
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontWeight: 400,
+            fontSize: "clamp(0.95rem, 3.5vw, 1.35rem)",
+            lineHeight: 1.4,
+            letterSpacing: "0.02em",
+            color: "#B0B0B0",
+            marginTop: "12px",
+          }}
+        >
+          O Kit Suporte Suspenso da{" "}
+          <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Olho na Brasa</span>
         </p>
 
         <BenefitsMarquee />
@@ -474,6 +500,7 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
     </section>
   );
 }
+
 
 /* ===================== BENEFITS MARQUEE ===================== */
 function BenefitsMarquee() {
