@@ -357,6 +357,8 @@ function LandingPage() {
           <Divider />
           <WhoItsForSection onOpenModal={openConsultiveModal} />
           <Divider />
+          <GoogleReviewsSection onOpenModal={openConsultiveModal} />
+          <Divider />
           <FaqSection onOpenModal={openConsultiveModal} />
           <Divider />
           <FinalCtaSection onOpenModal={openConsultiveModal} />
