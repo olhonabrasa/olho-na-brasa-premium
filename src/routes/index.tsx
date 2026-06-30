@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useMemo, useState, type ReactNode } from "react";
+import React, { useEffect, useId, useMemo, useRef, useState, type ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -63,6 +63,11 @@ import posterCliente3 from "@/assets/poster-cliente-3.jpg.asset.json";
 import posterCliente4 from "@/assets/poster-cliente-4.jpg.asset.json";
 import posterCliente5 from "@/assets/poster-cliente-5.jpg.asset.json";
 import { Play } from "lucide-react";
+
+declare global {
+  // eslint-disable-next-line no-var
+  var fbq: ((...args: unknown[]) => void) | undefined;
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -1203,8 +1208,10 @@ function ConsultiveModal({
     }
   };
 
+  const leadFired = useRef(false);
+
   const handleFinalAction = async (url: string) => {
-    await sendLeadToDataCrazy({
+    const leadData = {
       nome: form.name,
       whatsapp: form.whatsapp,
       email: form.email,
@@ -1213,7 +1220,23 @@ function ConsultiveModal({
       comprimento: form.depth,
       altura: form.height,
       temMedidas: !!(form.width || form.depth || form.height),
-    });
+    };
+
+    await sendLeadToDataCrazy(leadData);
+
+    if (!leadFired.current) {
+      leadFired.current = true;
+      if (typeof fbq !== "undefined") {
+        fbq("track", "Lead", {
+          content_name: "LP Premium - Kit Suporte Suspenso",
+          content_category: projectType ? projectTypeLabels[projectType] : "Kit completo",
+          city: form.city || "",
+          value: 3500,
+          currency: "BRL",
+        });
+      }
+    }
+
     window.open(url, "_blank");
   };
 
