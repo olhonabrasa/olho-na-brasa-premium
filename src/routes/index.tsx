@@ -376,12 +376,17 @@ function LandingPage() {
         stage={modalStage}
         measurementState={measurementState}
         showMeasurementsForm={showMeasurementsForm}
+        projectType={projectType}
         form={contactForm}
         formattedWhatsapp={formattedWhatsapp}
         onClose={closeConsultiveModal}
         onMomentSelect={(moment) => {
           if (moment === "planejando") setModalStage("cold");
-          else setModalStage("measurements");
+          else setModalStage("projectType");
+        }}
+        onProjectTypeSelect={(type) => {
+          setProjectType(type);
+          setModalStage("measurements");
         }}
         onMeasurementStateChange={(state) => {
           setMeasurementState(state);
