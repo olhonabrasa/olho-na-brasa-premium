@@ -129,7 +129,6 @@ type SectionHeadingProps = {
 
 type ProcessStep = { number: string; title: string; description: string; image: string; alt: string };
 type GalleryItem = { title: string; location: string; image?: string; alt: string; featured?: boolean };
-type Testimonial = { quote: string; author: string; accent?: boolean };
 type BeforeAfterPair = {
   before: string;
   after: string;
@@ -208,20 +207,6 @@ const galleryItems: GalleryItem[] = [
   { title: "Nicho premium", location: "Projeto residencial", image: projeto6.url, alt: "Kit instalado em nicho de churrasqueira residencial premium" },
 ];
 
-const testimonials: Testimonial[] = [
-  {
-    quote:
-      "Sou churrasqueiro profissional e faço churrasco nas chácaras de meus clientes. Sempre tive o problema de depender da estrutura do cliente. Mas agora que comprei essa churrasqueira, facilitou muito meu trabalho e o churrasco fica muito melhor! Se você quer uma churrasqueira realmente boa e móvel, essa é a única opção que conheço no mercado.",
-    author: "Wesley — 12/01/2024",
-  },
-  { quote: "É outra coisa! Exatamente como na foto, gostamos muito! Para quem assim como eu ficou em dúvida, o cabo realmente não esquenta!", author: "Rian — 06/04/2024" },
-  { quote: "Obrigado por produzirem com o cabo para dentro, ficou perfeita na minha churrasqueira!", author: "Valmir — 11/03/2024" },
-  { quote: "Comprei o Kit Inteiro e ficou perfeito aqui na churrasqueira. Suporte Espeto em Aço Inox impecável.", author: "Otávio — 19/01/2024" },
-  { quote: "O produto chegou antes do esperado, a qualidade é surpreendente. O valor foi 1/3 do orçamento que fiz aqui na região e a qualidade é a mesma. Estou indicando para todo mundo!", author: "Anderson — 10/01/2024" },
-  { quote: "Supera as expectativas.", author: "Ricardo Gölzer — 02/05/2023" },
-  { quote: "Produto de excelente qualidade, recomendo!", author: "Vanderlei Knopf — 16/01/2023" },
-  { quote: "Confiamos tanto na qualidade que oferecemos 15 anos de garantia. Os produtos são feitos com qualidade máxima!", author: "Olho na Brasa", accent: true },
-];
 
 const faqItems = [
   { question: "Como sei se o Kit vai caber na minha churrasqueira?", answer: "Todos os nossos kits são fabricados sob medida. Você informa as medidas internas da sua churrasqueira (largura e comprimento) e nós fabricamos no tamanho exato. Temos um vídeo com o Rodrigo, dono da fábrica, ensinando como tirar as medidas corretamente." },
@@ -350,8 +335,6 @@ function LandingPage() {
           <ProcessSection onOpenModal={openConsultiveModal} />
           <Divider />
           <GallerySection onOpenLightbox={(item) => setLightboxImage({ src: item.image ?? "", alt: item.alt, title: item.title, subtitle: item.location })} onOpenModal={openConsultiveModal} />
-          <Divider />
-          <TestimonialsSection onOpenModal={openConsultiveModal} />
           <Divider />
           <ClientVideosSection onOpenModal={openConsultiveModal} />
           <Divider />
@@ -705,47 +688,6 @@ function GallerySection({
         ))}
       </div>
       <BlockCta label="COMEÇAR MEU PROJETO" onClick={onOpenModal} />
-    </RevealSection>
-  );
-}
-
-/* ===================== AVALIAÇÕES ===================== */
-function TestimonialsSection({ onOpenModal }: { onOpenModal: () => void }) {
-  return (
-    <RevealSection className="section-dark section-glow">
-      <SectionHeading eyebrow="CLIENTES QUE LEVAM O CHURRASCO A SÉRIO" title="Quem instala percebe a diferença no primeiro uso." centered />
-
-      <div className="mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-4 md:overflow-visible">
-        {testimonials.map((item) => (
-          <article
-            key={item.quote}
-            className={cn(
-              "min-w-[85%] snap-start rounded-2xl p-6 shadow-soft md:min-w-0",
-              item.accent ? "border-2 border-primary/40 bg-primary/8" : "bg-white",
-            )}
-          >
-            <div className="mb-3 flex gap-0.5 text-amber-400">
-              {Array.from({ length: 5 }).map((_, index) => (
-                <Star key={index} className="h-4 w-4 fill-current" aria-hidden="true" />
-              ))}
-            </div>
-            <blockquote className={cn("text-sm leading-6", item.accent ? "text-foreground italic" : "text-neutral-800")}>
-              “{item.quote}”
-            </blockquote>
-            <div className="mt-4 flex items-center justify-between">
-              <p className={cn("text-sm font-semibold", item.accent ? "text-foreground" : "text-neutral-900")}>
-                {item.author}
-              </p>
-              {!item.accent ? (
-                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">
-                  <Check className="h-3 w-3" /> Compra verificada
-                </span>
-              ) : null}
-            </div>
-          </article>
-        ))}
-      </div>
-      <BlockCta label="FAZER COMO ESSES CLIENTES" onClick={onOpenModal} />
     </RevealSection>
   );
 }
