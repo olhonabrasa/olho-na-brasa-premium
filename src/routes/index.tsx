@@ -958,9 +958,34 @@ function WhoItsForSection({ onOpenModal }: { onOpenModal: () => void }) {
 
 /* ===================== AVALIAÇÕES NO GOOGLE ===================== */
 const googleReviews = [
-  "Excelente atendimento, material de primeira qualidade e ótimo acabamento. Entrega no prazo! Recomendo",
-  "Adquiri o suporte suspenso para espetos e uma grelha de descanso. Atendimento na compra personalizado e ágil, informei as medidas da minha churrasqueira e logo recebi o link com os valores. Recebi em casa muito antes do prazo. Estou muito satisfeito. Excelente pós venda. Sensacional.",
-  "Produto de altíssima qualidade, atendimento excepcional, recomendo fortemente. Melhorou muito meus momentos de lazer na minha casa com esses acessórios para a churrasqueira.",
+  {
+    quote: "Excelente atendimento, material de primeira qualidade e ótimo acabamento. Entrega no prazo! Recomendo.",
+    author: "Sérgio Saturnino",
+  },
+  {
+    quote: "Produto de excelente qualidade, com um pré e pós venda excelentes. Entregam o que prometem. Customizam seu pedido e orientam com segurança na retirada das medidas e como fazer sua instalação. Empresa diferenciada.",
+    author: "Luiz Carlos Crab",
+  },
+  {
+    quote: "Adquiri o suporte suspenso para espetos e uma grelha de descanso. Atendimento na compra personalizado e ágil, informei as medidas da minha churrasqueira e logo recebi o link com os valores. Recebi em casa muito antes do prazo. Estou muito satisfeito. Excelente pós venda. Sensacional.",
+    author: "Cliente Google",
+  },
+  {
+    quote: "O atendimento foi excelente, a loja é muito completa, estou satisfeita com os acessórios, são muito resistentes e lindos!",
+    author: "Valéria Orsatto",
+  },
+  {
+    quote: "Ótimos produtos, facilitando o manuseio na hora de fazer o churrasco. A instalação também fácil de fazer, deixando a churrasqueira funcional e com uma quantidade menor de utensílios para suporte de grelhas e espetos.",
+    author: "Celso Oliveira",
+  },
+  {
+    quote: "Produto de extrema qualidade. Superou as expectativas.",
+    author: "Diego Macedo",
+  },
+  {
+    quote: "Produto de altíssima qualidade, atendimento excepcional, recomendo fortemente. Melhorou muito meus momentos de lazer na minha casa com esses acessórios para a churrasqueira.",
+    author: "Cliente Google",
+  },
 ];
 
 function GoogleLogo({ className }: { className?: string }) {
@@ -975,7 +1000,7 @@ function GoogleLogo({ className }: { className?: string }) {
 }
 
 function GoogleReviewsSection({ onOpenModal }: { onOpenModal: () => void }) {
-  const mapsUrl = "https://www.google.com/maps/place/Olho+na+Brasa/@-27.1016701,-48.6187495,738m/data=!3m1!1e3!4m8!3m7!1s0x94d8b100c4230f17:0x899b6cbbbfaceb99!8m2!3d-27.1016701!4d-48.6161746!9m1!1b1!16s%2Fg%2F11rzr1kln5";
+  const mapsUrl = "https://www.google.com/maps/place/Olho+na+Brasa/@-27.1016701,-48.6187495,738m/data=!3m1!1e3!4m8!3m7!1s0x94d8b100c4230f17:0x899b6cbbbfaceb99!8m2!3d-27.1016701!4d-48.6161746!9m1!1b1!16s%2Fg%2F11rzr1kln5?entry=ttu&g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D";
   return (
     <RevealSection className="section-alt section-glow">
       <SectionHeading eyebrow="AVALIAÇÕES NO GOOGLE" title="O que nossos clientes dizem no Google" centered />
@@ -1004,12 +1029,12 @@ function GoogleReviewsSection({ onOpenModal }: { onOpenModal: () => void }) {
           rel="noopener noreferrer"
           className="text-sm font-semibold text-primary hover:underline"
         >
-          Ver no Google Maps →
+          Ver todas no Google Maps →
         </a>
       </div>
 
       <div className="mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible">
-        {googleReviews.map((quote, idx) => (
+        {googleReviews.map((review, idx) => (
           <article
             key={idx}
             className="min-w-[85%] snap-start rounded-xl bg-white p-6 md:min-w-0"
@@ -1023,8 +1048,8 @@ function GoogleReviewsSection({ onOpenModal }: { onOpenModal: () => void }) {
                 ))}
               </div>
             </div>
-            <blockquote className="text-sm leading-6" style={{ color: "#333" }}>
-              “{quote}”
+            <blockquote className="text-sm leading-[1.6]" style={{ color: "#333" }}>
+              “{review.quote}”
             </blockquote>
             <div className="mt-5 flex items-center gap-3 border-t border-neutral-200 pt-4">
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-neutral-200 text-neutral-500">
@@ -1033,8 +1058,8 @@ function GoogleReviewsSection({ onOpenModal }: { onOpenModal: () => void }) {
                 </svg>
               </div>
               <div className="leading-tight">
-                <p className="text-sm font-semibold text-neutral-900">Cliente Google</p>
-                <p className="text-xs text-neutral-500">Avaliação do Google</p>
+                <p className="text-sm font-semibold" style={{ color: "#222" }}>{review.author}</p>
+                <p className="text-xs" style={{ color: "#888" }}>Avaliação do Google</p>
               </div>
             </div>
           </article>
