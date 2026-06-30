@@ -862,7 +862,7 @@ function Footer() {
   return (
     <footer className="bg-footer pb-28 pt-12 text-center md:pb-12">
       <div className="mx-auto max-w-(--container-max) px-5">
-        <p className="font-display text-lg font-semibold tracking-[0.2em] text-foreground">OLHO NA BRASA</p>
+        <img src={logoOlhoNaBrasa.url} alt="Olho na Brasa" className="mx-auto h-12 w-auto" />
         <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-secondary-foreground">
           Olho na Brasa, fábrica de grelhas e acessórios premium em inox 304. Santa Catarina, Brasil.
         </p>
