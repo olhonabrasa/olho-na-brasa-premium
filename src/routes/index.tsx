@@ -128,6 +128,8 @@ type SectionHeadingProps = {
 
 
 type ProcessStep = { number: string; title: string; description: string; image: string; alt: string };
+type GalleryItem = { title: string; location: string; image?: string; alt: string; featured?: boolean };
+type BeforeAfterPair = {
   before: string;
   after: string;
   title: string;
