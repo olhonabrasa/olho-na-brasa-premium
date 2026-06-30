@@ -48,6 +48,17 @@ import projeto4 from "@/assets/projeto-instalado-4.png.asset.json";
 import projeto5 from "@/assets/projeto-instalado-5.jpg.asset.json";
 import projeto6 from "@/assets/projeto-instalado-6.jpg.asset.json";
 import rodrigoMedidasVideo from "@/assets/rodrigo-medidas.mp4.asset.json";
+import logoOlhoNaBrasa from "@/assets/logo-olho-na-brasa.png.asset.json";
+import card4Antes from "@/assets/card4-antes.jpg.asset.json";
+import card4Depois from "@/assets/card4-depois.jpg.asset.json";
+import card5Antes from "@/assets/card5-antes.png.asset.json";
+import card5Depois from "@/assets/card5-depois.jpg.asset.json";
+import videoCliente1 from "@/assets/video-cliente-1.mp4.asset.json";
+import videoCliente2 from "@/assets/video-cliente-2.mp4.asset.json";
+import videoCliente3 from "@/assets/video-cliente-3.mp4.asset.json";
+import videoCliente4 from "@/assets/video-cliente-4.mp4.asset.json";
+import videoCliente5 from "@/assets/video-cliente-5.mp4.asset.json";
+import { Play } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -80,8 +91,9 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
 });
 
-type ModalStage = "stage" | "measurements" | "contact" | "path" | "cold";
+type ModalStage = "stage" | "projectType" | "measurements" | "contact" | "path" | "cold";
 type ProjectMoment = "obra" | "pronta" | "planejando" | null;
+type ProjectType = "kit" | "suporte" | "especial" | null;
 type MeasurementState = "unknown" | "yes" | "no";
 
 type ContactForm = {
@@ -151,6 +163,22 @@ const processSteps: ProcessStep[] = [
 
 const beforeAfterPairs: BeforeAfterPair[] = [
   {
+    before: card4Antes.url,
+    after: card4Depois.url,
+    title: "Nicho em mármore, equipado com Kit Premium completo",
+    subtitle: "Suporte suspenso, grelhas e espetos sob medida no nicho de mármore calacatta.",
+    beforeAlt: "Nicho de churrasqueira em mármore antes da instalação do kit",
+    afterAlt: "Mesmo nicho com Kit Premium Olho na Brasa instalado em inox 304",
+  },
+  {
+    before: card5Antes.url,
+    after: card5Depois.url,
+    title: "Churrasqueira de tijolo refratário, transformada com inox 304",
+    subtitle: "Saiu o ferro enferrujado, entrou suporte suspenso premium com acabamento espelhado.",
+    beforeAlt: "Churrasqueira de tijolo refratário com grelhas antigas enferrujadas",
+    afterAlt: "Mesma churrasqueira com suporte suspenso Olho na Brasa em inox 304",
+  },
+  {
     before: card1Antes.url,
     after: card1Depois.url,
     title: "Churrasqueira de alvenaria, com Kit Premium instalado",
@@ -186,9 +214,13 @@ const galleryItems: GalleryItem[] = [
 ];
 
 const testimonials: Testimonial[] = [
-  { quote: "Supera as expectativas. É outra coisa! Exatamente como na foto, gostamos muito! Para quem ficou em dúvida como eu, o cabo realmente não esquenta!", author: "Cliente verificado" },
-  { quote: "O produto chegou antes do esperado, a qualidade é surpreendente. O valor foi 1/3 do orçamento que fiz aqui na região e a qualidade é a mesma. Estou indicando para todo mundo!", author: "Cliente verificado" },
-  { quote: "Sou churrasqueiro profissional. Sempre tive o problema de depender da estrutura do cliente. Essa churrasqueira facilitou muito meu trabalho e o churrasco fica muito melhor!", author: "Churrasqueiro profissional" },
+  { quote: "É outra coisa! Exatamente como na foto, gostamos muito! Para quem assim como eu ficou em dúvida, o cabo realmente não esquenta!", author: "Rian — 06/04/2024" },
+  { quote: "Obrigado por produzirem com o cabo para dentro, ficou perfeita na minha churrasqueira!", author: "Valmir — 11/03/2024" },
+  { quote: "Comprei o Kit Inteiro e ficou perfeito aqui na churrasqueira. Suporte Espeto em Aço Inox impecável.", author: "Otávio — 19/01/2024" },
+  { quote: "Sou churrasqueiro profissional e faço churrasco nas chácaras de meus clientes. Sempre tive o problema de depender da estrutura do cliente. Mas agora que comprei essa churrasqueira, facilitou muito meu trabalho e o churrasco fica muito melhor! Se você quer uma churrasqueira realmente boa e móvel, essa é a única opção que conheço no mercado.", author: "Wesley — 12/01/2024" },
+  { quote: "O produto chegou antes do esperado, a qualidade é surpreendente. O valor foi 1/3 do orçamento que fiz aqui na região e a qualidade é a mesma. Estou indicando para todo mundo!", author: "Anderson — 10/01/2024" },
+  { quote: "Supera as expectativas.", author: "Ricardo Gölzer — 02/05/2023" },
+  { quote: "Produto de excelente qualidade, recomendo!", author: "Vanderlei Knopf — 16/01/2023" },
   { quote: "Confiamos tanto na qualidade que oferecemos 15 anos de garantia. Os produtos são feitos com qualidade máxima!", author: "Olho na Brasa", accent: true },
 ];
 
@@ -203,13 +235,30 @@ const faqItems = [
   { question: "O Kit Premium inclui o quê?", answer: "Grelha Uruguaia Premium (quadro 6mm, varões 5mm), Grelha de Descanso, Suporte Suspenso e Espetos Duplos de brinde. Tudo em Inox 304 alimentício, sob medida." },
 ];
 
-const benefits = ["Inox 304 alimentício", "Sob medida", "15 anos de garantia", "Frete grátis Sul/Sudeste"];
+const benefits = [
+  "Inox 304 alimentício",
+  "Sob medida",
+  "15 anos de garantia",
+  "Frete grátis Sul/Sudeste",
+  "★★★★★ 100.000+ churrasqueiras entregues",
+  "Acabamento premium",
+];
+
+type ClientVideo = { src: string; name: string; caption: string };
+const clientVideos: ClientVideo[] = [
+  { src: videoCliente1.url, name: "Cliente Olho na Brasa", caption: "Kit Premium instalado" },
+  { src: videoCliente2.url, name: "Cliente Olho na Brasa", caption: "Reação ao receber o kit" },
+  { src: videoCliente3.url, name: "Cliente Olho na Brasa", caption: "Acabamento em inox 304" },
+  { src: videoCliente4.url, name: "Cliente Olho na Brasa", caption: "Encaixe sob medida" },
+  { src: videoCliente5.url, name: "Cliente Olho na Brasa", caption: "Primeiro churrasco" },
+];
 
 function LandingPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalStage, setModalStage] = useState<ModalStage>("stage");
   const [measurementState, setMeasurementState] = useState<MeasurementState>("unknown");
   const [showMeasurementsForm, setShowMeasurementsForm] = useState(false);
+  const [projectType, setProjectType] = useState<ProjectType>(null);
   const [headerVisible, setHeaderVisible] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string; title?: string; subtitle?: string } | null>(null);
   const [contactForm, setContactForm] = useState<ContactForm>({
@@ -260,6 +309,7 @@ function LandingPage() {
     setModalStage("stage");
     setMeasurementState("unknown");
     setShowMeasurementsForm(false);
+    setProjectType(null);
   };
 
   const closeConsultiveModal = () => {
@@ -267,6 +317,7 @@ function LandingPage() {
     setModalStage("stage");
     setMeasurementState("unknown");
     setShowMeasurementsForm(false);
+    setProjectType(null);
   };
 
   const formattedWhatsapp = formatWhatsapp(contactForm.whatsapp);
@@ -274,12 +325,14 @@ function LandingPage() {
   const specialistMessage = buildWhatsappMessage({
     intro: "Olá! Quero montar meu Kit Premium.",
     form: contactForm,
+    projectType,
     includeMeasurements: Boolean(contactForm.width || contactForm.depth || contactForm.height),
   });
 
   const measurementHelpMessage = buildWhatsappMessage({
     intro: "Olá! Quero montar meu Kit Premium, mas preciso de ajuda para definir as medidas da minha churrasqueira.",
     form: contactForm,
+    projectType,
     includeMeasurements: false,
   });
 
@@ -305,6 +358,8 @@ function LandingPage() {
           <Divider />
           <TestimonialsSection onOpenModal={openConsultiveModal} />
           <Divider />
+          <ClientVideosSection onOpenModal={openConsultiveModal} />
+          <Divider />
           <WhoItsForSection onOpenModal={openConsultiveModal} />
           <Divider />
           <FaqSection onOpenModal={openConsultiveModal} />
@@ -321,12 +376,17 @@ function LandingPage() {
         stage={modalStage}
         measurementState={measurementState}
         showMeasurementsForm={showMeasurementsForm}
+        projectType={projectType}
         form={contactForm}
         formattedWhatsapp={formattedWhatsapp}
         onClose={closeConsultiveModal}
         onMomentSelect={(moment) => {
           if (moment === "planejando") setModalStage("cold");
-          else setModalStage("measurements");
+          else setModalStage("projectType");
+        }}
+        onProjectTypeSelect={(type) => {
+          setProjectType(type);
+          setModalStage("measurements");
         }}
         onMeasurementStateChange={(state) => {
           setMeasurementState(state);
@@ -362,8 +422,8 @@ function StickyHeader({ visible, onOpenModal }: { visible: boolean; onOpenModal:
       style={{ background: "rgb(10 10 10 / 0.9)" }}
     >
       <div className="mx-auto flex h-full max-w-(--container-max) items-center justify-between gap-3 px-5">
-        <a href="#top" className="font-display text-xs font-semibold tracking-[0.2em] text-foreground md:text-sm">
-          OLHO NA BRASA
+        <a href="#top" aria-label="Olho na Brasa — Início" className="flex items-center gap-2">
+          <img src={logoOlhoNaBrasa.url} alt="Olho na Brasa" className="h-8 w-auto md:h-9" />
         </a>
         <button
           type="button"
@@ -395,26 +455,9 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
       {/* Gradiente para legibilidade do texto */}
       <div className="hero-gradient z-[1]" aria-hidden="true" />
 
-      {/* Badges sobrepostas */}
-      <div className="pointer-events-none absolute right-4 top-20 z-[2] md:top-24 md:right-8">
-        <span className="inline-block rounded-full border border-white/15 bg-black/55 px-3 py-1.5 text-[11px] font-semibold text-foreground backdrop-blur-md md:text-xs">
-          15 anos de garantia real
-        </span>
-      </div>
-      <div className="pointer-events-none absolute left-4 top-20 z-[2] md:top-24 md:left-8">
-        <span className="inline-block rounded-full border border-white/15 bg-black/55 px-3 py-1.5 text-[11px] font-semibold text-foreground backdrop-blur-md md:text-xs">
-          Rodrigo · fundador
-        </span>
-      </div>
-
       {/* Conteúdo na parte inferior */}
       <div className="relative z-[3] mx-auto w-full max-w-(--container-max) px-5 pb-10 pt-32 md:pb-16">
-        <div className="inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-black/55 px-3 py-1.5 text-[11px] font-semibold text-foreground backdrop-blur-md md:text-xs">
-          <Star className="h-3 w-3 fill-primary text-primary" aria-hidden="true" />
-          <span>★★★★★ 100.000+ churrasqueiras entregues</span>
-        </div>
-
-        <h1 className="mt-5 max-w-2xl font-display font-semibold leading-[1.05] text-balance text-foreground"
+        <h1 className="max-w-2xl font-display font-semibold leading-[1.05] text-balance text-foreground"
             style={{ fontSize: "clamp(1.75rem, 7vw, 3.5rem)" }}>
           Sua churrasqueira merece um upgrade de verdade.
         </h1>
@@ -423,17 +466,7 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
           Kit Premium em Inox 304, feito sob medida. Direto da fábrica, com garantia de 15 anos.
         </p>
 
-        <div className="mt-5 flex snap-x snap-mandatory gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:flex-wrap md:overflow-visible">
-          {benefits.map((item) => (
-            <span
-              key={item}
-              className="flex shrink-0 snap-start items-center gap-1.5 rounded-full border border-white/12 bg-black/55 px-3 py-1.5 text-xs text-foreground backdrop-blur-md"
-            >
-              <Check className="h-3.5 w-3.5 shrink-0 text-success" aria-hidden="true" />
-              {item}
-            </span>
-          ))}
-        </div>
+        <BenefitsMarquee />
 
         <div className="mt-7 max-w-md">
           <BlockCta label="QUERO MEU PROJETO" onClick={onOpenModal} fullWidth />
@@ -445,6 +478,29 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
     </section>
   );
 }
+
+/* ===================== BENEFITS MARQUEE ===================== */
+function BenefitsMarquee() {
+  // Duplica a lista para criar loop infinito sem corte
+  const items = [...benefits, ...benefits];
+  return (
+    <div className="marquee-mask mt-6 -mx-5 overflow-hidden md:mx-0">
+      <div className="marquee-track flex gap-3 py-1">
+        {items.map((item, idx) => (
+          <span
+            key={`${item}-${idx}`}
+            className="flex shrink-0 items-center gap-2 rounded-full border border-white/12 bg-black/55 px-4 py-2 text-xs font-medium text-foreground backdrop-blur-md md:text-sm"
+          >
+            <Check className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden="true" />
+            {item}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
 
 /* ===================== VÍDEO ===================== */
 function VideoSection({ onOpenModal }: { onOpenModal: () => void }) {
@@ -724,6 +780,66 @@ function TestimonialsSection({ onOpenModal }: { onOpenModal: () => void }) {
   );
 }
 
+/* ===================== VÍDEOS DE CLIENTES ===================== */
+function ClientVideosSection({ onOpenModal }: { onOpenModal: () => void }) {
+  return (
+    <RevealSection className="section-alt section-glow">
+      <SectionHeading
+        eyebrow="CLIENTES REAIS"
+        title="Veja a reação de quem recebeu o Kit Olho na Brasa."
+        centered
+      />
+      <div className="mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible lg:grid-cols-5">
+        {clientVideos.map((video, idx) => (
+          <ClientVideoCard key={video.src} video={video} index={idx} />
+        ))}
+      </div>
+      <p className="mx-auto mt-6 max-w-2xl px-5 text-center text-sm text-secondary-foreground md:text-base">
+        Mais de 100.000 kits entregues em todo o Brasil.
+      </p>
+      <BlockCta label="QUERO RECEBER O MEU" onClick={onOpenModal} />
+    </RevealSection>
+  );
+}
+
+function ClientVideoCard({ video, index }: { video: ClientVideo; index: number }) {
+  const [playing, setPlaying] = useState(false);
+  return (
+    <article className="group min-w-[70%] snap-start overflow-hidden rounded-2xl border border-border bg-card shadow-soft md:min-w-0">
+      <div className="relative aspect-[9/16] overflow-hidden bg-black">
+        <video
+          src={video.src}
+          controls={playing}
+          playsInline
+          preload="metadata"
+          className="absolute inset-0 h-full w-full object-cover"
+          onPlay={() => setPlaying(true)}
+          onPause={() => setPlaying(false)}
+        />
+        {!playing ? (
+          <button
+            type="button"
+            onClick={(e) => {
+              const v = e.currentTarget.parentElement?.querySelector("video");
+              if (v) { v.play(); setPlaying(true); }
+            }}
+            aria-label={`Reproduzir vídeo do cliente ${index + 1}`}
+            className="absolute inset-0 z-10 flex items-center justify-center bg-black/30 transition-colors hover:bg-black/45"
+          >
+            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/95 text-black shadow-fire transition-transform group-hover:scale-110">
+              <Play className="ml-1 h-7 w-7 fill-current" aria-hidden="true" />
+            </span>
+          </button>
+        ) : null}
+      </div>
+      <div className="space-y-1 p-4">
+        <p className="text-sm font-semibold text-foreground">{video.name}</p>
+        <p className="text-xs text-secondary-foreground md:text-sm">{video.caption}</p>
+      </div>
+    </article>
+  );
+}
+
 /* ===================== PARA QUEM É ===================== */
 function WhoItsForSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
@@ -819,7 +935,7 @@ function Footer() {
   return (
     <footer className="bg-footer pb-28 pt-12 text-center md:pb-12">
       <div className="mx-auto max-w-(--container-max) px-5">
-        <p className="font-display text-lg font-semibold tracking-[0.2em] text-foreground">OLHO NA BRASA</p>
+        <img src={logoOlhoNaBrasa.url} alt="Olho na Brasa" className="mx-auto h-12 w-auto" />
         <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-secondary-foreground">
           Olho na Brasa, fábrica de grelhas e acessórios premium em inox 304. Santa Catarina, Brasil.
         </p>
@@ -881,10 +997,12 @@ function ConsultiveModal({
   stage,
   measurementState,
   showMeasurementsForm,
+  projectType,
   form,
   formattedWhatsapp,
   onClose,
   onMomentSelect,
+  onProjectTypeSelect,
   onMeasurementStateChange,
   onShowMeasurementForm,
   onContinueMeasurements,
@@ -897,10 +1015,12 @@ function ConsultiveModal({
   stage: ModalStage;
   measurementState: MeasurementState;
   showMeasurementsForm: boolean;
+  projectType: ProjectType;
   form: ContactForm;
   formattedWhatsapp: string;
   onClose: () => void;
   onMomentSelect: (moment: ProjectMoment) => void;
+  onProjectTypeSelect: (type: NonNullable<ProjectType>) => void;
   onMeasurementStateChange: (state: MeasurementState) => void;
   onShowMeasurementForm: () => void;
   onContinueMeasurements: () => void;
@@ -940,6 +1060,35 @@ function ConsultiveModal({
               <OptionButton icon={<Search className="h-5 w-5" />} title="Ainda estou planejando" description="Veja kits, preços e baixe o guia de medidas" onClick={() => onMomentSelect("planejando")} />
             </div>
           ) : null}
+          {stage === "projectType" ? (
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-lg font-semibold text-foreground">Que tipo de projeto você procura?</h3>
+                <p className="mt-2 text-sm leading-6 text-secondary-foreground">Escolha a opção mais próxima — o especialista refina com você no WhatsApp.</p>
+              </div>
+              <div className="grid gap-3">
+                <ProjectTypeCard
+                  active={projectType === "kit"}
+                  title="Kit completo (grelha + suporte suspenso + espetos)"
+                  subtitle="Nosso kit mais vendido, a partir de R$2.500"
+                  onClick={() => onProjectTypeSelect("kit")}
+                />
+                <ProjectTypeCard
+                  active={projectType === "suporte"}
+                  title="Só o Suporte Suspenso com uma grelha ou espeto"
+                  subtitle="Suporte Suspenso + grelhas, espetos ou acessórios separados"
+                  onClick={() => onProjectTypeSelect("suporte")}
+                />
+                <ProjectTypeCard
+                  active={projectType === "especial"}
+                  title="Projeto especial ou comercial"
+                  subtitle="Restaurante, espetaria, evento ou medida fora do padrão"
+                  onClick={() => onProjectTypeSelect("especial")}
+                />
+              </div>
+            </div>
+          ) : null}
+
 
           {stage === "measurements" ? (
             <div className="space-y-5">
@@ -1181,6 +1330,22 @@ function OptionButton({ icon, title, description, onClick }: { icon: ReactNode; 
   );
 }
 
+function ProjectTypeCard({ active, title, subtitle, onClick }: { active: boolean; title: string; subtitle: string; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "w-full rounded-2xl border px-5 py-4 text-left transition-colors",
+        active ? "border-primary bg-primary/10" : "border-border bg-background/50 hover:bg-card-hover",
+      )}
+    >
+      <p className="text-sm font-semibold text-foreground md:text-base">{title}</p>
+      <p className="mt-1 text-xs leading-5 text-secondary-foreground md:text-sm">{subtitle}</p>
+    </button>
+  );
+}
+
 function LabelField({ label, children }: { label: string; children: ReactNode }) {
   return (
     <label className="grid gap-2 text-sm font-medium text-foreground">
@@ -1205,10 +1370,17 @@ function buildWhatsappHref(text: string) {
   return `${WHATSAPP_URL}?text=${encodeURIComponent(text)}`;
 }
 
-function buildWhatsappMessage({ intro, form, includeMeasurements }: { intro: string; form: ContactForm; includeMeasurements: boolean }) {
+const projectTypeLabels: Record<NonNullable<ProjectType>, string> = {
+  kit: "Kit completo (grelha + suporte suspenso + espetos)",
+  suporte: "Suporte Suspenso com grelha ou espeto",
+  especial: "Projeto especial ou comercial",
+};
+
+function buildWhatsappMessage({ intro, form, includeMeasurements, projectType }: { intro: string; form: ContactForm; includeMeasurements: boolean; projectType?: ProjectType }) {
   const lines = [intro, ""];
   if (form.name) lines.push(`Nome: ${form.name}`);
   if (form.city) lines.push(`Cidade: ${form.city}`);
+  if (projectType) lines.push(`Tipo de projeto: ${projectTypeLabels[projectType]}`);
   if (includeMeasurements) {
     const measurementParts = [form.width, form.depth].filter(Boolean);
     const combined = measurementParts.length ? `${measurementParts.join("x")}cm` : "Não informadas";
