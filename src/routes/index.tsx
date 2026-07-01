@@ -131,7 +131,6 @@ type SectionHeadingProps = {
   centered?: boolean;
 };
 
-
 type ProcessStep = { number: string; title: string; description: string; image: string; alt: string };
 type GalleryItem = { title: string; location: string; image?: string; alt: string; featured?: boolean };
 type BeforeAfterPair = {
@@ -148,15 +147,49 @@ const SITE_URL = "https://www.olhonabrasa.com.br";
 const KITS_URL = "https://www.olhonabrasa.com.br/kits-premium/";
 const INSTAGRAM_URL = "https://www.instagram.com/olhonabrasa/";
 
-
-
 const processSteps: ProcessStep[] = [
-  { number: "01", title: "Corte do Inox", description: "Chapas de Inox 304 cortadas com precisão milimétrica.", image: processCutAsset.url, alt: "Corte preciso de peças em inox 304 com faíscas na fábrica" },
-  { number: "02", title: "Solda especializada", description: "Solda TIG por profissionais certificados. Acabamento limpo e resistente.", image: processWeldAsset.url, alt: "Solda especializada em estrutura de inox" },
-  { number: "03", title: "Polimento", description: "Acabamento escovado premium. Brilho que dura anos sem desbotar.", image: processPolishAsset.url, alt: "Polimento do inox com acabamento premium" },
-  { number: "04", title: "Montagem", description: "Cada peça é montada e testada manualmente antes da embalagem.", image: processAssemblyAsset.url, alt: "Montagem manual de estrutura em inox" },
-  { number: "05", title: "Inspeção de qualidade", description: "Verificação final de medidas, acabamento e resistência.", image: processInspectionAsset.url, alt: "Equipe conferindo qualidade final do kit" },
-  { number: "06", title: "Embalagem segura", description: "Embalagem reforçada para transporte. Seu kit chega intacto.", image: processPackagingAsset.url, alt: "Kit embalado com proteção reforçada" },
+  {
+    number: "01",
+    title: "Corte do Inox",
+    description: "Chapas de Inox 304 cortadas com precisão milimétrica.",
+    image: processCutAsset.url,
+    alt: "Corte preciso de peças em inox 304 com faíscas na fábrica",
+  },
+  {
+    number: "02",
+    title: "Solda especializada",
+    description: "Solda TIG por profissionais certificados. Acabamento limpo e resistente.",
+    image: processWeldAsset.url,
+    alt: "Solda especializada em estrutura de inox",
+  },
+  {
+    number: "03",
+    title: "Polimento",
+    description: "Acabamento escovado premium. Brilho que dura anos sem desbotar.",
+    image: processPolishAsset.url,
+    alt: "Polimento do inox com acabamento premium",
+  },
+  {
+    number: "04",
+    title: "Montagem",
+    description: "Cada peça é montada e testada manualmente antes da embalagem.",
+    image: processAssemblyAsset.url,
+    alt: "Montagem manual de estrutura em inox",
+  },
+  {
+    number: "05",
+    title: "Inspeção de qualidade",
+    description: "Verificação final de medidas, acabamento e resistência.",
+    image: processInspectionAsset.url,
+    alt: "Equipe conferindo qualidade final do kit",
+  },
+  {
+    number: "06",
+    title: "Embalagem segura",
+    description: "Embalagem reforçada para transporte. Seu kit chega intacto.",
+    image: processPackagingAsset.url,
+    alt: "Kit embalado com proteção reforçada",
+  },
 ];
 
 const beforeAfterPairs: BeforeAfterPair[] = [
@@ -203,25 +236,88 @@ const beforeAfterPairs: BeforeAfterPair[] = [
 ];
 
 const galleryItems: GalleryItem[] = [
-  { title: "Acabamento espelhado", location: "Revestimento em pedra natural", image: kitRevestimento4.url, alt: "Kit Olho na Brasa instalado em churrasqueira com revestimento em pedra natural", featured: true },
-  { title: "Kit Premium em ação", location: "Carnes na brasa com suporte suspenso", image: projeto1.url, alt: "Kit premium em inox 304 com carnes assando", featured: true },
-  { title: "Acabamento espelhado", location: "Churrasqueira em mármore", image: projeto2.url, alt: "Kit Olho na Brasa instalado em churrasqueira com moldura em mármore" },
-  { title: "Encaixe perfeito", location: "Churrasqueira em tijolo aparente", image: projeto3.url, alt: "Kit premium em inox instalado em churrasqueira de tijolo" },
-  { title: "Projeto em pedra natural", location: "Área gourmet rústica", image: projeto4.url, alt: "Kit instalado em churrasqueira com revestimento em pedra natural" },
-  { title: "Área gourmet contemporânea", location: "Bancada em granito", image: projeto5.url, alt: "Kit premium em área gourmet contemporânea" },
-  { title: "Nicho premium", location: "Projeto residencial", image: projeto6.url, alt: "Kit instalado em nicho de churrasqueira residencial premium" },
+  {
+    title: "Acabamento espelhado",
+    location: "Revestimento em pedra natural",
+    image: kitRevestimento4.url,
+    alt: "Kit Olho na Brasa instalado em churrasqueira com revestimento em pedra natural",
+    featured: true,
+  },
+  {
+    title: "Kit Premium em ação",
+    location: "Carnes na brasa com suporte suspenso",
+    image: projeto1.url,
+    alt: "Kit premium em inox 304 com carnes assando",
+    featured: true,
+  },
+  {
+    title: "Acabamento espelhado",
+    location: "Churrasqueira em mármore",
+    image: projeto2.url,
+    alt: "Kit Olho na Brasa instalado em churrasqueira com moldura em mármore",
+  },
+  {
+    title: "Encaixe perfeito",
+    location: "Churrasqueira em tijolo aparente",
+    image: projeto3.url,
+    alt: "Kit premium em inox instalado em churrasqueira de tijolo",
+  },
+  {
+    title: "Projeto em pedra natural",
+    location: "Área gourmet rústica",
+    image: projeto4.url,
+    alt: "Kit instalado em churrasqueira com revestimento em pedra natural",
+  },
+  {
+    title: "Área gourmet contemporânea",
+    location: "Bancada em granito",
+    image: projeto5.url,
+    alt: "Kit premium em área gourmet contemporânea",
+  },
+  {
+    title: "Nicho premium",
+    location: "Projeto residencial",
+    image: projeto6.url,
+    alt: "Kit instalado em nicho de churrasqueira residencial premium",
+  },
 ];
 
-
 const faqItems = [
-  { question: "Como sei se o Kit vai caber na minha churrasqueira?", answer: "Todos os nossos kits são fabricados sob medida. Você informa as medidas internas da sua churrasqueira (largura e comprimento) e nós fabricamos no tamanho exato. Temos um vídeo com o Rodrigo, dono da fábrica, ensinando como tirar as medidas corretamente." },
-  { question: "O inox 304 realmente não enferruja?", answer: "O Inox 304 é o mesmo aço utilizado em equipamentos hospitalares e na indústria alimentícia. Ele resiste a maresia, chuva e uso intenso. Com o cuidado básico, vai durar décadas sem ferrugem, por isso garantimos por 15 anos." },
-  { question: "Quanto tempo demora a entrega?", answer: "Como cada kit é fabricado sob medida, o prazo de produção varia. Após a confirmação do pagamento, nosso time informa o prazo atualizado. Frete grátis para Sul e Sudeste." },
-  { question: "E se eu errar a medida?", answer: "Nosso time confere as medidas junto com você antes de iniciar a fabricação. Enviamos imagem e vídeo explicando exatamente onde medir." },
+  {
+    question: "Como sei se o Kit vai caber na minha churrasqueira?",
+    answer:
+      "Todos os nossos kits são fabricados sob medida. Você informa as medidas internas da sua churrasqueira (largura e comprimento) e nós fabricamos no tamanho exato. Temos um vídeo com o Rodrigo, dono da fábrica, ensinando como tirar as medidas corretamente.",
+  },
+  {
+    question: "O inox 304 realmente não enferruja?",
+    answer:
+      "O Inox 304 é o mesmo aço utilizado em equipamentos hospitalares e na indústria alimentícia. Ele resiste a maresia, chuva e uso intenso. Com o cuidado básico, vai durar décadas sem ferrugem, por isso garantimos por 15 anos.",
+  },
+  {
+    question: "Quanto tempo demora a entrega?",
+    answer:
+      "Como cada kit é fabricado sob medida, o prazo de produção varia. Após a confirmação do pagamento, nosso time informa o prazo atualizado. Frete grátis para Sul e Sudeste.",
+  },
+  {
+    question: "E se eu errar a medida?",
+    answer:
+      "Nosso time confere as medidas junto com você antes de iniciar a fabricação. Enviamos imagem e vídeo explicando exatamente onde medir.",
+  },
   { question: "Posso parcelar?", answer: "Sim! Em até 10x sem juros no cartão. Também temos 5% de desconto no PIX." },
-  { question: "Como funciona a garantia de 15 anos?", answer: "A garantia cobre defeitos de fabricação e falhas de material por 15 anos a partir da data de entrega." },
-  { question: "Vocês fazem instalação?", answer: "Sim! Para clientes da Grande Florianópolis e litoral catarinense, oferecemos serviço de instalação com equipe própria." },
-  { question: "O Kit Premium inclui o quê?", answer: "Grelha Uruguaia Premium (quadro 6mm, varões 5mm), Grelha de Descanso, Suporte Suspenso e Espetos Duplos de brinde. Tudo em Inox 304 alimentício, sob medida." },
+  {
+    question: "Como funciona a garantia de 15 anos?",
+    answer: "A garantia cobre defeitos de fabricação e falhas de material por 15 anos a partir da data de entrega.",
+  },
+  {
+    question: "Vocês fazem instalação?",
+    answer:
+      "Sim! Para clientes da Grande Florianópolis e litoral catarinense, oferecemos serviço de instalação com equipe própria.",
+  },
+  {
+    question: "O Kit Premium inclui o quê?",
+    answer:
+      "Grelha Uruguaia Premium (quadro 6mm, varões 5mm), Grelha de Descanso, Suporte Suspenso e Espetos Duplos de brinde. Tudo em Inox 304 alimentício, sob medida.",
+  },
 ];
 
 const benefits = [
@@ -235,9 +331,24 @@ const benefits = [
 
 type ClientVideo = { src: string; name: string; caption: string; poster: string };
 const clientVideos: ClientVideo[] = [
-  { src: videoCliente1.url, poster: posterCliente1.url, name: "Cliente Olho na Brasa", caption: "Kit Premium instalado" },
-  { src: videoCliente2.url, poster: posterCliente2.url, name: "Cliente Olho na Brasa", caption: "Reação ao receber o kit" },
-  { src: videoCliente3.url, poster: posterCliente3.url, name: "Cliente Olho na Brasa", caption: "Acabamento em inox 304" },
+  {
+    src: videoCliente1.url,
+    poster: posterCliente1.url,
+    name: "Cliente Olho na Brasa",
+    caption: "Kit Premium instalado",
+  },
+  {
+    src: videoCliente2.url,
+    poster: posterCliente2.url,
+    name: "Cliente Olho na Brasa",
+    caption: "Reação ao receber o kit",
+  },
+  {
+    src: videoCliente3.url,
+    poster: posterCliente3.url,
+    name: "Cliente Olho na Brasa",
+    caption: "Acabamento em inox 304",
+  },
   { src: videoCliente4.url, poster: posterCliente4.url, name: "Cliente Olho na Brasa", caption: "Encaixe sob medida" },
   { src: videoCliente5.url, poster: posterCliente5.url, name: "Cliente Olho na Brasa", caption: "Primeiro churrasco" },
 ];
@@ -249,9 +360,20 @@ function LandingPage() {
   const [showMeasurementsForm, setShowMeasurementsForm] = useState(false);
   const [projectType, setProjectType] = useState<ProjectType>(null);
   const [headerVisible, setHeaderVisible] = useState(false);
-  const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string; title?: string; subtitle?: string } | null>(null);
+  const [lightboxImage, setLightboxImage] = useState<{
+    src: string;
+    alt: string;
+    title?: string;
+    subtitle?: string;
+  } | null>(null);
   const [contactForm, setContactForm] = useState<ContactForm>({
-    name: "", whatsapp: "", city: "", width: "", depth: "", height: "", email: "",
+    name: "",
+    whatsapp: "",
+    city: "",
+    width: "",
+    depth: "",
+    height: "",
+    email: "",
   });
 
   const schemaMarkup = useMemo(
@@ -290,7 +412,9 @@ function LandingPage() {
 
   useEffect(() => {
     document.body.style.overflow = modalOpen || lightboxImage ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [modalOpen, lightboxImage]);
 
   const openConsultiveModal = () => {
@@ -339,7 +463,12 @@ function LandingPage() {
           <Divider />
           <ProcessSection onOpenModal={openConsultiveModal} />
           <Divider />
-          <GallerySection onOpenLightbox={(item) => setLightboxImage({ src: item.image ?? "", alt: item.alt, title: item.title, subtitle: item.location })} onOpenModal={openConsultiveModal} />
+          <GallerySection
+            onOpenLightbox={(item) =>
+              setLightboxImage({ src: item.image ?? "", alt: item.alt, title: item.title, subtitle: item.location })
+            }
+            onOpenModal={openConsultiveModal}
+          />
           <Divider />
           <ClientVideosSection onOpenModal={openConsultiveModal} />
           <Divider />
@@ -425,10 +554,7 @@ function StickyHeader({ visible, onOpenModal }: { visible: boolean; onOpenModal:
 /* ===================== HERO ===================== */
 function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
-    <section
-      id="top"
-      className="relative overflow-hidden bg-background pt-16 pb-8 md:pt-24 md:pb-16"
-    >
+    <section id="top" className="relative overflow-hidden bg-background pt-16 pb-8 md:pt-24 md:pb-16">
       <div className="relative z-[3] mx-auto w-full max-w-(--container-max) px-5">
         {/* Vídeo cinematográfico em loop, sem controles — full-bleed no mobile */}
         <div className="relative -mx-5 w-auto overflow-hidden md:mx-0 md:rounded-2xl border-y border-white/10 md:border bg-black shadow-fire">
@@ -457,8 +583,7 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
             letterSpacing: "-0.03em",
           }}
         >
-          O Kit de Churrasqueira{" "}
-          <span style={{ color: "#FF6B00" }}>mais Vendido do Brasil!</span>
+          O Kit de Churrasqueira <span style={{ color: "#FF6B00" }}>mais Vendido do Brasil!</span>
         </h1>
 
         <p
@@ -473,8 +598,7 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
             marginTop: "12px",
           }}
         >
-          O Kit Suporte Suspenso da{" "}
-          <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Olho na Brasa</span>
+          O Kit Suporte Suspenso da <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Olho na Brasa</span>
         </p>
 
         <BenefitsMarquee />
@@ -489,7 +613,6 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
     </section>
   );
 }
-
 
 /* ===================== BENEFITS MARQUEE ===================== */
 function BenefitsMarquee() {
@@ -511,9 +634,6 @@ function BenefitsMarquee() {
     </div>
   );
 }
-
-
-
 
 /* ===================== ANTES/DEPOIS ===================== */
 function BeforeAfterSection({
@@ -547,14 +667,18 @@ function BeforeAfterSection({
                 alt={pair.beforeAlt}
                 label="ANTES"
                 labelClass="bg-black/70 text-foreground"
-                onExpand={() => onOpenLightbox({ src: pair.before, alt: pair.beforeAlt, title: pair.title, subtitle: "Antes" })}
+                onExpand={() =>
+                  onOpenLightbox({ src: pair.before, alt: pair.beforeAlt, title: pair.title, subtitle: "Antes" })
+                }
               />
               <ExpandableImage
                 src={pair.after}
                 alt={pair.afterAlt}
                 label="DEPOIS"
                 labelClass="bg-primary text-primary-foreground"
-                onExpand={() => onOpenLightbox({ src: pair.after, alt: pair.afterAlt, title: pair.title, subtitle: "Depois" })}
+                onExpand={() =>
+                  onOpenLightbox({ src: pair.after, alt: pair.afterAlt, title: pair.title, subtitle: "Depois" })
+                }
               />
             </div>
             <div className="space-y-2 p-5">
@@ -589,8 +713,18 @@ function ExpandableImage({
       className="group relative block h-full min-h-[280px] overflow-hidden border-r border-border last:border-r-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       aria-label={`Ampliar imagem: ${alt}`}
     >
-      <img src={src} alt={alt} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" />
-      <span className={cn("absolute left-3 top-3 z-10 rounded-full px-3 py-1 text-[11px] font-semibold tracking-[0.14em] backdrop-blur", labelClass)}>
+      <img
+        src={src}
+        alt={alt}
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        loading="lazy"
+      />
+      <span
+        className={cn(
+          "absolute left-3 top-3 z-10 rounded-full px-3 py-1 text-[11px] font-semibold tracking-[0.14em] backdrop-blur",
+          labelClass,
+        )}
+      >
         {label}
       </span>
       <span className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/60 text-foreground backdrop-blur transition-colors group-hover:bg-black/80">
@@ -626,7 +760,10 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
 
       <div className="mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 xl:grid-cols-6 md:overflow-visible">
         {processSteps.map((step) => (
-          <article key={step.number} className="group min-w-[80%] snap-start rounded-2xl border border-border bg-card p-4 shadow-soft md:min-w-0">
+          <article
+            key={step.number}
+            className="group min-w-[80%] snap-start rounded-2xl border border-border bg-card p-4 shadow-soft md:min-w-0"
+          >
             <div className="mb-4 flex items-center gap-3">
               <span className="flex h-10 w-10 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-sm font-bold text-primary">
                 {step.number}
@@ -634,7 +771,12 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
               <div className="h-px flex-1 bg-border" aria-hidden="true" />
             </div>
             <div className="overflow-hidden rounded-xl border border-border bg-background/40">
-              <img src={step.image} alt={step.alt} className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" />
+              <img
+                src={step.image}
+                alt={step.alt}
+                className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                loading="lazy"
+              />
             </div>
             <h3 className="mt-4 text-base font-semibold text-foreground">{step.title}</h3>
             <p className="mt-2 text-sm leading-6 text-secondary-foreground">{step.description}</p>
@@ -669,12 +811,18 @@ function GallerySection({
               item.featured ? "md:col-span-2" : "",
             )}
           >
-            <div className="absolute inset-0 z-10 bg-linear-to-t from-background via-background/20 to-transparent opacity-90" aria-hidden="true" />
+            <div
+              className="absolute inset-0 z-10 bg-linear-to-t from-background via-background/20 to-transparent opacity-90"
+              aria-hidden="true"
+            />
             {item.image ? (
               <img
                 src={item.image}
                 alt={item.alt}
-                className={cn("w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]", item.featured ? "aspect-[4/3]" : "aspect-square")}
+                className={cn(
+                  "w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]",
+                  item.featured ? "aspect-[4/3]" : "aspect-square",
+                )}
                 loading="lazy"
               />
             ) : (
@@ -701,11 +849,7 @@ function GallerySection({
 function ClientVideosSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <RevealSection className="section-alt section-glow">
-      <SectionHeading
-        eyebrow="CLIENTES REAIS"
-        title="Veja a reação de quem recebeu o Kit Olho na Brasa."
-        centered
-      />
+      <SectionHeading eyebrow="CLIENTES REAIS" title="Veja a reação de quem recebeu o Kit Olho na Brasa." centered />
       <div className="mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible lg:grid-cols-5">
         {clientVideos.map((video, idx) => (
           <ClientVideoCard key={video.src} video={video} index={idx} />
@@ -763,7 +907,10 @@ function ClientVideoCard({ video, index }: { video: ClientVideo; index: number }
   }, []);
 
   return (
-    <article ref={cardRef} className="client-video-card group min-w-[70%] snap-start overflow-hidden rounded-2xl border border-border bg-card shadow-soft md:min-w-0">
+    <article
+      ref={cardRef}
+      className="client-video-card group min-w-[70%] snap-start overflow-hidden rounded-2xl border border-border bg-card shadow-soft md:min-w-0"
+    >
       <div className="relative aspect-[9/16] overflow-hidden bg-black">
         <video
           ref={videoRef}
@@ -783,7 +930,9 @@ function ClientVideoCard({ video, index }: { video: ClientVideo; index: number }
               const v = videoRef.current;
               if (v) {
                 v.preload = "metadata";
-                v.play().then(() => setPlaying(true)).catch(() => {});
+                v.play()
+                  .then(() => setPlaying(true))
+                  .catch(() => {});
               }
             }}
             aria-label={`Reproduzir vídeo do cliente ${index + 1}`}
@@ -802,7 +951,6 @@ function ClientVideoCard({ video, index }: { video: ClientVideo; index: number }
     </article>
   );
 }
-
 
 /* ===================== AUTO-PAUSE VIDEO (pausa quando sai da viewport) ===================== */
 function AutoPauseVideo({ src, poster, className }: { src: string; poster?: string; className?: string }) {
@@ -852,7 +1000,11 @@ function AutoPauseVideo({ src, poster, className }: { src: string; poster?: stri
         aria-label={muted ? "Ativar som do vídeo" : "Desativar som do vídeo"}
         className="absolute bottom-3 right-3 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white backdrop-blur transition-colors hover:bg-black/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
       >
-        {muted ? <VolumeX className="h-5 w-5" aria-hidden="true" /> : <Volume2 className="h-5 w-5" aria-hidden="true" />}
+        {muted ? (
+          <VolumeX className="h-5 w-5" aria-hidden="true" />
+        ) : (
+          <Volume2 className="h-5 w-5" aria-hidden="true" />
+        )}
       </button>
     </>
   );
@@ -910,19 +1062,23 @@ const googleReviews = [
     author: "Sérgio Saturnino",
   },
   {
-    quote: "Produto de excelente qualidade, com um pré e pós venda excelentes. Entregam o que prometem. Customizam seu pedido e orientam com segurança na retirada das medidas e como fazer sua instalação. Empresa diferenciada.",
+    quote:
+      "Produto de excelente qualidade, com um pré e pós venda excelentes. Entregam o que prometem. Customizam seu pedido e orientam com segurança na retirada das medidas e como fazer sua instalação. Empresa diferenciada.",
     author: "Luiz Carlos Crab",
   },
   {
-    quote: "Adquiri o suporte suspenso para espetos e uma grelha de descanso. Atendimento na compra personalizado e ágil, informei as medidas da minha churrasqueira e logo recebi o link com os valores. Recebi em casa muito antes do prazo. Estou muito satisfeito. Excelente pós venda. Sensacional.",
+    quote:
+      "Adquiri o suporte suspenso para espetos e uma grelha de descanso. Atendimento na compra personalizado e ágil, informei as medidas da minha churrasqueira e logo recebi o link com os valores. Recebi em casa muito antes do prazo. Estou muito satisfeito. Excelente pós venda. Sensacional.",
     author: "Cliente Google",
   },
   {
-    quote: "O atendimento foi excelente, a loja é muito completa, estou satisfeita com os acessórios, são muito resistentes e lindos!",
+    quote:
+      "O atendimento foi excelente, a loja é muito completa, estou satisfeita com os acessórios, são muito resistentes e lindos!",
     author: "Valéria Orsatto",
   },
   {
-    quote: "Ótimos produtos, facilitando o manuseio na hora de fazer o churrasco. A instalação também fácil de fazer, deixando a churrasqueira funcional e com uma quantidade menor de utensílios para suporte de grelhas e espetos.",
+    quote:
+      "Ótimos produtos, facilitando o manuseio na hora de fazer o churrasco. A instalação também fácil de fazer, deixando a churrasqueira funcional e com uma quantidade menor de utensílios para suporte de grelhas e espetos.",
     author: "Celso Oliveira",
   },
   {
@@ -930,7 +1086,8 @@ const googleReviews = [
     author: "Diego Macedo",
   },
   {
-    quote: "Produto de altíssima qualidade, atendimento excepcional, recomendo fortemente. Melhorou muito meus momentos de lazer na minha casa com esses acessórios para a churrasqueira.",
+    quote:
+      "Produto de altíssima qualidade, atendimento excepcional, recomendo fortemente. Melhorou muito meus momentos de lazer na minha casa com esses acessórios para a churrasqueira.",
     author: "Cliente Google",
   },
 ];
@@ -938,16 +1095,29 @@ const googleReviews = [
 function GoogleLogo({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
-      <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
-      <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
-      <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/>
-      <path fill="#EA4335" d="M24 9.5c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 2.97 29.93 1 24 1 15.4 1 7.96 5.93 4.34 13.12l7.35 5.7C13.42 13.37 18.27 9.5 24 9.5z"/>
+      <path
+        fill="#4285F4"
+        d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"
+      />
+      <path
+        fill="#34A853"
+        d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"
+      />
+      <path
+        fill="#EA4335"
+        d="M24 9.5c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 2.97 29.93 1 24 1 15.4 1 7.96 5.93 4.34 13.12l7.35 5.7C13.42 13.37 18.27 9.5 24 9.5z"
+      />
     </svg>
   );
 }
 
 function GoogleReviewsSection({ onOpenModal }: { onOpenModal: () => void }) {
-  const mapsUrl = "https://www.google.com/maps/place/Olho+na+Brasa/@-27.1016701,-48.6187495,738m/data=!3m1!1e3!4m8!3m7!1s0x94d8b100c4230f17:0x899b6cbbbfaceb99!8m2!3d-27.1016701!4d-48.6161746!9m1!1b1!16s%2Fg%2F11rzr1kln5?entry=ttu&g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D";
+  const mapsUrl =
+    "https://www.google.com/maps/place/Olho+na+Brasa/@-27.1016701,-48.6187495,738m/data=!3m1!1e3!4m8!3m7!1s0x94d8b100c4230f17:0x899b6cbbbfaceb99!8m2!3d-27.1016701!4d-48.6161746!9m1!1b1!16s%2Fg%2F11rzr1kln5?entry=ttu&g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D";
   return (
     <RevealSection className="section-alt section-glow">
       <SectionHeading eyebrow="AVALIAÇÕES NO GOOGLE" title="O que nossos clientes dizem no Google" centered />
@@ -969,7 +1139,9 @@ function GoogleReviewsSection({ onOpenModal }: { onOpenModal: () => void }) {
             </div>
           </div>
         </div>
-        <p className="text-sm" style={{ color: "#888" }}>41 avaliações</p>
+        <p className="text-sm" style={{ color: "#888" }}>
+          41 avaliações
+        </p>
         <a
           href={mapsUrl}
           target="_blank"
@@ -1001,12 +1173,16 @@ function GoogleReviewsSection({ onOpenModal }: { onOpenModal: () => void }) {
             <div className="mt-5 flex items-center gap-3 border-t border-neutral-200 pt-4">
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-neutral-200 text-neutral-500">
                 <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
-                  <path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-4 0-8 2-8 6v2h16v-2c0-4-4-6-8-6z"/>
+                  <path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-4 0-8 2-8 6v2h16v-2c0-4-4-6-8-6z" />
                 </svg>
               </div>
               <div className="leading-tight">
-                <p className="text-sm font-semibold" style={{ color: "#222" }}>{review.author}</p>
-                <p className="text-xs" style={{ color: "#888" }}>Avaliação do Google</p>
+                <p className="text-sm font-semibold" style={{ color: "#222" }}>
+                  {review.author}
+                </p>
+                <p className="text-xs" style={{ color: "#888" }}>
+                  Avaliação do Google
+                </p>
               </div>
             </div>
           </article>
@@ -1017,7 +1193,6 @@ function GoogleReviewsSection({ onOpenModal }: { onOpenModal: () => void }) {
     </RevealSection>
   );
 }
-
 
 function FaqSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
@@ -1030,7 +1205,9 @@ function FaqSection({ onOpenModal }: { onOpenModal: () => void }) {
               <AccordionTrigger className="py-5 text-base font-semibold text-foreground hover:no-underline">
                 {item.question}
               </AccordionTrigger>
-              <AccordionContent className="pb-5 text-sm leading-7 text-secondary-foreground">{item.answer}</AccordionContent>
+              <AccordionContent className="pb-5 text-sm leading-7 text-secondary-foreground">
+                {item.answer}
+              </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
@@ -1046,9 +1223,14 @@ function FinalCtaSection({ onOpenModal }: { onOpenModal: () => void }) {
     <RevealSection className="section-cta">
       <section className="mx-auto max-w-4xl px-5 text-center">
         <div className="relative overflow-hidden rounded-3xl border border-border-strong bg-card px-6 py-10 shadow-fire md:px-10 md:py-14">
-          <div className="absolute inset-x-1/2 top-0 h-48 w-48 -translate-x-1/2 rounded-full bg-primary/18 blur-3xl" aria-hidden="true" />
-          <h2 className="relative font-display font-semibold leading-[1.04] text-balance text-foreground"
-              style={{ fontSize: "clamp(1.6rem,6vw,3rem)" }}>
+          <div
+            className="absolute inset-x-1/2 top-0 h-48 w-48 -translate-x-1/2 rounded-full bg-primary/18 blur-3xl"
+            aria-hidden="true"
+          />
+          <h2
+            className="relative font-display font-semibold leading-[1.04] text-balance text-foreground"
+            style={{ fontSize: "clamp(1.6rem,6vw,3rem)" }}
+          >
             Sua churrasqueira merece um upgrade de verdade.
           </h2>
           <p className="relative mx-auto mt-4 max-w-2xl text-base leading-7 text-secondary-foreground md:text-lg">
@@ -1073,9 +1255,20 @@ function Footer() {
           Olho na Brasa, fábrica de grelhas e acessórios premium em inox 304. Santa Catarina, Brasil.
         </p>
         <nav className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm text-foreground">
-          <a href={SITE_URL} target="_blank" rel="noreferrer" className="transition-colors hover:text-primary">Site</a>
-          <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="transition-colors hover:text-primary">Instagram</a>
-          <a href={buildWhatsappHref("Olá! Vim pela landing page e quero saber mais sobre o Kit Premium.")} target="_blank" rel="noreferrer" className="transition-colors hover:text-primary">WhatsApp</a>
+          <a href={SITE_URL} target="_blank" rel="noreferrer" className="transition-colors hover:text-primary">
+            Site
+          </a>
+          <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="transition-colors hover:text-primary">
+            Instagram
+          </a>
+          <a
+            href={buildWhatsappHref("Olá! Vim pela landing page e quero saber mais sobre o Kit Premium.")}
+            target="_blank"
+            rel="noreferrer"
+            className="transition-colors hover:text-primary"
+          >
+            WhatsApp
+          </a>
         </nav>
         <div className="mt-6 space-y-1 text-sm text-muted-foreground">
           <p>Instagram: @olhonabrasa</p>
@@ -1181,7 +1374,7 @@ function ConsultiveModal({
   }) => {
     try {
       await fetch(
-        "https://api.datacrazy.io/v1/crm/api/crm/flows/webhooks/57af109b-a833-4f35-8081-b5ee5109d305/9d608ce0-6177-4000-9646-4b7c6d5cd750",
+        "https://api.datacrazy.io/v1/crm/api/crm/flows/webhooks/57af109b-a833-4f35-8081-b5ee5109d305/dc8467f8-72d4-4382-88e9-4fdb14aef590",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -1262,7 +1455,12 @@ function ConsultiveModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/85 p-0 md:items-center md:p-6" role="dialog" aria-modal="true" aria-labelledby="consultive-modal-title">
+    <div
+      className="fixed inset-0 z-50 flex items-end justify-center bg-black/85 p-0 md:items-center md:p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="consultive-modal-title"
+    >
       <div className="relative max-h-[95svh] w-full overflow-hidden rounded-t-[28px] border border-border-strong bg-card shadow-fire md:max-h-[90svh] md:max-w-[500px] md:rounded-[28px]">
         <div className="flex items-center justify-between border-b border-border px-5 py-4">
           <div>
@@ -1271,7 +1469,12 @@ function ConsultiveModal({
               Vamos montar seu projeto 🔥
             </h2>
           </div>
-          <button type="button" onClick={onClose} aria-label="Fechar modal" className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background/70 text-foreground transition-colors hover:bg-card-hover">
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Fechar modal"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background/70 text-foreground transition-colors hover:bg-card-hover"
+          >
             <X className="h-4 w-4" aria-hidden="true" />
           </button>
         </div>
@@ -1280,16 +1483,33 @@ function ConsultiveModal({
           {stage === "stage" ? (
             <div className="space-y-3">
               <p className="text-sm leading-6 text-secondary-foreground">Em que momento você está?</p>
-              <OptionButton icon={<Hammer className="h-5 w-5" />} title="Estou construindo ou reformando minha churrasqueira" description="Fluxo ideal para quem quer projetar certo desde o início" onClick={() => onMomentSelect("obra")} />
-              <OptionButton icon={<CheckCircle2 className="h-5 w-5" />} title="Já tenho a churrasqueira pronta, só falta o kit" description="Vamos confirmar medidas e direcionar para o especialista" onClick={() => onMomentSelect("pronta")} />
-              <OptionButton icon={<Search className="h-5 w-5" />} title="Ainda estou planejando" description="Veja kits, preços e baixe o guia de medidas" onClick={() => onMomentSelect("planejando")} />
+              <OptionButton
+                icon={<Hammer className="h-5 w-5" />}
+                title="Estou construindo ou reformando minha churrasqueira"
+                description="Fluxo ideal para quem quer projetar certo desde o início"
+                onClick={() => onMomentSelect("obra")}
+              />
+              <OptionButton
+                icon={<CheckCircle2 className="h-5 w-5" />}
+                title="Já tenho a churrasqueira pronta, só falta o kit"
+                description="Vamos confirmar medidas e direcionar para o especialista"
+                onClick={() => onMomentSelect("pronta")}
+              />
+              <OptionButton
+                icon={<Search className="h-5 w-5" />}
+                title="Ainda estou planejando"
+                description="Veja kits, preços e baixe o guia de medidas"
+                onClick={() => onMomentSelect("planejando")}
+              />
             </div>
           ) : null}
           {stage === "projectType" ? (
             <div className="space-y-4">
               <div>
                 <h3 className="text-lg font-semibold text-foreground">Que tipo de projeto você procura?</h3>
-                <p className="mt-2 text-sm leading-6 text-secondary-foreground">Escolha a opção mais próxima — o especialista refina com você no WhatsApp.</p>
+                <p className="mt-2 text-sm leading-6 text-secondary-foreground">
+                  Escolha a opção mais próxima — o especialista refina com você no WhatsApp.
+                </p>
               </div>
               <div className="grid gap-3">
                 <ProjectTypeCard
@@ -1314,19 +1534,38 @@ function ConsultiveModal({
             </div>
           ) : null}
 
-
           {stage === "measurements" ? (
             <div className="space-y-5">
               <div>
                 <h3 className="text-lg font-semibold text-foreground">Você já tem as medidas da sua churrasqueira?</h3>
-                <p className="mt-2 text-sm leading-6 text-secondary-foreground">Se já tiver, seguimos para um projeto mais preciso. Se ainda não, te mostramos exatamente como medir.</p>
+                <p className="mt-2 text-sm leading-6 text-secondary-foreground">
+                  Se já tiver, seguimos para um projeto mais preciso. Se ainda não, te mostramos exatamente como medir.
+                </p>
               </div>
 
               <div className="grid gap-3 sm:grid-cols-2">
-                <button type="button" onClick={() => onMeasurementStateChange("yes")} className={cn("min-h-14 rounded-2xl border px-4 py-4 text-left text-sm font-medium transition-colors", measurementState === "yes" ? "border-primary bg-primary/10 text-foreground" : "border-border bg-background/50 text-secondary-foreground hover:bg-card-hover")}>
+                <button
+                  type="button"
+                  onClick={() => onMeasurementStateChange("yes")}
+                  className={cn(
+                    "min-h-14 rounded-2xl border px-4 py-4 text-left text-sm font-medium transition-colors",
+                    measurementState === "yes"
+                      ? "border-primary bg-primary/10 text-foreground"
+                      : "border-border bg-background/50 text-secondary-foreground hover:bg-card-hover",
+                  )}
+                >
                   SIM, já tenho as medidas
                 </button>
-                <button type="button" onClick={() => onMeasurementStateChange("no")} className={cn("min-h-14 rounded-2xl border px-4 py-4 text-left text-sm font-medium transition-colors", measurementState === "no" ? "border-primary bg-primary/10 text-foreground" : "border-border bg-background/50 text-secondary-foreground hover:bg-card-hover")}>
+                <button
+                  type="button"
+                  onClick={() => onMeasurementStateChange("no")}
+                  className={cn(
+                    "min-h-14 rounded-2xl border px-4 py-4 text-left text-sm font-medium transition-colors",
+                    measurementState === "no"
+                      ? "border-primary bg-primary/10 text-foreground"
+                      : "border-border bg-background/50 text-secondary-foreground hover:bg-card-hover",
+                  )}
+                >
                   NÃO, ainda preciso medir
                 </button>
               </div>
@@ -1335,39 +1574,90 @@ function ConsultiveModal({
                 <div className="space-y-4 rounded-2xl border border-border bg-background/50 p-4">
                   <div className="grid gap-3">
                     <LabelField label="Largura interna (cm)">
-                      <input type="number" inputMode="numeric" min="0" value={form.width} onChange={(e) => onChangeField("width", e.target.value)} className="field-base" />
+                      <input
+                        type="number"
+                        inputMode="numeric"
+                        min="0"
+                        value={form.width}
+                        onChange={(e) => onChangeField("width", e.target.value)}
+                        className="field-base"
+                      />
                     </LabelField>
                     <LabelField label="Comprimento interno (cm)">
-                      <input type="number" inputMode="numeric" min="0" value={form.depth} onChange={(e) => onChangeField("depth", e.target.value)} className="field-base" />
+                      <input
+                        type="number"
+                        inputMode="numeric"
+                        min="0"
+                        value={form.depth}
+                        onChange={(e) => onChangeField("depth", e.target.value)}
+                        className="field-base"
+                      />
                     </LabelField>
                     <LabelField label="Altura interna (cm) — opcional">
-                      <input type="number" inputMode="numeric" min="0" value={form.height} onChange={(e) => onChangeField("height", e.target.value)} className="field-base" />
+                      <input
+                        type="number"
+                        inputMode="numeric"
+                        min="0"
+                        value={form.height}
+                        onChange={(e) => onChangeField("height", e.target.value)}
+                        className="field-base"
+                      />
                     </LabelField>
                   </div>
                   <div className="overflow-hidden rounded-xl border border-border bg-black">
-                    <video src={rodrigoMedidasVideo.url} controls playsInline poster={measurementGuideAsset.url} className="aspect-video w-full object-contain" />
+                    <video
+                      src={rodrigoMedidasVideo.url}
+                      controls
+                      playsInline
+                      poster={measurementGuideAsset.url}
+                      className="aspect-video w-full object-contain"
+                    />
                   </div>
-                  <p className="text-sm leading-6 text-secondary-foreground">Meça por dentro da churrasqueira, de parede a parede. No vídeo, o Rodrigo mostra o passo a passo.</p>
+                  <p className="text-sm leading-6 text-secondary-foreground">
+                    Meça por dentro da churrasqueira, de parede a parede. No vídeo, o Rodrigo mostra o passo a passo.
+                  </p>
                 </div>
               ) : null}
 
               {measurementState === "no" ? (
                 <div className="space-y-4 rounded-2xl border border-border bg-background/50 p-4">
                   <div className="overflow-hidden rounded-xl border border-border bg-black">
-                    <video src={rodrigoMedidasVideo.url} controls playsInline poster={measurementGuideAsset.url} className="aspect-video w-full object-contain" />
+                    <video
+                      src={rodrigoMedidasVideo.url}
+                      controls
+                      playsInline
+                      poster={measurementGuideAsset.url}
+                      className="aspect-video w-full object-contain"
+                    />
                   </div>
                   <div className="grid gap-3">
-                    <Button type="button" variant="outline" className="min-h-12 justify-between border-border bg-card hover:bg-card-hover" onClick={onShowMeasurementForm}>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="min-h-12 justify-between border-border bg-card hover:bg-card-hover"
+                      onClick={onShowMeasurementForm}
+                    >
                       Já entendi, vou medir agora <ChevronRight className="h-4 w-4" />
                     </Button>
-                    <Button type="button" variant="outline" className="min-h-12 justify-between border-border bg-card hover:bg-card-hover" onClick={onContinueMeasurements}>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="min-h-12 justify-between border-border bg-card hover:bg-card-hover"
+                      onClick={onContinueMeasurements}
+                    >
                       Posso medir depois, quero falar com especialista <ChevronRight className="h-4 w-4" />
                     </Button>
                   </div>
                 </div>
               ) : null}
 
-              <Button type="button" size="lg" disabled={!canContinueMeasurements} className="min-h-13 w-full rounded-xl bg-primary text-sm font-bold tracking-[0.08em] text-primary-foreground hover:bg-primary-strong disabled:bg-primary/35" onClick={onContinueMeasurements}>
+              <Button
+                type="button"
+                size="lg"
+                disabled={!canContinueMeasurements}
+                className="min-h-13 w-full rounded-xl bg-primary text-sm font-bold tracking-[0.08em] text-primary-foreground hover:bg-primary-strong disabled:bg-primary/35"
+                onClick={onContinueMeasurements}
+              >
                 CONTINUAR <ArrowRight className="h-4 w-4" />
               </Button>
             </div>
@@ -1377,15 +1667,50 @@ function ConsultiveModal({
             <div className="space-y-5">
               <div>
                 <h3 className="text-lg font-semibold text-foreground">Quase lá! Como podemos te chamar?</h3>
-                <p className="mt-2 text-sm leading-6 text-secondary-foreground">Assim já deixamos seu atendimento mais ágil no WhatsApp.</p>
+                <p className="mt-2 text-sm leading-6 text-secondary-foreground">
+                  Assim já deixamos seu atendimento mais ágil no WhatsApp.
+                </p>
               </div>
               <div className="grid gap-4">
-                <LabelField label="Nome"><input value={form.name} onChange={(e) => onChangeField("name", e.target.value)} className="field-base" /></LabelField>
-                <LabelField label="WhatsApp"><input value={formattedWhatsapp} onChange={(e) => onChangeField("whatsapp", e.target.value)} inputMode="tel" className="field-base" /></LabelField>
-                <LabelField label="Cidade / Estado"><input value={form.city} onChange={(e) => onChangeField("city", e.target.value)} className="field-base" /></LabelField>
-                <LabelField label="E-mail"><input type="email" value={form.email} onChange={(e) => onChangeField("email", e.target.value)} className="field-base" placeholder="voce@email.com" /></LabelField>
+                <LabelField label="Nome">
+                  <input
+                    value={form.name}
+                    onChange={(e) => onChangeField("name", e.target.value)}
+                    className="field-base"
+                  />
+                </LabelField>
+                <LabelField label="WhatsApp">
+                  <input
+                    value={formattedWhatsapp}
+                    onChange={(e) => onChangeField("whatsapp", e.target.value)}
+                    inputMode="tel"
+                    className="field-base"
+                  />
+                </LabelField>
+                <LabelField label="Cidade / Estado">
+                  <input
+                    value={form.city}
+                    onChange={(e) => onChangeField("city", e.target.value)}
+                    className="field-base"
+                  />
+                </LabelField>
+                <LabelField label="E-mail">
+                  <input
+                    type="email"
+                    value={form.email}
+                    onChange={(e) => onChangeField("email", e.target.value)}
+                    className="field-base"
+                    placeholder="voce@email.com"
+                  />
+                </LabelField>
               </div>
-              <Button type="button" size="lg" disabled={!canContinueContact} className="min-h-13 w-full rounded-xl bg-primary text-sm font-bold tracking-[0.08em] text-primary-foreground hover:bg-primary-strong disabled:bg-primary/35" onClick={onContinueContact}>
+              <Button
+                type="button"
+                size="lg"
+                disabled={!canContinueContact}
+                className="min-h-13 w-full rounded-xl bg-primary text-sm font-bold tracking-[0.08em] text-primary-foreground hover:bg-primary-strong disabled:bg-primary/35"
+                onClick={onContinueContact}
+              >
                 CONTINUAR <ArrowRight className="h-4 w-4" />
               </Button>
             </div>
@@ -1395,7 +1720,9 @@ function ConsultiveModal({
             <div className="space-y-4">
               <div>
                 <h3 className="text-lg font-semibold text-foreground">Tudo certo! Como prefere seguir?</h3>
-                <p className="mt-2 text-sm leading-6 text-secondary-foreground">Escolha o caminho mais confortável para você agora.</p>
+                <p className="mt-2 text-sm leading-6 text-secondary-foreground">
+                  Escolha o caminho mais confortável para você agora.
+                </p>
               </div>
 
               {/* Card 1 — destaque WhatsApp */}
@@ -1406,7 +1733,10 @@ function ConsultiveModal({
               >
                 <div className="flex items-start gap-3">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-whatsapp text-whatsapp-foreground">
-                    <svg viewBox="0 0 32 32" className="h-5 w-5 fill-current" aria-hidden="true"><path d="M19.11 17.23c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.18-1.33-.81-.72-1.36-1.61-1.52-1.88-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.48-.84-2.03-.22-.53-.45-.46-.61-.47-.16-.01-.34-.01-.52-.01-.18 0-.48.07-.73.34-.25.27-.96.93-.96 2.28s.98 2.65 1.11 2.84c.14.18 1.92 2.93 4.65 4.11.65.28 1.15.44 1.55.56.65.21 1.24.18 1.71.11.52-.08 1.6-.65 1.82-1.27.22-.62.22-1.15.16-1.27-.07-.11-.25-.18-.52-.32Z" /><path d="M16.02 3.2c-7.07 0-12.8 5.71-12.8 12.76 0 2.25.59 4.44 1.7 6.37L3 29l6.86-1.79a12.83 12.83 0 0 0 6.16 1.57h.01c7.07 0 12.8-5.71 12.8-12.77S23.1 3.2 16.02 3.2Zm0 23.46h-.01a10.7 10.7 0 0 1-5.45-1.49l-.39-.23-4.07 1.06 1.09-3.96-.25-.41a10.62 10.62 0 0 1-1.64-5.62c0-5.89 4.82-10.68 10.73-10.68 2.87 0 5.56 1.11 7.58 3.13a10.58 10.58 0 0 1 3.15 7.55c0 5.9-4.82 10.69-10.74 10.69Z" /></svg>
+                    <svg viewBox="0 0 32 32" className="h-5 w-5 fill-current" aria-hidden="true">
+                      <path d="M19.11 17.23c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.18-1.33-.81-.72-1.36-1.61-1.52-1.88-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.48-.84-2.03-.22-.53-.45-.46-.61-.47-.16-.01-.34-.01-.52-.01-.18 0-.48.07-.73.34-.25.27-.96.93-.96 2.28s.98 2.65 1.11 2.84c.14.18 1.92 2.93 4.65 4.11.65.28 1.15.44 1.55.56.65.21 1.24.18 1.71.11.52-.08 1.6-.65 1.82-1.27.22-.62.22-1.15.16-1.27-.07-.11-.25-.18-.52-.32Z" />
+                      <path d="M16.02 3.2c-7.07 0-12.8 5.71-12.8 12.76 0 2.25.59 4.44 1.7 6.37L3 29l6.86-1.79a12.83 12.83 0 0 0 6.16 1.57h.01c7.07 0 12.8-5.71 12.8-12.77S23.1 3.2 16.02 3.2Zm0 23.46h-.01a10.7 10.7 0 0 1-5.45-1.49l-.39-.23-4.07 1.06 1.09-3.96-.25-.41a10.62 10.62 0 0 1-1.64-5.62c0-5.89 4.82-10.68 10.73-10.68 2.87 0 5.56 1.11 7.58 3.13a10.58 10.58 0 0 1 3.15 7.55c0 5.9-4.82 10.69-10.74 10.69Z" />
+                    </svg>
                   </div>
                   <div>
                     <p className="text-base font-semibold text-foreground">Falar agora com um especialista</p>
@@ -1427,7 +1757,9 @@ function ConsultiveModal({
                   </div>
                   <div>
                     <p className="text-base font-semibold text-foreground">Comprar direto no site</p>
-                    <p className="mt-1 text-sm leading-6 text-secondary-foreground">Veja os kits, escolha o tamanho e finalize sua compra</p>
+                    <p className="mt-1 text-sm leading-6 text-secondary-foreground">
+                      Veja os kits, escolha o tamanho e finalize sua compra
+                    </p>
                   </div>
                 </div>
               </button>
@@ -1445,11 +1777,20 @@ function ConsultiveModal({
           {stage === "cold" ? (
             <div className="space-y-4">
               <div>
-                <h3 className="text-lg font-semibold text-foreground">Sem problema! Enquanto planeja, conheça nossos kits.</h3>
-                <p className="mt-2 text-sm leading-6 text-secondary-foreground">Veja os modelos, tamanhos e preços disponíveis no nosso site.</p>
+                <h3 className="text-lg font-semibold text-foreground">
+                  Sem problema! Enquanto planeja, conheça nossos kits.
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-secondary-foreground">
+                  Veja os modelos, tamanhos e preços disponíveis no nosso site.
+                </p>
               </div>
 
-              <a href={KITS_URL} target="_blank" rel="noreferrer" className="block rounded-2xl border border-border bg-background/50 p-4 transition-colors hover:bg-card-hover">
+              <a
+                href={KITS_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="block rounded-2xl border border-border bg-background/50 p-4 transition-colors hover:bg-card-hover"
+              >
                 <div className="flex items-center gap-3">
                   <ExternalLink className="h-5 w-5 text-primary" />
                   <div>
@@ -1461,20 +1802,28 @@ function ConsultiveModal({
 
               <button
                 type="button"
-                onClick={() => window.open("https://drive.google.com/file/d/1y9Uy1Xy-n7mRXdiBcC5I5O1Om-hy9ka4/view?usp=sharing", "_blank")}
+                onClick={() =>
+                  window.open(
+                    "https://drive.google.com/file/d/1y9Uy1Xy-n7mRXdiBcC5I5O1Om-hy9ka4/view?usp=sharing",
+                    "_blank",
+                  )
+                }
                 className="block w-full rounded-2xl border border-border bg-background/50 p-4 text-left transition-colors hover:bg-card-hover"
               >
                 <div className="flex items-center gap-3">
                   <Download className="h-5 w-5 text-primary" />
                   <div>
                     <p className="text-base font-semibold text-foreground">Baixar guia gratuito de medidas</p>
-                    <p className="mt-1 text-sm text-secondary-foreground">PDF com tudo que você precisa saber antes de comprar.</p>
+                    <p className="mt-1 text-sm text-secondary-foreground">
+                      PDF com tudo que você precisa saber antes de comprar.
+                    </p>
                   </div>
                 </div>
               </button>
 
-
-              <p className="text-sm leading-6 text-muted-foreground">Quando estiver pronto, volte e fale com nosso especialista.</p>
+              <p className="text-sm leading-6 text-muted-foreground">
+                Quando estiver pronto, volte e fale com nosso especialista.
+              </p>
             </div>
           ) : null}
         </div>
@@ -1491,18 +1840,32 @@ function Lightbox({
   onClose: () => void;
 }) {
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/95 p-4" role="dialog" aria-modal="true" onClick={onClose}>
-      <button type="button" onClick={onClose} className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/60 text-foreground backdrop-blur" aria-label="Fechar">
+    <div
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-black/95 p-4"
+      role="dialog"
+      aria-modal="true"
+      onClick={onClose}
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/60 text-foreground backdrop-blur"
+        aria-label="Fechar"
+      >
         <X className="h-5 w-5" />
       </button>
       <div className="relative w-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
-        {image.src ? <img src={image.src} alt={image.alt} className="mx-auto max-h-[85svh] w-auto rounded-xl object-contain" /> : null}
+        {image.src ? (
+          <img src={image.src} alt={image.alt} className="mx-auto max-h-[85svh] w-auto rounded-xl object-contain" />
+        ) : null}
         {image.title ? (
           <div className="mt-4 px-2 text-center">
             <p className="text-base font-semibold text-foreground">{image.title}</p>
@@ -1537,7 +1900,11 @@ function RevealSection({ id, className, as = "section", children, style }: Revea
   }, [elementId]);
 
   return (
-    <Component id={elementId} style={style} className={cn("scroll-mt-20 px-0 py-14 md:py-20", visible ? "fade-visible" : "fade-hidden", className)}>
+    <Component
+      id={elementId}
+      style={style}
+      className={cn("scroll-mt-20 px-0 py-14 md:py-20", visible ? "fade-visible" : "fade-hidden", className)}
+    >
       {children}
     </Component>
   );
@@ -1547,23 +1914,46 @@ function SectionHeading({ eyebrow, title, description, centered }: SectionHeadin
   return (
     <div className={cn("mx-auto mb-8 max-w-(--container-max) px-5", centered ? "text-center" : "")}>
       {eyebrow ? (
-        <p className={cn("section-label", centered ? "justify-center" : "")} style={centered ? { display: "inline-flex" } : undefined}>
+        <p
+          className={cn("section-label", centered ? "justify-center" : "")}
+          style={centered ? { display: "inline-flex" } : undefined}
+        >
           {eyebrow}
         </p>
       ) : null}
-      <h2 className="mt-2 max-w-3xl font-display font-semibold leading-[1.05] text-balance text-foreground md:max-w-4xl"
-          style={{ fontSize: "clamp(1.5rem, 5vw, 2.75rem)" }}>
+      <h2
+        className="mt-2 max-w-3xl font-display font-semibold leading-[1.05] text-balance text-foreground md:max-w-4xl"
+        style={{ fontSize: "clamp(1.5rem, 5vw, 2.75rem)" }}
+      >
         {title}
       </h2>
-      {description ? <p className="mt-3 max-w-2xl text-sm leading-6 text-secondary-foreground md:text-base">{description}</p> : null}
+      {description ? (
+        <p className="mt-3 max-w-2xl text-sm leading-6 text-secondary-foreground md:text-base">{description}</p>
+      ) : null}
     </div>
   );
 }
 
-function OptionButton({ icon, title, description, onClick }: { icon: ReactNode; title: string; description: string; onClick: () => void }) {
+function OptionButton({
+  icon,
+  title,
+  description,
+  onClick,
+}: {
+  icon: ReactNode;
+  title: string;
+  description: string;
+  onClick: () => void;
+}) {
   return (
-    <button type="button" onClick={onClick} className="flex min-h-16 w-full items-start gap-3 rounded-2xl border border-border bg-background/50 px-4 py-4 text-left transition-colors hover:bg-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-      <span className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">{icon}</span>
+    <button
+      type="button"
+      onClick={onClick}
+      className="flex min-h-16 w-full items-start gap-3 rounded-2xl border border-border bg-background/50 px-4 py-4 text-left transition-colors hover:bg-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+    >
+      <span className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+        {icon}
+      </span>
       <span>
         <span className="block text-sm font-semibold text-foreground">{title}</span>
         <span className="mt-1 block text-sm leading-6 text-secondary-foreground">{description}</span>
@@ -1572,7 +1962,17 @@ function OptionButton({ icon, title, description, onClick }: { icon: ReactNode; 
   );
 }
 
-function ProjectTypeCard({ active, title, subtitle, onClick }: { active: boolean; title: string; subtitle: string; onClick: () => void }) {
+function ProjectTypeCard({
+  active,
+  title,
+  subtitle,
+  onClick,
+}: {
+  active: boolean;
+  title: string;
+  subtitle: string;
+  onClick: () => void;
+}) {
   return (
     <button
       type="button"
@@ -1618,7 +2018,17 @@ const projectTypeLabels: Record<NonNullable<ProjectType>, string> = {
   especial: "Projeto especial ou comercial",
 };
 
-function buildWhatsappMessage({ intro, form, includeMeasurements, projectType }: { intro: string; form: ContactForm; includeMeasurements: boolean; projectType?: ProjectType }) {
+function buildWhatsappMessage({
+  intro,
+  form,
+  includeMeasurements,
+  projectType,
+}: {
+  intro: string;
+  form: ContactForm;
+  includeMeasurements: boolean;
+  projectType?: ProjectType;
+}) {
   const lines = [intro, ""];
   if (form.name) lines.push(`Nome: ${form.name}`);
   if (form.city) lines.push(`Cidade: ${form.city}`);
