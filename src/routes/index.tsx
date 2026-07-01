@@ -424,6 +424,7 @@ function LandingPage() {
     setMeasurementState("unknown");
     setShowMeasurementsForm(false);
     setProjectType(null);
+    setProjectMomentLabel("");
   };
 
   const closeConsultiveModal = () => {
@@ -432,6 +433,7 @@ function LandingPage() {
     setMeasurementState("unknown");
     setShowMeasurementsForm(false);
     setProjectType(null);
+    setProjectMomentLabel("");
   };
 
   const formattedWhatsapp = formatWhatsapp(contactForm.whatsapp);
