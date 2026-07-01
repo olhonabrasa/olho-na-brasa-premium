@@ -1372,31 +1372,36 @@ function ConsultiveModal({
     altura: string;
     temMedidas: boolean;
   }) => {
+    const params = new URLSearchParams(window.location.search);
+    const payload = {
+      whatsapp: leadData.whatsapp || "",
+      email: leadData.email || "",
+      nome: leadData.nome || "",
+      churrasqueira: stage || "",
+      projeto: projectType ? projectTypeLabels[projectType] : "",
+      prazo: "Agora",
+      investimento: "",
+      cidade: leadData.cidade || "",
+      largura: leadData.largura || "",
+      comprimento: leadData.comprimento || "",
+      altura: leadData.altura || "",
+      temMedidas: leadData.temMedidas ? "Sim" : "Não",
+      utm_source: params.get("utm_source") || "direct",
+      utm_medium: params.get("utm_medium") || "",
+      utm_campaign: params.get("utm_campaign") || "",
+      utm_content: params.get("utm_content") || "",
+    };
+    console.log("Enviando para DataCrazy:", JSON.stringify(payload));
     try {
-      await fetch(
+      const response = await fetch(
         "https://api.datacrazy.io/v1/crm/api/crm/flows/webhooks/57af109b-a833-4f35-8081-b5ee5109d305/dc8467f8-72d4-4382-88e9-4fdb14aef590",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            whatsapp: leadData.whatsapp,
-            email: leadData.email,
-            nome: leadData.nome,
-            estagio: stage,
-            tipoProjeto: projectType ? projectTypeLabels[projectType] : "",
-            cidade: leadData.cidade,
-            largura: leadData.largura || "",
-            comprimento: leadData.comprimento || "",
-            altura: leadData.altura || "",
-            temMedidas: leadData.temMedidas ? "Sim" : "Não",
-            prazo: "Agora",
-            utm_source: new URLSearchParams(window.location.search).get("utm_source") || "direct",
-            utm_medium: new URLSearchParams(window.location.search).get("utm_medium") || "",
-            utm_campaign: new URLSearchParams(window.location.search).get("utm_campaign") || "",
-            utm_content: new URLSearchParams(window.location.search).get("utm_content") || "",
-          }),
+          body: JSON.stringify(payload),
         },
       );
+      console.log("DataCrazy response:", response.status);
     } catch (error) {
       console.error("DataCrazy webhook error:", error);
     }
