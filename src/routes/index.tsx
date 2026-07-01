@@ -105,6 +105,12 @@ type ProjectMoment = "obra" | "pronta" | "planejando" | null;
 type ProjectType = "kit" | "suporte" | "especial" | null;
 type MeasurementState = "unknown" | "yes" | "no";
 
+const projectMomentLabels: Record<NonNullable<ProjectMoment>, string> = {
+  obra: "Estou construindo ou reformando minha churrasqueira",
+  pronta: "Já tenho a churrasqueira pronta, só falta o kit",
+  planejando: "Ainda estou planejando",
+};
+
 type ContactForm = {
   name: string;
   whatsapp: string;
@@ -359,6 +365,7 @@ function LandingPage() {
   const [measurementState, setMeasurementState] = useState<MeasurementState>("unknown");
   const [showMeasurementsForm, setShowMeasurementsForm] = useState(false);
   const [projectType, setProjectType] = useState<ProjectType>(null);
+  const [projectMomentLabel, setProjectMomentLabel] = useState("");
   const [headerVisible, setHeaderVisible] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<{
     src: string;
@@ -423,6 +430,7 @@ function LandingPage() {
     setMeasurementState("unknown");
     setShowMeasurementsForm(false);
     setProjectType(null);
+    setProjectMomentLabel("");
   };
 
   const closeConsultiveModal = () => {
@@ -431,6 +439,7 @@ function LandingPage() {
     setMeasurementState("unknown");
     setShowMeasurementsForm(false);
     setProjectType(null);
+    setProjectMomentLabel("");
   };
 
   const formattedWhatsapp = formatWhatsapp(contactForm.whatsapp);
@@ -491,10 +500,12 @@ function LandingPage() {
         measurementState={measurementState}
         showMeasurementsForm={showMeasurementsForm}
         projectType={projectType}
+        estagio={projectMomentLabel}
         form={contactForm}
         formattedWhatsapp={formattedWhatsapp}
         onClose={closeConsultiveModal}
         onMomentSelect={(moment) => {
+          setProjectMomentLabel(projectMomentLabels[moment]);
           if (moment === "planejando") setModalStage("cold");
           else setModalStage("projectType");
         }}
@@ -1324,6 +1335,7 @@ function ConsultiveModal({
   measurementState,
   showMeasurementsForm,
   projectType,
+  estagio,
   form,
   formattedWhatsapp,
   onClose,
@@ -1342,10 +1354,11 @@ function ConsultiveModal({
   measurementState: MeasurementState;
   showMeasurementsForm: boolean;
   projectType: ProjectType;
+  estagio: string;
   form: ContactForm;
   formattedWhatsapp: string;
   onClose: () => void;
-  onMomentSelect: (moment: ProjectMoment) => void;
+  onMomentSelect: (moment: NonNullable<ProjectMoment>) => void;
   onProjectTypeSelect: (type: NonNullable<ProjectType>) => void;
   onMeasurementStateChange: (state: MeasurementState) => void;
   onShowMeasurementForm: () => void;
@@ -1377,7 +1390,7 @@ function ConsultiveModal({
       whatsapp: leadData.whatsapp || "",
       email: leadData.email || "",
       nome: leadData.nome || "",
-      churrasqueira: stage || "",
+      churrasqueira: estagio || "",
       projeto: projectType ? projectTypeLabels[projectType] : "",
       prazo: "Agora",
       investimento: "",
