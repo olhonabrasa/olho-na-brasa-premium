@@ -1390,7 +1390,7 @@ function ConsultiveModal({
       whatsapp: leadData.whatsapp || "",
       email: leadData.email || "",
       nome: leadData.nome || "",
-      churrasqueira: stage || "",
+      churrasqueira: estagio || "",
       projeto: projectType ? projectTypeLabels[projectType] : "",
       prazo: "Agora",
       investimento: "",
