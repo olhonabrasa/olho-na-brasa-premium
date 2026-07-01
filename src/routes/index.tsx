@@ -1692,20 +1692,20 @@ function ConsultiveModal({
                     className="field-base"
                   />
                 </LabelField>
-                <LabelField label="Cidade / Estado">
-                  <input
-                    value={form.city}
-                    onChange={(e) => onChangeField("city", e.target.value)}
-                    className="field-base"
-                  />
-                </LabelField>
-                <LabelField label="E-mail">
+                <LabelField label="E-mail (opcional)">
                   <input
                     type="email"
                     value={form.email}
                     onChange={(e) => onChangeField("email", e.target.value)}
                     className="field-base"
-                    placeholder="voce@email.com"
+                    placeholder="seu@email.com"
+                  />
+                </LabelField>
+                <LabelField label="Cidade / Estado">
+                  <input
+                    value={form.city}
+                    onChange={(e) => onChangeField("city", e.target.value)}
+                    className="field-base"
                   />
                 </LabelField>
               </div>
