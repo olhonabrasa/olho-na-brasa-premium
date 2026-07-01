@@ -105,6 +105,12 @@ type ProjectMoment = "obra" | "pronta" | "planejando" | null;
 type ProjectType = "kit" | "suporte" | "especial" | null;
 type MeasurementState = "unknown" | "yes" | "no";
 
+const projectMomentLabels: Record<NonNullable<ProjectMoment>, string> = {
+  obra: "Estou construindo ou reformando minha churrasqueira",
+  pronta: "Já tenho a churrasqueira pronta, só falta o kit",
+  planejando: "Ainda estou planejando",
+};
+
 type ContactForm = {
   name: string;
   whatsapp: string;
