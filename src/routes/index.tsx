@@ -359,6 +359,7 @@ function LandingPage() {
   const [measurementState, setMeasurementState] = useState<MeasurementState>("unknown");
   const [showMeasurementsForm, setShowMeasurementsForm] = useState(false);
   const [projectType, setProjectType] = useState<ProjectType>(null);
+  const [projectMomentLabel, setProjectMomentLabel] = useState("");
   const [headerVisible, setHeaderVisible] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<{
     src: string;
