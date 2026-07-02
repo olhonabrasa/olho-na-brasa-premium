@@ -119,6 +119,7 @@ type ContactForm = {
   depth: string;
   height: string;
   email: string;
+  photoUrl: string;
 };
 
 type RevealProps = {
@@ -381,6 +382,7 @@ function LandingPage() {
     depth: "",
     height: "",
     email: "",
+    photoUrl: "",
   });
 
   const schemaMarkup = useMemo(
