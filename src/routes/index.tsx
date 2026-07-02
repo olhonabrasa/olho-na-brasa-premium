@@ -20,6 +20,7 @@ import {
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { PhotoUpload } from "@/components/PhotoUpload";
 import { cn } from "@/lib/utils";
 import beforeProjectAsset from "@/assets/olho-na-brasa-antes-1.jpg.asset.json";
 import afterProjectAsset from "@/assets/olho-na-brasa-depois-1.jpg.asset.json";
@@ -119,6 +120,7 @@ type ContactForm = {
   depth: string;
   height: string;
   email: string;
+  photoUrl: string;
 };
 
 type RevealProps = {
@@ -381,6 +383,7 @@ function LandingPage() {
     depth: "",
     height: "",
     email: "",
+    photoUrl: "",
   });
 
   const schemaMarkup = useMemo(
@@ -1399,6 +1402,7 @@ function ConsultiveModal({
       comprimento: leadData.comprimento || "",
       altura: leadData.altura || "",
       temMedidas: leadData.temMedidas ? "Sim" : "Não",
+      fotoUrl: form.photoUrl || "",
       utm_source: params.get("utm_source") || "direct",
       utm_medium: params.get("utm_medium") || "",
       utm_campaign: params.get("utm_campaign") || "",
@@ -1622,6 +1626,9 @@ function ConsultiveModal({
                       />
                     </LabelField>
                   </div>
+                  <PhotoUpload
+                    onPhotoUploaded={(url) => onChangeField("photoUrl", url)}
+                  />
                   <div className="overflow-hidden rounded-xl border border-border bg-black">
                     <video
                       src={rodrigoMedidasVideo.url}
@@ -2056,6 +2063,7 @@ function buildWhatsappMessage({
     const combined = measurementParts.length ? `${measurementParts.join("x")}cm` : "Não informadas";
     lines.push(`Medidas: ${combined}${form.height ? ` | Altura: ${form.height}cm` : ""}`);
   }
+  if (form.photoUrl) lines.push("", `Foto da churrasqueira: ${form.photoUrl}`);
   lines.push("", "Vim pela landing page.");
   return buildWhatsappHref(lines.join("\n"));
 }
