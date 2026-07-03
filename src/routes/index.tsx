@@ -1020,45 +1020,130 @@ function AutoPauseVideo({ src, poster, className }: { src: string; poster?: stri
 
 /* ===================== PARA QUEM É ===================== */
 function WhoItsForSection({ onOpenModal }: { onOpenModal: () => void }) {
+  const forYou = [
+    "Está construindo ou reformando a área gourmet",
+    "Quer equipamento profissional dentro de casa",
+    "Valoriza inox que dura décadas, não meses",
+    "Recebe família e amigos e leva o churrasco a sério",
+  ];
+  const notForYou = [
+    "Procura o mais barato sem se importar com qualidade",
+    "Quer solução descartável de supermercado",
+    "Não liga se enferruja em 6 meses",
+  ];
+
   return (
-    <RevealSection className="section-alt">
-      <SectionHeading title="O Kit Olho na Brasa é para quem leva o churrasco a sério." centered />
+    <RevealSection className="section-alt relative overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40 blur-3xl"
+        style={{ background: "radial-gradient(circle, rgba(255,107,0,0.25), transparent 70%)" }}
+      />
 
-      <div className="mx-auto grid max-w-(--container-max) gap-5 px-5 md:grid-cols-2">
-        <article className="rounded-2xl border border-success/25 bg-card p-6 shadow-soft">
-          <h3 className="text-lg font-semibold text-foreground">Para quem é</h3>
-          <ul className="mt-5 space-y-4">
-            {[
-              "Está construindo ou reformando a churrasqueira",
-              "Quer equipamento profissional para uso residencial",
-              "Valoriza durabilidade e não quer trocar em 2 anos",
-              "Leva o churrasco a sério e recebe família e amigos",
-            ].map((item) => (
-              <li key={item} className="flex gap-3 text-sm leading-6 text-secondary-foreground">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-success" aria-hidden="true" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </article>
-
-        <article className="rounded-2xl border border-danger/20 bg-card p-6 shadow-soft">
-          <h3 className="text-lg font-semibold text-foreground">Não é para quem</h3>
-          <ul className="mt-5 space-y-4">
-            {[
-              "Procura o preço mais baixo do mercado",
-              "Quer churrasqueira descartável",
-              "Não se importa com qualidade do material",
-            ].map((item) => (
-              <li key={item} className="flex gap-3 text-sm leading-6 text-secondary-foreground">
-                <X className="mt-0.5 h-5 w-5 shrink-0 text-danger" aria-hidden="true" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </article>
+      <div className="relative mx-auto max-w-(--container-max) px-5 text-center">
+        <p className="section-label inline-flex justify-center">FEITO PARA QUEM LEVA A SÉRIO</p>
+        <h2
+          className="mt-3 font-display font-semibold leading-[1.05] text-balance text-foreground"
+          style={{ fontSize: "clamp(1.6rem, 5.5vw, 2.75rem)" }}
+        >
+          Não é pra qualquer um.<br />
+          <span style={{ color: "#FF6B00" }}>É pra quem entende de churrasco.</span>
+        </h2>
       </div>
-      <BlockCta label="SIM, QUERO O MEU" onClick={onOpenModal} />
+
+      <div className="relative mx-auto mt-10 grid max-w-(--container-max) gap-6 px-5 md:grid-cols-2">
+        <div>
+          <p className="mb-4 text-sm font-bold tracking-[0.14em] text-emerald-400">É PRA VOCÊ SE:</p>
+          <ul className="space-y-3">
+            {forYou.map((item) => (
+              <li
+                key={item}
+                className="flex items-start gap-3 rounded-xl border border-white/8 bg-white/[0.03] p-4 backdrop-blur-sm"
+              >
+                <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-emerald-500/20 text-emerald-400">
+                  <Check className="h-4 w-4" aria-hidden="true" />
+                </span>
+                <span className="text-sm leading-6 text-foreground">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <p className="mb-4 text-sm font-bold tracking-[0.14em] text-red-400/80">NÃO É PRA VOCÊ SE:</p>
+          <ul className="space-y-3">
+            {notForYou.map((item) => (
+              <li
+                key={item}
+                className="flex items-start gap-3 rounded-xl border border-white/8 bg-white/[0.03] p-4 backdrop-blur-sm"
+              >
+                <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-red-500/15 text-red-400/80">
+                  <X className="h-4 w-4" aria-hidden="true" />
+                </span>
+                <span className="text-sm leading-6 text-secondary-foreground">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div className="relative mx-auto mt-12 max-w-(--container-max) px-5">
+        <div className="grid grid-cols-3 gap-4 rounded-2xl border border-white/8 bg-black/40 px-4 py-6 backdrop-blur-md">
+          {[
+            { n: "100.000+", l: "clientes atendidos" },
+            { n: "15 anos", l: "de garantia" },
+            { n: "Inox 304", l: "alimentício" },
+          ].map((s) => (
+            <div key={s.l} className="text-center">
+              <p
+                className="font-display font-bold leading-none"
+                style={{ color: "#FF6B00", fontSize: "clamp(1.25rem, 5vw, 2.25rem)" }}
+              >
+                {s.n}
+              </p>
+              <p className="mt-2 text-[11px] uppercase tracking-wider text-secondary-foreground md:text-xs">
+                {s.l}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <BlockCta label="QUERO O EQUIPAMENTO QUE MEU CHURRASCO MERECE" onClick={onOpenModal} />
+    </RevealSection>
+  );
+}
+
+function DifferentialsSection() {
+  const items = [
+    { t: "Não enferruja", d: "Inox 304 alimentício" },
+    { t: "Sob medida", d: "Fabricado no seu tamanho" },
+    { t: "Prazo de entrega", d: "Rápido e confiável" },
+    { t: "Fábrica própria", d: "Direto do fabricante" },
+    { t: "+7 anos de mercado", d: "Referência em SC" },
+    { t: "Tempo de produção", d: "Otimizado por etapa" },
+    { t: "Qualidade garantida", d: "15 anos de garantia" },
+    { t: "Melhor pós-venda", d: "Suporte real do time" },
+  ];
+  return (
+    <RevealSection className="section-dark">
+      <div className="mx-auto grid max-w-(--container-max) grid-cols-2 gap-3 px-5 md:grid-cols-4">
+        {items.map((i) => (
+          <div
+            key={i.t}
+            className="flex flex-col items-center rounded-2xl border border-white/8 bg-white/[0.02] p-4 text-center backdrop-blur-sm"
+          >
+            <span
+              className="grid h-11 w-11 place-items-center rounded-full"
+              style={{ background: "rgba(255,107,0,0.15)", color: "#FF6B00" }}
+            >
+              <Check className="h-5 w-5" />
+            </span>
+            <p className="mt-3 text-sm font-semibold text-foreground">{i.t}</p>
+            <p className="mt-1 text-xs text-secondary-foreground">{i.d}</p>
+          </div>
+        ))}
+      </div>
     </RevealSection>
   );
 }
