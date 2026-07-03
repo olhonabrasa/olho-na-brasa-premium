@@ -1732,11 +1732,13 @@ function ProjectTypeCard({
   active,
   title,
   subtitle,
+  image,
   onClick,
 }: {
   active: boolean;
   title: string;
   subtitle: string;
+  image?: string;
   onClick: () => void;
 }) {
   return (
@@ -1744,15 +1746,23 @@ function ProjectTypeCard({
       type="button"
       onClick={onClick}
       className={cn(
-        "w-full rounded-2xl border px-5 py-4 text-left transition-colors",
+        "w-full overflow-hidden rounded-2xl border text-left transition-colors",
         active ? "border-primary bg-primary/10" : "border-border bg-background/50 hover:bg-card-hover",
       )}
     >
-      <p className="text-sm font-semibold text-foreground md:text-base">{title}</p>
-      <p className="mt-1 text-xs leading-5 text-secondary-foreground md:text-sm">{subtitle}</p>
+      {image ? (
+        <div className="aspect-[16/10] w-full overflow-hidden bg-black/40">
+          <img src={image} alt={title} className="h-full w-full object-contain" loading="lazy" />
+        </div>
+      ) : null}
+      <div className="px-5 py-4">
+        <p className="text-sm font-semibold text-foreground md:text-base">{title}</p>
+        <p className="mt-1 text-xs leading-5 text-secondary-foreground md:text-sm">{subtitle}</p>
+      </div>
     </button>
   );
 }
+
 
 function LabelField({ label, children }: { label: string; children: ReactNode }) {
   return (
