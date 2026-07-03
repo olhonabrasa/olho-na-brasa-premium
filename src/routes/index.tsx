@@ -561,26 +561,113 @@ function StickyHeader({ visible }: { visible: boolean }) {
 }
 
 
+/* ===================== HERO VIDEO ===================== */
+function HeroVideo({ videoSrc }: { videoSrc: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMuted, setIsMuted] = useState(true);
+  const [showSoundPrompt, setShowSoundPrompt] = useState(true);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.5 },
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
+  const handleActivateSound = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = false;
+    video.volume = 1.0;
+    setIsMuted(false);
+    setShowSoundPrompt(false);
+    video.play().catch(() => {});
+  };
+
+  const toggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = !video.muted;
+    setIsMuted(video.muted);
+  };
+
+  return (
+    <div
+      className="relative -mx-5 w-auto overflow-hidden md:mx-0 md:rounded-2xl border-y border-white/10 md:border bg-black shadow-fire cursor-pointer"
+      onClick={showSoundPrompt ? handleActivateSound : undefined}
+    >
+      <video
+        ref={videoRef}
+        className="block h-auto w-full max-h-[62vh] md:max-h-none"
+        src={videoSrc}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        disablePictureInPicture
+        controlsList="nodownload noplaybackrate nofullscreen"
+      />
+
+      {showSoundPrompt && (
+        <button
+          type="button"
+          onClick={handleActivateSound}
+          aria-label="Ativar som"
+          className="absolute left-1/2 top-1/2 z-10 flex items-center gap-3 rounded-full border border-white/40 bg-black/55 px-5 py-3 text-white backdrop-blur-md"
+          style={{
+            transform: "translate(-50%, -50%)",
+            animation: "pulseSound 2s ease-in-out infinite",
+          }}
+        >
+          <Volume2 className="h-5 w-5" />
+          <span className="text-sm font-semibold uppercase tracking-wide">
+            Toque para ativar o som
+          </span>
+        </button>
+      )}
+
+      {!showSoundPrompt && (
+        <button
+          type="button"
+          onClick={toggleMute}
+          aria-label={isMuted ? "Ativar som" : "Silenciar"}
+          className="absolute bottom-3 right-3 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-white/30 bg-black/55 text-white backdrop-blur-md hover:bg-black/70 transition-colors"
+        >
+          {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+        </button>
+      )}
+
+      <style>{`
+        @keyframes pulseSound {
+          0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+          50% { transform: translate(-50%, -50%) scale(1.06); opacity: 0.85; }
+        }
+      `}</style>
+    </div>
+  );
+}
+
 /* ===================== HERO ===================== */
 function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <section id="top" className="relative overflow-hidden bg-background pt-16 pb-8 md:pt-24 md:pb-16">
       <div className="relative z-[3] mx-auto w-full max-w-(--container-max) px-5">
-        {/* Vídeo cinematográfico em loop, sem controles — full-bleed no mobile */}
-        <div className="relative -mx-5 w-auto overflow-hidden md:mx-0 md:rounded-2xl border-y border-white/10 md:border bg-black shadow-fire">
-          <video
-            className="block h-auto w-full max-h-[62vh] md:max-h-none"
-            src={videoHeadlineAsset.url}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            disablePictureInPicture
-            controlsList="nodownload noplaybackrate nofullscreen"
-            aria-hidden="true"
-          />
-        </div>
+        {/* Vídeo cinematográfico em loop — autoplay muted, com ativação de som */}
+        <HeroVideo videoSrc={videoHeadlineAsset.url} />
 
         {/* Headline abaixo do vídeo */}
         <h1
