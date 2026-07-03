@@ -474,6 +474,8 @@ function LandingPage() {
         <main>
           <HeroSection onOpenModal={openConsultiveModal} />
           <Divider />
+          <DifferentialsSection />
+          <Divider />
           <BeforeAfterSection onOpenModal={openConsultiveModal} onOpenLightbox={(img) => setLightboxImage(img)} />
           <Divider />
           <ProcessSection onOpenModal={openConsultiveModal} />
