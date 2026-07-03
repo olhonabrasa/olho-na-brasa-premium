@@ -613,12 +613,6 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
 
         <BenefitsMarquee />
 
-        <div className="mx-auto mt-7 flex w-full max-w-md flex-col items-center md:mx-0">
-          <BlockCta label="QUERO MEU PROJETO" onClick={onOpenModal} fullWidth />
-          <p className="mt-3 w-full text-center text-xs text-muted-foreground md:text-sm">
-            Fale com um especialista ou compre direto no site
-          </p>
-        </div>
       </div>
     </section>
   );
@@ -698,7 +692,7 @@ function BeforeAfterSection({
           </article>
         ))}
       </div>
-      <BlockCta label="TRANSFORMAR MINHA CHURRASQUEIRA" onClick={onOpenModal} />
+      
     </RevealSection>
   );
 }
@@ -1111,7 +1105,7 @@ function WhoItsForSection({ onOpenModal }: { onOpenModal: () => void }) {
         </div>
       </div>
 
-      <BlockCta label="QUERO O EQUIPAMENTO QUE MEU CHURRASCO MERECE" onClick={onOpenModal} />
+      <BlockCta label="QUERO RECEBER O MEU" onClick={onOpenModal} />
     </RevealSection>
   );
 }
