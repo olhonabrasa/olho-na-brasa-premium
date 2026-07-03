@@ -32,7 +32,6 @@ import processPolishAsset from "@/assets/processo-polimento.png.asset.json";
 import processAssemblyAsset from "@/assets/processo-montagem.jpg.asset.json";
 import processInspectionAsset from "@/assets/processo-inspecao-qualidade.jpg.asset.json";
 import processPackagingAsset from "@/assets/processo-embalagem-segura.png.asset.json";
-import videoHeadlineAsset from "@/assets/video-headline.mp4.asset.json";
 import fabricaVideo from "@/assets/fabrica.mp4.asset.json";
 import kitCompletoAsset from "@/assets/kit-completo.png.asset.json";
 import suporteSuspensoAsset from "@/assets/suporte-suspenso.png.asset.json";
@@ -566,23 +565,7 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <section id="top" className="relative overflow-hidden bg-background pt-16 pb-8 md:pt-24 md:pb-16">
       <div className="relative z-[3] mx-auto w-full max-w-(--container-max) px-5">
-        {/* Vídeo cinematográfico em loop, sem controles — full-bleed no mobile */}
-        <div className="relative -mx-5 w-auto overflow-hidden md:mx-0 md:rounded-2xl border-y border-white/10 md:border bg-black shadow-fire">
-          <video
-            className="block h-auto w-full max-h-[62vh] md:max-h-none"
-            src={videoHeadlineAsset.url}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            disablePictureInPicture
-            controlsList="nodownload noplaybackrate nofullscreen"
-            aria-hidden="true"
-          />
-        </div>
-
-        {/* Headline abaixo do vídeo */}
+        {/* Headline */}
         <h1
           className="mt-8 font-display text-foreground"
           style={{
