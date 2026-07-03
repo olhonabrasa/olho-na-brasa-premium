@@ -566,21 +566,8 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <section id="top" className="relative overflow-hidden bg-background pt-16 pb-8 md:pt-24 md:pb-16">
       <div className="relative z-[3] mx-auto w-full max-w-(--container-max) px-5">
-        {/* Vídeo cinematográfico em loop, sem controles — full-bleed no mobile */}
-        <div className="relative -mx-5 w-auto overflow-hidden md:mx-0 md:rounded-2xl border-y border-white/10 md:border bg-black shadow-fire">
-          <video
-            className="block h-auto w-full max-h-[62vh] md:max-h-none"
-            src={videoHeadlineAsset.url}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            disablePictureInPicture
-            controlsList="nodownload noplaybackrate nofullscreen"
-            aria-hidden="true"
-          />
-        </div>
+        {/* Vídeo cinematográfico em loop — autoplay muted, com ativação de som */}
+        <HeroVideo videoSrc={videoHeadlineAsset.url} />
 
         {/* Headline abaixo do vídeo */}
         <h1
