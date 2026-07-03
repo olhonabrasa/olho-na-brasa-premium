@@ -468,7 +468,7 @@ function LandingPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }} />
 
       <div className="bg-background text-foreground">
-        <StickyHeader visible={headerVisible} />
+        
 
 
         <main>
@@ -664,10 +664,11 @@ function HeroVideo({ videoSrc }: { videoSrc: string }) {
 /* ===================== HERO ===================== */
 function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
-    <section id="top" className="relative overflow-hidden bg-background pt-16 pb-8 md:pt-24 md:pb-16">
+    <section id="top" className="relative overflow-hidden bg-background pb-8 md:pb-16">
+      {/* Vídeo cinematográfico em loop — autoplay muted, com ativação de som — colado no topo */}
+      <HeroVideo videoSrc={videoHeadlineAsset.url} />
       <div className="relative z-[3] mx-auto w-full max-w-(--container-max) px-5">
-        {/* Vídeo cinematográfico em loop — autoplay muted, com ativação de som */}
-        <HeroVideo videoSrc={videoHeadlineAsset.url} />
+
 
         {/* Headline abaixo do vídeo */}
         <h1
@@ -1430,22 +1431,6 @@ function Footer() {
         <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-secondary-foreground">
           Olho na Brasa, fábrica de grelhas e acessórios premium em inox 304. Santa Catarina, Brasil.
         </p>
-        <nav className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm text-foreground">
-          <a href={SITE_URL} target="_blank" rel="noreferrer" className="transition-colors hover:text-primary">
-            Site
-          </a>
-          <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="transition-colors hover:text-primary">
-            Instagram
-          </a>
-          <a
-            href={buildWhatsappHref("Olá! Vim pela landing page e quero saber mais sobre o Kit Premium.")}
-            target="_blank"
-            rel="noreferrer"
-            className="transition-colors hover:text-primary"
-          >
-            WhatsApp
-          </a>
-        </nav>
         <div className="mt-6 space-y-1 text-sm text-muted-foreground">
           <p>Instagram: @olhonabrasa</p>
           <p>WhatsApp: (47) 4042-0956</p>
