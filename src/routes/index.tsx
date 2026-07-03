@@ -21,6 +21,8 @@ import {
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { PhotoUpload } from "@/components/PhotoUpload";
+import { WhatsappChatSimulado } from "@/components/WhatsappChatSimulado";
+import { sendLeadToDataCrazy } from "@/lib/sendLead";
 import { cn } from "@/lib/utils";
 import beforeProjectAsset from "@/assets/olho-na-brasa-antes-1.jpg.asset.json";
 import afterProjectAsset from "@/assets/olho-na-brasa-depois-1.jpg.asset.json";
@@ -30,9 +32,11 @@ import processPolishAsset from "@/assets/processo-polimento.png.asset.json";
 import processAssemblyAsset from "@/assets/processo-montagem.jpg.asset.json";
 import processInspectionAsset from "@/assets/processo-inspecao-qualidade.jpg.asset.json";
 import processPackagingAsset from "@/assets/processo-embalagem-segura.png.asset.json";
-import measurementGuideAsset from "@/assets/guia-medidas.png.asset.json";
-import videoAsset from "@/assets/video-cinematografico.mp4.asset.json";
+import videoHeadlineAsset from "@/assets/video-headline.mp4.asset.json";
 import fabricaVideo from "@/assets/fabrica.mp4.asset.json";
+import kitCompletoAsset from "@/assets/kit-completo.png.asset.json";
+import suporteSuspensoAsset from "@/assets/suporte-suspenso.png.asset.json";
+
 
 import card1Antes from "@/assets/card1-antes.jpg.asset.json";
 import card1Depois from "@/assets/card1-depois.jpg.asset.json";
@@ -101,27 +105,24 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
 });
 
-type ModalStage = "stage" | "projectType" | "measurements" | "contact" | "path" | "cold";
-type ProjectMoment = "obra" | "pronta" | "planejando" | null;
-type ProjectType = "kit" | "suporte" | "especial" | null;
-type MeasurementState = "unknown" | "yes" | "no";
+type ModalStage = "stage" | "projectType" | "photo" | "contact" | "path";
+type ProjectMoment = "obra" | "pronta" | null;
+type ProjectType = "kit" | "suporte" | null;
 
 const projectMomentLabels: Record<NonNullable<ProjectMoment>, string> = {
   obra: "Estou construindo ou reformando minha churrasqueira",
   pronta: "Já tenho a churrasqueira pronta, só falta o kit",
-  planejando: "Ainda estou planejando",
 };
 
 type ContactForm = {
   name: string;
   whatsapp: string;
   city: string;
-  width: string;
-  depth: string;
-  height: string;
+  state: string;
   email: string;
   photoUrl: string;
 };
+
 
 type RevealProps = {
   id?: string;
@@ -363,9 +364,8 @@ const clientVideos: ClientVideo[] = [
 
 function LandingPage() {
   const [modalOpen, setModalOpen] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
   const [modalStage, setModalStage] = useState<ModalStage>("stage");
-  const [measurementState, setMeasurementState] = useState<MeasurementState>("unknown");
-  const [showMeasurementsForm, setShowMeasurementsForm] = useState(false);
   const [projectType, setProjectType] = useState<ProjectType>(null);
   const [projectMomentLabel, setProjectMomentLabel] = useState("");
   const [headerVisible, setHeaderVisible] = useState(false);
@@ -379,9 +379,7 @@ function LandingPage() {
     name: "",
     whatsapp: "",
     city: "",
-    width: "",
-    depth: "",
-    height: "",
+    state: "",
     email: "",
     photoUrl: "",
   });
@@ -421,17 +419,16 @@ function LandingPage() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = modalOpen || lightboxImage ? "hidden" : "";
+    document.body.style.overflow = modalOpen || chatOpen || lightboxImage ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [modalOpen, lightboxImage]);
+  }, [modalOpen, chatOpen, lightboxImage]);
 
   const openConsultiveModal = () => {
+    setChatOpen(false);
     setModalOpen(true);
     setModalStage("stage");
-    setMeasurementState("unknown");
-    setShowMeasurementsForm(false);
     setProjectType(null);
     setProjectMomentLabel("");
   };
@@ -439,26 +436,31 @@ function LandingPage() {
   const closeConsultiveModal = () => {
     setModalOpen(false);
     setModalStage("stage");
-    setMeasurementState("unknown");
-    setShowMeasurementsForm(false);
     setProjectType(null);
     setProjectMomentLabel("");
   };
 
+  const openChatSimulado = () => {
+    setModalOpen(false);
+    setChatOpen(true);
+  };
+
   const formattedWhatsapp = formatWhatsapp(contactForm.whatsapp);
+
+  const cityState = contactForm.state
+    ? `${contactForm.city}/${contactForm.state.toUpperCase()}`
+    : contactForm.city;
 
   const specialistMessage = buildWhatsappMessage({
     intro: "Olá! Quero montar meu Kit Premium.",
     form: contactForm,
     projectType,
-    includeMeasurements: Boolean(contactForm.width || contactForm.depth || contactForm.height),
   });
 
   const measurementHelpMessage = buildWhatsappMessage({
     intro: "Olá! Quero montar meu Kit Premium, mas preciso de ajuda para definir as medidas da minha churrasqueira.",
     form: contactForm,
     projectType,
-    includeMeasurements: false,
   });
 
   return (
@@ -466,7 +468,8 @@ function LandingPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }} />
 
       <div className="bg-background text-foreground">
-        <StickyHeader visible={headerVisible} onOpenModal={openConsultiveModal} />
+        <StickyHeader visible={headerVisible} />
+
 
         <main>
           <HeroSection onOpenModal={openConsultiveModal} />
@@ -494,41 +497,37 @@ function LandingPage() {
         </main>
 
         <Footer />
-        <FloatingWhatsappButton onOpenModal={openConsultiveModal} />
+        <FloatingWhatsappButton onOpenChat={openChatSimulado} />
       </div>
 
       <ConsultiveModal
         open={modalOpen}
         stage={modalStage}
-        measurementState={measurementState}
-        showMeasurementsForm={showMeasurementsForm}
         projectType={projectType}
         estagio={projectMomentLabel}
         form={contactForm}
         formattedWhatsapp={formattedWhatsapp}
+        cityState={cityState}
         onClose={closeConsultiveModal}
         onMomentSelect={(moment) => {
           setProjectMomentLabel(projectMomentLabels[moment]);
-          if (moment === "planejando") setModalStage("cold");
-          else setModalStage("projectType");
+          setModalStage("projectType");
         }}
         onProjectTypeSelect={(type) => {
           setProjectType(type);
-          setModalStage("measurements");
+          setModalStage("photo");
         }}
-        onMeasurementStateChange={(state) => {
-          setMeasurementState(state);
-          setShowMeasurementsForm(state === "yes");
-        }}
-        onShowMeasurementForm={() => {
-          setMeasurementState("yes");
-          setShowMeasurementsForm(true);
-        }}
-        onContinueMeasurements={() => setModalStage("contact")}
+        onContinuePhoto={() => setModalStage("contact")}
         onContinueContact={() => setModalStage("path")}
         onChangeField={(field, value) => setContactForm((current) => ({ ...current, [field]: value }))}
         specialistMessage={specialistMessage}
         measurementHelpMessage={measurementHelpMessage}
+      />
+
+      <WhatsappChatSimulado
+        open={chatOpen}
+        onClose={() => setChatOpen(false)}
+        onSwitchToForm={openConsultiveModal}
       />
 
       {lightboxImage ? <Lightbox image={lightboxImage} onClose={() => setLightboxImage(null)} /> : null}
@@ -536,11 +535,12 @@ function LandingPage() {
   );
 }
 
+
 function Divider() {
   return <hr className="section-divider" aria-hidden="true" />;
 }
 
-function StickyHeader({ visible, onOpenModal }: { visible: boolean; onOpenModal: () => void }) {
+function StickyHeader({ visible }: { visible: boolean }) {
   return (
     <header
       className={cn(
@@ -549,21 +549,15 @@ function StickyHeader({ visible, onOpenModal }: { visible: boolean; onOpenModal:
       )}
       style={{ background: "rgb(10 10 10 / 0.9)" }}
     >
-      <div className="mx-auto flex h-full max-w-(--container-max) items-center justify-between gap-3 px-5">
+      <div className="mx-auto flex h-full max-w-(--container-max) items-center justify-center gap-3 px-5">
         <a href="#top" aria-label="Olho na Brasa — Início" className="flex items-center gap-2">
           <img src={logoOlhoNaBrasa.url} alt="Olho na Brasa" className="h-8 w-auto md:h-9" />
         </a>
-        <button
-          type="button"
-          onClick={onOpenModal}
-          className="whitespace-nowrap rounded-lg bg-primary px-4 py-2 text-xs font-bold tracking-wide text-primary-foreground transition-colors hover:bg-primary-strong"
-        >
-          QUERO MEU PROJETO
-        </button>
       </div>
     </header>
   );
 }
+
 
 /* ===================== HERO ===================== */
 function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
@@ -574,7 +568,7 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
         <div className="relative -mx-5 w-auto overflow-hidden md:mx-0 md:rounded-2xl border-y border-white/10 md:border bg-black shadow-fire">
           <video
             className="block h-auto w-full max-h-[62vh] md:max-h-none"
-            src={videoAsset.url}
+            src={videoHeadlineAsset.url}
             autoPlay
             loop
             muted
@@ -1298,12 +1292,12 @@ function Footer() {
   );
 }
 
-function FloatingWhatsappButton({ onOpenModal }: { onOpenModal: () => void }) {
+function FloatingWhatsappButton({ onOpenChat }: { onOpenChat: () => void }) {
   return (
     <button
       type="button"
-      onClick={onOpenModal}
-      aria-label="Iniciar projeto, abrir formulário"
+      onClick={onOpenChat}
+      aria-label="Abrir chat WhatsApp"
       className="whatsapp-pulse fixed bottom-6 right-6 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-whatsapp-foreground transition-transform duration-300 hover:scale-110"
     >
       <svg viewBox="0 0 32 32" className="h-7 w-7 fill-current" aria-hidden="true">
@@ -1335,18 +1329,15 @@ function BlockCta({ label, onClick, fullWidth }: { label: string; onClick: () =>
 function ConsultiveModal({
   open,
   stage,
-  measurementState,
-  showMeasurementsForm,
   projectType,
   estagio,
   form,
   formattedWhatsapp,
+  cityState,
   onClose,
   onMomentSelect,
   onProjectTypeSelect,
-  onMeasurementStateChange,
-  onShowMeasurementForm,
-  onContinueMeasurements,
+  onContinuePhoto,
   onContinueContact,
   onChangeField,
   specialistMessage,
@@ -1354,18 +1345,15 @@ function ConsultiveModal({
 }: {
   open: boolean;
   stage: ModalStage;
-  measurementState: MeasurementState;
-  showMeasurementsForm: boolean;
   projectType: ProjectType;
   estagio: string;
   form: ContactForm;
   formattedWhatsapp: string;
+  cityState: string;
   onClose: () => void;
   onMomentSelect: (moment: NonNullable<ProjectMoment>) => void;
   onProjectTypeSelect: (type: NonNullable<ProjectType>) => void;
-  onMeasurementStateChange: (state: MeasurementState) => void;
-  onShowMeasurementForm: () => void;
-  onContinueMeasurements: () => void;
+  onContinuePhoto: () => void;
   onContinueContact: () => void;
   onChangeField: (field: keyof ContactForm, value: string) => void;
   specialistMessage: string;
@@ -1373,106 +1361,25 @@ function ConsultiveModal({
 }) {
   if (!open) return null;
 
-  const canContinueMeasurements = showMeasurementsForm
-    ? Boolean(form.width.trim() && form.depth.trim())
-    : measurementState === "no";
-  const canContinueContact = Boolean(form.name.trim() && form.whatsapp.trim() && form.city.trim());
-
-  const sendLeadToDataCrazy = async (leadData: {
-    nome: string;
-    whatsapp: string;
-    email: string;
-    cidade: string;
-    largura: string;
-    comprimento: string;
-    altura: string;
-    temMedidas: boolean;
-  }) => {
-    const params = new URLSearchParams(window.location.search);
-    const payload = {
-      whatsapp: leadData.whatsapp || "",
-      email: leadData.email || "",
-      nome: leadData.nome || "",
-      churrasqueira: estagio || "",
-      projeto: projectType ? projectTypeLabels[projectType] : "",
-      prazo: "Agora",
-      investimento: "",
-      cidade: leadData.cidade || "",
-      largura: leadData.largura || "",
-      comprimento: leadData.comprimento || "",
-      altura: leadData.altura || "",
-      temMedidas: leadData.temMedidas ? "Sim" : "Não",
-      fotoUrl: form.photoUrl || "",
-      utm_source: params.get("utm_source") || "direct",
-      utm_medium: params.get("utm_medium") || "",
-      utm_campaign: params.get("utm_campaign") || "",
-      utm_content: params.get("utm_content") || "",
-    };
-    console.log("Enviando para DataCrazy:", JSON.stringify(payload));
-    try {
-      const response = await fetch(
-        "https://api.datacrazy.io/v1/crm/api/crm/flows/webhooks/57af109b-a833-4f35-8081-b5ee5109d305/dc8467f8-72d4-4382-88e9-4fdb14aef590",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        },
-      );
-      console.log("DataCrazy response:", response.status);
-    } catch (error) {
-      console.error("DataCrazy webhook error:", error);
-    }
-  };
-
-  const leadFired = useRef(false);
+  void cityState;
+  const canContinueContact = Boolean(
+    form.name.trim() && form.whatsapp.trim() && form.city.trim() && form.state.trim(),
+  );
 
   const handleFinalAction = async (url: string) => {
-    const leadData = {
-      nome: form.name,
-      whatsapp: form.whatsapp,
-      email: form.email,
-      cidade: form.city,
-      largura: form.width,
-      comprimento: form.depth,
-      altura: form.height,
-      temMedidas: !!(form.width || form.depth || form.height),
-    };
-
-    await sendLeadToDataCrazy(leadData);
-
-    if (!leadFired.current) {
-      leadFired.current = true;
-
-      const formatPhone = (phone: string) => {
-        const digits = phone.replace(/\D/g, "");
-        if (digits.startsWith("55")) return digits;
-        return "55" + digits;
-      };
-
-      const formatName = (name: string) => name.trim().toLowerCase();
-      const nameParts = (form.name || "").trim().split(" ");
-      const firstName = nameParts[0] || "";
-      const lastName = nameParts.slice(1).join(" ") || "";
-
-      if (typeof fbq !== "undefined") {
-        fbq("init", "560384575766988", {
-          ph: formatPhone(form.whatsapp),
-          fn: formatName(firstName),
-          ln: formatName(lastName),
-          ct: formatName(form.city || ""),
-          country: "br",
-          external_id: formatPhone(form.whatsapp),
-        });
-
-        fbq("track", "Lead", {
-          content_name: "LP Premium - Kit Suporte Suspenso",
-          content_category: projectType ? projectTypeLabels[projectType] : "Kit completo",
-          value: 3500,
-          currency: "BRL",
-        });
-      }
-    }
-
+    await sendLeadToDataCrazy(
+      {
+        nome: form.name,
+        whatsapp: form.whatsapp,
+        email: form.email,
+        cidade: form.city,
+        estado: form.state.toUpperCase(),
+        estagio: estagio || "",
+        tipoProjeto: projectType ? projectTypeLabels[projectType] : "",
+        fotoUrl: form.photoUrl,
+      },
+      "formulario",
+    );
     window.open(url, "_blank");
   };
 
@@ -1483,14 +1390,11 @@ function ConsultiveModal({
       aria-modal="true"
       aria-labelledby="consultive-modal-title"
     >
-      <div className="relative max-h-[95svh] w-full overflow-hidden rounded-t-[28px] border border-border-strong bg-card shadow-fire md:max-h-[90svh] md:max-w-[500px] md:rounded-[28px]">
+      <div className="relative max-h-[95svh] w-full overflow-hidden rounded-t-[28px] border border-border-strong bg-card shadow-fire md:max-h-[90svh] md:max-w-[520px] md:rounded-[28px]">
         <div className="flex items-center justify-between border-b border-border px-5 py-4">
-          <div>
-            <p className="text-xs font-semibold tracking-[0.14em] text-muted-foreground">PROJETO CONSULTIVO</p>
-            <h2 id="consultive-modal-title" className="mt-1 text-lg font-semibold text-foreground">
-              Vamos montar seu projeto 🔥
-            </h2>
-          </div>
+          <h2 id="consultive-modal-title" className="text-lg font-semibold text-foreground">
+            Vamos montar seu projeto 🔥
+          </h2>
           <button
             type="button"
             onClick={onClose}
@@ -1501,10 +1405,9 @@ function ConsultiveModal({
           </button>
         </div>
 
-        <div className="max-h-[calc(95svh-88px)] space-y-5 overflow-y-auto px-5 py-5 md:max-h-[calc(90svh-88px)]">
+        <div className="max-h-[calc(95svh-72px)] space-y-5 overflow-y-auto px-5 py-5 md:max-h-[calc(90svh-72px)]">
           {stage === "stage" ? (
             <div className="space-y-3">
-              <p className="text-sm leading-6 text-secondary-foreground">Em que momento você está?</p>
               <OptionButton
                 icon={<Hammer className="h-5 w-5" />}
                 title="Estou construindo ou reformando minha churrasqueira"
@@ -1517,14 +1420,9 @@ function ConsultiveModal({
                 description="Vamos confirmar medidas e direcionar para o especialista"
                 onClick={() => onMomentSelect("pronta")}
               />
-              <OptionButton
-                icon={<Search className="h-5 w-5" />}
-                title="Ainda estou planejando"
-                description="Veja kits, preços e baixe o guia de medidas"
-                onClick={() => onMomentSelect("planejando")}
-              />
             </div>
           ) : null}
+
           {stage === "projectType" ? (
             <div className="space-y-4">
               <div>
@@ -1536,152 +1434,38 @@ function ConsultiveModal({
               <div className="grid gap-3">
                 <ProjectTypeCard
                   active={projectType === "kit"}
+                  image={kitCompletoAsset.url}
                   title="Kit completo (grelha + suporte suspenso + espetos)"
-                  subtitle="Nosso kit mais vendido, a partir de R$2.500"
+                  subtitle="Nosso kit mais vendido"
                   onClick={() => onProjectTypeSelect("kit")}
                 />
                 <ProjectTypeCard
                   active={projectType === "suporte"}
-                  title="Só o Suporte Suspenso com uma grelha ou espeto"
-                  subtitle="Suporte Suspenso + grelhas, espetos ou acessórios separados"
+                  image={suporteSuspensoAsset.url}
+                  title="Só o Suporte Suspenso com uma grelha ou espeto separado"
+                  subtitle="Ideal para complementar o que você já tem"
                   onClick={() => onProjectTypeSelect("suporte")}
-                />
-                <ProjectTypeCard
-                  active={projectType === "especial"}
-                  title="Projeto especial ou comercial"
-                  subtitle="Restaurante, espetaria, evento ou medida fora do padrão"
-                  onClick={() => onProjectTypeSelect("especial")}
                 />
               </div>
             </div>
           ) : null}
 
-          {stage === "measurements" ? (
+          {stage === "photo" ? (
             <div className="space-y-5">
               <div>
-                <h3 className="text-lg font-semibold text-foreground">Você já tem as medidas da sua churrasqueira?</h3>
+                <h3 className="text-lg font-semibold text-foreground">
+                  Para agilizar seu atendimento, consegue enviar uma foto da sua churrasqueira?
+                </h3>
                 <p className="mt-2 text-sm leading-6 text-secondary-foreground">
-                  Se já tiver, seguimos para um projeto mais preciso. Se ainda não, te mostramos exatamente como medir.
+                  A foto é opcional, mas ajuda muito o especialista a entender seu projeto.
                 </p>
               </div>
-
-              <div className="grid gap-3 sm:grid-cols-2">
-                <button
-                  type="button"
-                  onClick={() => onMeasurementStateChange("yes")}
-                  className={cn(
-                    "min-h-14 rounded-2xl border px-4 py-4 text-left text-sm font-medium transition-colors",
-                    measurementState === "yes"
-                      ? "border-primary bg-primary/10 text-foreground"
-                      : "border-border bg-background/50 text-secondary-foreground hover:bg-card-hover",
-                  )}
-                >
-                  SIM, já tenho as medidas
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onMeasurementStateChange("no")}
-                  className={cn(
-                    "min-h-14 rounded-2xl border px-4 py-4 text-left text-sm font-medium transition-colors",
-                    measurementState === "no"
-                      ? "border-primary bg-primary/10 text-foreground"
-                      : "border-border bg-background/50 text-secondary-foreground hover:bg-card-hover",
-                  )}
-                >
-                  NÃO, ainda preciso medir
-                </button>
-              </div>
-
-              {showMeasurementsForm ? (
-                <div className="space-y-4 rounded-2xl border border-border bg-background/50 p-4">
-                  <div className="grid gap-3">
-                    <LabelField label="Largura interna (cm)">
-                      <input
-                        type="number"
-                        inputMode="numeric"
-                        min="0"
-                        value={form.width}
-                        onChange={(e) => onChangeField("width", e.target.value)}
-                        className="field-base"
-                      />
-                    </LabelField>
-                    <LabelField label="Comprimento interno (cm)">
-                      <input
-                        type="number"
-                        inputMode="numeric"
-                        min="0"
-                        value={form.depth}
-                        onChange={(e) => onChangeField("depth", e.target.value)}
-                        className="field-base"
-                      />
-                    </LabelField>
-                    <LabelField label="Altura interna (cm) — opcional">
-                      <input
-                        type="number"
-                        inputMode="numeric"
-                        min="0"
-                        value={form.height}
-                        onChange={(e) => onChangeField("height", e.target.value)}
-                        className="field-base"
-                      />
-                    </LabelField>
-                  </div>
-                  <PhotoUpload
-                    onPhotoUploaded={(url) => onChangeField("photoUrl", url)}
-                  />
-                  <div className="overflow-hidden rounded-xl border border-border bg-black">
-                    <video
-                      src={rodrigoMedidasVideo.url}
-                      controls
-                      playsInline
-                      poster={measurementGuideAsset.url}
-                      className="aspect-video w-full object-contain"
-                    />
-                  </div>
-                  <p className="text-sm leading-6 text-secondary-foreground">
-                    Meça por dentro da churrasqueira, de parede a parede. No vídeo, o Rodrigo mostra o passo a passo.
-                  </p>
-                </div>
-              ) : null}
-
-              {measurementState === "no" ? (
-                <div className="space-y-4 rounded-2xl border border-border bg-background/50 p-4">
-                  <div className="overflow-hidden rounded-xl border border-border bg-black">
-                    <video
-                      src={rodrigoMedidasVideo.url}
-                      controls
-                      playsInline
-                      poster={measurementGuideAsset.url}
-                      className="aspect-video w-full object-contain"
-                    />
-                  </div>
-                  <div className="grid gap-3">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      className="min-h-12 justify-between border-border bg-card hover:bg-card-hover"
-                      onClick={onShowMeasurementForm}
-                    >
-                      Já entendi, vou medir agora <ChevronRight className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      className="min-h-12 justify-between border-border bg-card hover:bg-card-hover"
-                      onClick={onContinueMeasurements}
-                    >
-                      Posso medir depois, quero falar com especialista <ChevronRight className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-              ) : null}
-
+              <PhotoUpload onPhotoUploaded={(url) => onChangeField("photoUrl", url)} />
               <Button
                 type="button"
                 size="lg"
-                disabled={!canContinueMeasurements}
-                className="min-h-13 w-full rounded-xl bg-primary text-sm font-bold tracking-[0.08em] text-primary-foreground hover:bg-primary-strong disabled:bg-primary/35"
-                onClick={onContinueMeasurements}
+                className="min-h-13 w-full rounded-xl bg-primary text-sm font-bold tracking-[0.08em] text-primary-foreground hover:bg-primary-strong"
+                onClick={onContinuePhoto}
               >
                 CONTINUAR <ArrowRight className="h-4 w-4" />
               </Button>
@@ -1721,13 +1505,24 @@ function ConsultiveModal({
                     placeholder="seu@email.com"
                   />
                 </LabelField>
-                <LabelField label="Cidade / Estado">
-                  <input
-                    value={form.city}
-                    onChange={(e) => onChangeField("city", e.target.value)}
-                    className="field-base"
-                  />
-                </LabelField>
+                <div className="grid grid-cols-[1fr_100px] gap-3">
+                  <LabelField label="Cidade">
+                    <input
+                      value={form.city}
+                      onChange={(e) => onChangeField("city", e.target.value)}
+                      className="field-base"
+                    />
+                  </LabelField>
+                  <LabelField label="Estado">
+                    <input
+                      value={form.state}
+                      onChange={(e) => onChangeField("state", e.target.value.toUpperCase().slice(0, 2))}
+                      maxLength={2}
+                      placeholder="UF"
+                      className="field-base uppercase"
+                    />
+                  </LabelField>
+                </div>
               </div>
               <Button
                 type="button"
@@ -1750,7 +1545,6 @@ function ConsultiveModal({
                 </p>
               </div>
 
-              {/* Card 1 — destaque WhatsApp */}
               <button
                 type="button"
                 onClick={() => handleFinalAction(specialistMessage)}
@@ -1770,7 +1564,6 @@ function ConsultiveModal({
                 </div>
               </button>
 
-              {/* Card 2 — Comprar direto no site */}
               <button
                 type="button"
                 onClick={() => handleFinalAction(SITE_URL)}
@@ -1798,64 +1591,12 @@ function ConsultiveModal({
               </button>
             </div>
           ) : null}
-
-          {stage === "cold" ? (
-            <div className="space-y-4">
-              <div>
-                <h3 className="text-lg font-semibold text-foreground">
-                  Sem problema! Enquanto planeja, conheça nossos kits.
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-secondary-foreground">
-                  Veja os modelos, tamanhos e preços disponíveis no nosso site.
-                </p>
-              </div>
-
-              <a
-                href={KITS_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="block rounded-2xl border border-border bg-background/50 p-4 transition-colors hover:bg-card-hover"
-              >
-                <div className="flex items-center gap-3">
-                  <ExternalLink className="h-5 w-5 text-primary" />
-                  <div>
-                    <p className="text-base font-semibold text-foreground">Ver kits e preços no site</p>
-                    <p className="mt-1 text-sm text-secondary-foreground">Abrir catálogo oficial em nova aba</p>
-                  </div>
-                </div>
-              </a>
-
-              <button
-                type="button"
-                onClick={() =>
-                  window.open(
-                    "https://drive.google.com/file/d/1y9Uy1Xy-n7mRXdiBcC5I5O1Om-hy9ka4/view?usp=sharing",
-                    "_blank",
-                  )
-                }
-                className="block w-full rounded-2xl border border-border bg-background/50 p-4 text-left transition-colors hover:bg-card-hover"
-              >
-                <div className="flex items-center gap-3">
-                  <Download className="h-5 w-5 text-primary" />
-                  <div>
-                    <p className="text-base font-semibold text-foreground">Baixar guia gratuito de medidas</p>
-                    <p className="mt-1 text-sm text-secondary-foreground">
-                      PDF com tudo que você precisa saber antes de comprar.
-                    </p>
-                  </div>
-                </div>
-              </button>
-
-              <p className="text-sm leading-6 text-muted-foreground">
-                Quando estiver pronto, volte e fale com nosso especialista.
-              </p>
-            </div>
-          ) : null}
         </div>
       </div>
     </div>
   );
 }
+
 
 function Lightbox({
   image,
@@ -2040,30 +1781,24 @@ function buildWhatsappHref(text: string) {
 const projectTypeLabels: Record<NonNullable<ProjectType>, string> = {
   kit: "Kit completo (grelha + suporte suspenso + espetos)",
   suporte: "Suporte Suspenso com grelha ou espeto",
-  especial: "Projeto especial ou comercial",
 };
 
 function buildWhatsappMessage({
   intro,
   form,
-  includeMeasurements,
   projectType,
 }: {
   intro: string;
   form: ContactForm;
-  includeMeasurements: boolean;
   projectType?: ProjectType;
 }) {
   const lines = [intro, ""];
   if (form.name) lines.push(`Nome: ${form.name}`);
-  if (form.city) lines.push(`Cidade: ${form.city}`);
+  const cityStr = form.state ? `${form.city}/${form.state.toUpperCase()}` : form.city;
+  if (cityStr) lines.push(`Cidade: ${cityStr}`);
   if (projectType) lines.push(`Tipo de projeto: ${projectTypeLabels[projectType]}`);
-  if (includeMeasurements) {
-    const measurementParts = [form.width, form.depth].filter(Boolean);
-    const combined = measurementParts.length ? `${measurementParts.join("x")}cm` : "Não informadas";
-    lines.push(`Medidas: ${combined}${form.height ? ` | Altura: ${form.height}cm` : ""}`);
-  }
   if (form.photoUrl) lines.push("", `Foto da churrasqueira: ${form.photoUrl}`);
   lines.push("", "Vim pela landing page.");
   return buildWhatsappHref(lines.join("\n"));
 }
+
