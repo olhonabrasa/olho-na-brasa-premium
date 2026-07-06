@@ -717,13 +717,96 @@ function BenefitsMarquee() {
 }
 
 /* ===================== ANTES/DEPOIS ===================== */
+function BeforeAfterSlider({
+  before,
+  after,
+  beforeAlt,
+  afterAlt,
+}: {
+  before: string;
+  after: string;
+  beforeAlt: string;
+  afterAlt: string;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [pct, setPct] = useState(50);
+  const dragging = useRef(false);
+
+  const updateFromClient = (clientX: number) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    let next = ((clientX - rect.left) / rect.width) * 100;
+    next = Math.max(2, Math.min(98, next));
+    setPct(next);
+  };
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    e.preventDefault();
+    dragging.current = true;
+    (e.target as Element).setPointerCapture?.(e.pointerId);
+    updateFromClient(e.clientX);
+  };
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!dragging.current) return;
+    updateFromClient(e.clientX);
+  };
+  const onPointerUp = () => {
+    dragging.current = false;
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative w-full select-none overflow-hidden rounded-xl border border-border bg-black"
+      style={{ aspectRatio: "4 / 3", touchAction: "none" }}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerUp}
+    >
+      <img src={before} alt={beforeAlt} className="absolute inset-0 h-full w-full object-cover" loading="lazy" draggable={false} />
+      <img
+        src={after}
+        alt={afterAlt}
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{ clipPath: `inset(0 0 0 ${pct}%)` }}
+        loading="lazy"
+        draggable={false}
+      />
+      <span className="absolute bottom-2 left-2 rounded-full bg-black/70 px-2.5 py-1 text-[10px] font-semibold tracking-[0.14em] text-white">
+        ANTES
+      </span>
+      <span
+        className="absolute bottom-2 right-2 rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-[0.14em] text-black"
+        style={{ background: "#E8913A" }}
+      >
+        DEPOIS
+      </span>
+      <div
+        className="pointer-events-none absolute top-0 bottom-0"
+        style={{ left: `${pct}%`, width: "3px", background: "#E8913A", transform: "translateX(-1.5px)" }}
+      >
+        <div
+          className="absolute left-1/2 top-1/2 flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white"
+          style={{ background: "#E8913A" }}
+        >
+          <ChevronRight className="h-3.5 w-3.5 text-black -ml-2" strokeWidth={3} />
+          <ChevronRight className="h-3.5 w-3.5 rotate-180 text-black -ml-3" strokeWidth={3} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function BeforeAfterSection({
-  onOpenModal,
-  onOpenLightbox,
+  onOpenModal: _onOpenModal,
+  onOpenLightbox: _onOpenLightbox,
 }: {
   onOpenModal: () => void;
   onOpenLightbox: (img: { src: string; alt: string; title?: string; subtitle?: string }) => void;
 }) {
+  const [active, setActive] = useState(0);
   return (
     <RevealSection className="section-alt section-glow">
       <SectionHeading
@@ -733,45 +816,48 @@ function BeforeAfterSection({
         centered
       />
 
-      <div
-        className="mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible"
-        style={{ WebkitOverflowScrolling: "touch" }}
-      >
-        {beforeAfterPairs.map((pair) => (
-          <article
-            key={pair.title}
-            className="min-w-[85%] snap-start overflow-hidden rounded-2xl border border-border bg-card shadow-soft md:min-w-0"
-          >
-            <div className="grid grid-cols-2">
-              <ExpandableImage
-                src={pair.before}
-                alt={pair.beforeAlt}
-                label="ANTES"
-                labelClass="bg-black/70 text-foreground"
-                onExpand={() =>
-                  onOpenLightbox({ src: pair.before, alt: pair.beforeAlt, title: pair.title, subtitle: "Antes" })
-                }
+      <div className="mx-auto max-w-(--container-max) px-4">
+        <div
+          className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          style={{ WebkitOverflowScrolling: "touch" }}
+          onScroll={(e) => {
+            const el = e.currentTarget;
+            const idx = Math.round(el.scrollLeft / el.clientWidth);
+            if (idx !== active) setActive(idx);
+          }}
+        >
+          {beforeAfterPairs.map((pair) => (
+            <article key={pair.title} className="w-full shrink-0 snap-center">
+              <BeforeAfterSlider
+                before={pair.before}
+                after={pair.after}
+                beforeAlt={pair.beforeAlt}
+                afterAlt={pair.afterAlt}
               />
-              <ExpandableImage
-                src={pair.after}
-                alt={pair.afterAlt}
-                label="DEPOIS"
-                labelClass="bg-primary text-primary-foreground"
-                onExpand={() =>
-                  onOpenLightbox({ src: pair.after, alt: pair.afterAlt, title: pair.title, subtitle: "Depois" })
-                }
-              />
-            </div>
-            <div className="space-y-2 p-5">
-              <h3 className="text-base font-semibold text-foreground">{pair.title}</h3>
-              <p className="text-sm leading-6 text-secondary-foreground">{pair.subtitle}</p>
-            </div>
-          </article>
-        ))}
+              <div className="mt-3 space-y-1">
+                <h3 className="text-sm font-semibold text-foreground">{pair.title}</h3>
+                <p className="text-[12px] leading-[1.4] text-secondary-foreground">{pair.subtitle}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div className="mt-3 flex justify-center gap-1.5">
+          {beforeAfterPairs.map((_, i) => (
+            <span
+              key={i}
+              className="h-1.5 rounded-full transition-all"
+              style={{
+                width: i === active ? 20 : 6,
+                background: i === active ? "#E8913A" : "rgba(255,255,255,0.25)",
+              }}
+            />
+          ))}
+        </div>
       </div>
     </RevealSection>
   );
 }
+
 
 function ExpandableImage({
   src,
