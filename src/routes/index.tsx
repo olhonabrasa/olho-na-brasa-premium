@@ -486,8 +486,6 @@ function LandingPage() {
           <Divider />
           <ClientVideosSection onOpenModal={openConsultiveModal} />
           <Divider />
-          <WhoItsForSection onOpenModal={openConsultiveModal} />
-          <Divider />
           <GoogleReviewsSection onOpenModal={openConsultiveModal} />
           <Divider />
           <FaqSection onOpenModal={openConsultiveModal} />
@@ -913,21 +911,16 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
         </h2>
       </div>
 
-      <div className="mx-auto mb-5 flex w-full max-w-(--container-max) flex-col items-center px-5">
+      <div className="mx-auto mb-5 flex w-full max-w-(--container-max) justify-center px-5">
         <div
-          className="glass-panel w-full overflow-hidden rounded-2xl border border-border"
-          style={{ maxWidth: "min(320px, 78vw)" }}
+          className="glass-panel relative overflow-hidden rounded-2xl border border-border bg-black"
+          style={{ aspectRatio: "9 / 16", height: "58svh", maxHeight: "58svh", maxWidth: "78vw" }}
         >
-          <div
-            className="relative overflow-hidden bg-black"
-            style={{ aspectRatio: "9 / 16", maxHeight: "58svh" }}
-          >
-            <AutoPauseVideo
-              className="h-full w-full object-cover"
-              src={fabricaVideo.url}
-              poster={processCutAsset.url}
-            />
-          </div>
+          <AutoPauseVideo
+            className="h-full w-full object-cover"
+            src={fabricaVideo.url}
+            poster={processCutAsset.url}
+          />
         </div>
       </div>
 
