@@ -2,15 +2,19 @@ import React, { useEffect, useId, useMemo, useRef, useState, type ReactNode } fr
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowRight,
+  Award,
   Check,
   CheckCircle2,
   ChevronRight,
   Download,
   ExternalLink,
+  Factory,
   Hammer,
   Image as ImageIcon,
+  Lock,
   Maximize2,
   Search,
+  ShieldCheck,
   ShoppingCart,
   Star,
   Volume2,
@@ -593,12 +597,13 @@ function HeroVideo({ videoSrc }: { videoSrc: string }) {
 
   return (
     <div
-      className="relative -mx-5 w-auto overflow-hidden md:mx-0 md:rounded-2xl border-y border-white/10 md:border bg-black shadow-fire cursor-pointer"
+      className="relative w-full overflow-hidden bg-black cursor-pointer"
       onClick={showSoundPrompt ? handleActivateSound : undefined}
+      style={{ height: "100svh", maxHeight: "100svh" }}
     >
       <video
         ref={videoRef}
-        className="block h-auto w-full max-h-[62vh] md:max-h-none"
+        className="absolute inset-0 h-full w-full object-cover"
         src={videoSrc}
         autoPlay
         loop
@@ -608,6 +613,42 @@ function HeroVideo({ videoSrc }: { videoSrc: string }) {
         disablePictureInPicture
         controlsList="nodownload noplaybackrate nofullscreen"
       />
+
+      {/* Gradiente escuro na base para leitura da headline */}
+      <div className="hero-gradient" aria-hidden="true" />
+
+      {/* Conteúdo sobreposto: headline + subtítulo + marquee — dentro da viewport */}
+      <div className="absolute inset-x-0 bottom-0 z-[3] px-4 pb-6" style={{ paddingBottom: "max(20px, env(safe-area-inset-bottom))" }}>
+        <h1
+          className="font-display text-foreground"
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontWeight: 800,
+            fontSize: "clamp(1.5rem, 6.5vw, 3.25rem)",
+            lineHeight: 1.08,
+            letterSpacing: "-0.03em",
+          }}
+        >
+          O Kit de Churrasqueira <span style={{ color: "#FF6B00" }}>mais Vendido do Brasil!</span>
+        </h1>
+
+        <p
+          className="mt-2 text-secondary-foreground"
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontWeight: 400,
+            fontSize: "clamp(0.85rem, 3.2vw, 1.15rem)",
+            lineHeight: 1.35,
+            color: "#B0B0B0",
+          }}
+        >
+          O Kit Suporte Suspenso da <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Olho na Brasa</span>
+        </p>
+
+        <div className="mt-3">
+          <BenefitsMarquee />
+        </div>
+      </div>
 
       {showSoundPrompt && (
         <button
@@ -630,7 +671,7 @@ function HeroVideo({ videoSrc }: { videoSrc: string }) {
           type="button"
           onClick={toggleMute}
           aria-label={isMuted ? "Ativar som" : "Silenciar"}
-          className="absolute bottom-3 right-3 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-white/30 bg-black/55 text-white backdrop-blur-md hover:bg-black/70 transition-colors"
+          className="absolute bottom-4 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/55 text-white backdrop-blur-md hover:bg-black/70 transition-colors"
         >
           {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
         </button>
@@ -647,60 +688,26 @@ function HeroVideo({ videoSrc }: { videoSrc: string }) {
 }
 
 /* ===================== HERO ===================== */
-function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
+function HeroSection({ onOpenModal: _onOpenModal }: { onOpenModal: () => void }) {
   return (
-    <section id="top" className="relative overflow-hidden bg-background pb-8 md:pb-16">
-      {/* Vídeo cinematográfico em loop — autoplay muted, com ativação de som — colado no topo */}
+    <section id="top" className="relative overflow-hidden bg-background">
       <HeroVideo videoSrc={videoHeadlineAsset.url} />
-      <div className="relative z-[3] mx-auto w-full max-w-(--container-max) px-5">
-        {/* Headline abaixo do vídeo */}
-        <h1
-          className="mt-8 font-display text-foreground"
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontWeight: 800,
-            fontSize: "clamp(1.75rem, 7.5vw, 3.5rem)",
-            lineHeight: 1.1,
-            letterSpacing: "-0.03em",
-          }}
-        >
-          O Kit de Churrasqueira <span style={{ color: "#FF6B00" }}>mais Vendido do Brasil!</span>
-        </h1>
-
-        <p
-          className="text-secondary-foreground"
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontWeight: 400,
-            fontSize: "clamp(0.95rem, 3.5vw, 1.35rem)",
-            lineHeight: 1.4,
-            letterSpacing: "0.02em",
-            color: "#B0B0B0",
-            marginTop: "12px",
-          }}
-        >
-          O Kit Suporte Suspenso da <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Olho na Brasa</span>
-        </p>
-
-        <BenefitsMarquee />
-      </div>
     </section>
   );
 }
 
 /* ===================== BENEFITS MARQUEE ===================== */
 function BenefitsMarquee() {
-  // Duplica a lista para criar loop infinito sem corte
   const items = [...benefits, ...benefits];
   return (
-    <div className="marquee-mask mt-6 -mx-5 overflow-hidden md:mx-0">
-      <div className="marquee-track flex gap-3 py-1">
+    <div className="marquee-mask overflow-hidden">
+      <div className="marquee-track flex gap-2 py-1">
         {items.map((item, idx) => (
           <span
             key={`${item}-${idx}`}
-            className="flex shrink-0 items-center gap-2 rounded-full border border-white/12 bg-black/55 px-4 py-2 text-xs font-medium text-foreground backdrop-blur-md md:text-sm"
+            className="flex shrink-0 items-center gap-1.5 rounded-full border border-white/15 bg-black/55 px-3 py-1.5 text-[11px] font-medium text-foreground backdrop-blur-md md:text-sm"
           >
-            <Check className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden="true" />
+            <Check className="h-3 w-3 shrink-0 text-primary" aria-hidden="true" />
             {item}
           </span>
         ))}
@@ -710,13 +717,96 @@ function BenefitsMarquee() {
 }
 
 /* ===================== ANTES/DEPOIS ===================== */
+function BeforeAfterSlider({
+  before,
+  after,
+  beforeAlt,
+  afterAlt,
+}: {
+  before: string;
+  after: string;
+  beforeAlt: string;
+  afterAlt: string;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [pct, setPct] = useState(50);
+  const dragging = useRef(false);
+
+  const updateFromClient = (clientX: number) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    let next = ((clientX - rect.left) / rect.width) * 100;
+    next = Math.max(2, Math.min(98, next));
+    setPct(next);
+  };
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    e.preventDefault();
+    dragging.current = true;
+    (e.target as Element).setPointerCapture?.(e.pointerId);
+    updateFromClient(e.clientX);
+  };
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!dragging.current) return;
+    updateFromClient(e.clientX);
+  };
+  const onPointerUp = () => {
+    dragging.current = false;
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative w-full select-none overflow-hidden rounded-xl border border-border bg-black"
+      style={{ aspectRatio: "4 / 3", touchAction: "none" }}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerUp}
+    >
+      <img src={before} alt={beforeAlt} className="absolute inset-0 h-full w-full object-cover" loading="lazy" draggable={false} />
+      <img
+        src={after}
+        alt={afterAlt}
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{ clipPath: `inset(0 0 0 ${pct}%)` }}
+        loading="lazy"
+        draggable={false}
+      />
+      <span className="absolute bottom-2 left-2 rounded-full bg-black/70 px-2.5 py-1 text-[10px] font-semibold tracking-[0.14em] text-white">
+        ANTES
+      </span>
+      <span
+        className="absolute bottom-2 right-2 rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-[0.14em] text-black"
+        style={{ background: "#E8913A" }}
+      >
+        DEPOIS
+      </span>
+      <div
+        className="pointer-events-none absolute top-0 bottom-0"
+        style={{ left: `${pct}%`, width: "3px", background: "#E8913A", transform: "translateX(-1.5px)" }}
+      >
+        <div
+          className="absolute left-1/2 top-1/2 flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white"
+          style={{ background: "#E8913A" }}
+        >
+          <ChevronRight className="h-3.5 w-3.5 text-black -ml-2" strokeWidth={3} />
+          <ChevronRight className="h-3.5 w-3.5 rotate-180 text-black -ml-3" strokeWidth={3} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function BeforeAfterSection({
-  onOpenModal,
-  onOpenLightbox,
+  onOpenModal: _onOpenModal,
+  onOpenLightbox: _onOpenLightbox,
 }: {
   onOpenModal: () => void;
   onOpenLightbox: (img: { src: string; alt: string; title?: string; subtitle?: string }) => void;
 }) {
+  const [active, setActive] = useState(0);
   return (
     <RevealSection className="section-alt section-glow">
       <SectionHeading
@@ -726,45 +816,48 @@ function BeforeAfterSection({
         centered
       />
 
-      <div
-        className="mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible"
-        style={{ WebkitOverflowScrolling: "touch" }}
-      >
-        {beforeAfterPairs.map((pair) => (
-          <article
-            key={pair.title}
-            className="min-w-[85%] snap-start overflow-hidden rounded-2xl border border-border bg-card shadow-soft md:min-w-0"
-          >
-            <div className="grid grid-cols-2">
-              <ExpandableImage
-                src={pair.before}
-                alt={pair.beforeAlt}
-                label="ANTES"
-                labelClass="bg-black/70 text-foreground"
-                onExpand={() =>
-                  onOpenLightbox({ src: pair.before, alt: pair.beforeAlt, title: pair.title, subtitle: "Antes" })
-                }
+      <div className="mx-auto max-w-(--container-max) px-4">
+        <div
+          className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          style={{ WebkitOverflowScrolling: "touch" }}
+          onScroll={(e) => {
+            const el = e.currentTarget;
+            const idx = Math.round(el.scrollLeft / el.clientWidth);
+            if (idx !== active) setActive(idx);
+          }}
+        >
+          {beforeAfterPairs.map((pair) => (
+            <article key={pair.title} className="w-full shrink-0 snap-center">
+              <BeforeAfterSlider
+                before={pair.before}
+                after={pair.after}
+                beforeAlt={pair.beforeAlt}
+                afterAlt={pair.afterAlt}
               />
-              <ExpandableImage
-                src={pair.after}
-                alt={pair.afterAlt}
-                label="DEPOIS"
-                labelClass="bg-primary text-primary-foreground"
-                onExpand={() =>
-                  onOpenLightbox({ src: pair.after, alt: pair.afterAlt, title: pair.title, subtitle: "Depois" })
-                }
-              />
-            </div>
-            <div className="space-y-2 p-5">
-              <h3 className="text-base font-semibold text-foreground">{pair.title}</h3>
-              <p className="text-sm leading-6 text-secondary-foreground">{pair.subtitle}</p>
-            </div>
-          </article>
-        ))}
+              <div className="mt-3 space-y-1">
+                <h3 className="text-sm font-semibold text-foreground">{pair.title}</h3>
+                <p className="text-[12px] leading-[1.4] text-secondary-foreground">{pair.subtitle}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div className="mt-3 flex justify-center gap-1.5">
+          {beforeAfterPairs.map((_, i) => (
+            <span
+              key={i}
+              className="h-1.5 rounded-full transition-all"
+              style={{
+                width: i === active ? 20 : 6,
+                background: i === active ? "#E8913A" : "rgba(255,255,255,0.25)",
+              }}
+            />
+          ))}
+        </div>
       </div>
     </RevealSection>
   );
 }
+
 
 function ExpandableImage({
   src,
@@ -831,31 +924,7 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
         </p>
       </div>
 
-      <div className="mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 xl:grid-cols-6 md:overflow-visible">
-        {processSteps.map((step) => (
-          <article
-            key={step.number}
-            className="group min-w-[80%] snap-start rounded-2xl border border-border bg-card p-4 shadow-soft md:min-w-0"
-          >
-            <div className="mb-4 flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-sm font-bold text-primary">
-                {step.number}
-              </span>
-              <div className="h-px flex-1 bg-border" aria-hidden="true" />
-            </div>
-            <div className="overflow-hidden rounded-xl border border-border bg-background/40">
-              <img
-                src={step.image}
-                alt={step.alt}
-                className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                loading="lazy"
-              />
-            </div>
-            <h3 className="mt-4 text-base font-semibold text-foreground">{step.title}</h3>
-            <p className="mt-2 text-sm leading-6 text-secondary-foreground">{step.description}</p>
-          </article>
-        ))}
-      </div>
+      {/* Carrossel de etapas removido — o vídeo da fábrica já mostra o processo completo. */}
       <BlockCta label="QUERO UM KIT DESSES" onClick={onOpenModal} />
     </RevealSection>
   );
@@ -1086,11 +1155,11 @@ function AutoPauseVideo({ src, poster, className }: { src: string; poster?: stri
 /* ===================== PARA QUEM É ===================== */
 function WhoItsForSection({ onOpenModal }: { onOpenModal: () => void }) {
   const forYou = [
-    "Está construindo ou reformando a sua área gourmet",
-    "Quer equipamento profissional dentro de casa",
-    "Valoriza a saúde de familiares e amigos",
-    "Recebe família e amigos e leva o churrasco a sério",
-    "Faz escolhas na sua vida para não se arrepender",
+    "Está construindo ou reformando a área gourmet",
+    "Quer equipamento profissional em casa",
+    "Valoriza a saúde da família",
+    "Leva o churrasco a sério",
+    "Faz escolhas para não se arrepender",
   ];
   const notForYou = [
     "Procura o mais barato sem se importar com qualidade",
@@ -1118,36 +1187,36 @@ function WhoItsForSection({ onOpenModal }: { onOpenModal: () => void }) {
         </h2>
       </div>
 
-      <div className="relative mx-auto mt-10 grid max-w-(--container-max) gap-6 px-5 md:grid-cols-2">
-        <div>
-          <p className="mb-4 text-sm font-bold tracking-[0.14em] text-emerald-400">É PRA VOCÊ SE:</p>
-          <ul className="space-y-3">
+      <div className="relative mx-auto mt-8 grid max-w-(--container-max) grid-cols-2 gap-3 px-4">
+        <div
+          className="rounded-xl p-3"
+          style={{ border: "0.5px solid #2d5a2d", background: "rgba(45,90,45,0.05)" }}
+        >
+          <p className="mb-2.5 text-[11px] font-bold tracking-[0.14em]" style={{ color: "#5DC88F" }}>
+            É PRA VOCÊ SE:
+          </p>
+          <ul className="space-y-2">
             {forYou.map((item) => (
-              <li
-                key={item}
-                className="flex items-start gap-3 rounded-xl border border-white/8 bg-white/[0.03] p-4 backdrop-blur-sm"
-              >
-                <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-emerald-500/20 text-emerald-400">
-                  <Check className="h-4 w-4" aria-hidden="true" />
-                </span>
-                <span className="text-sm leading-6 text-foreground">{item}</span>
+              <li key={item} className="flex items-start gap-2">
+                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: "#5DC88F" }} />
+                <span className="text-[12px] leading-[1.35] text-foreground">{item}</span>
               </li>
             ))}
           </ul>
         </div>
 
-        <div>
-          <p className="mb-4 text-sm font-bold tracking-[0.14em] text-red-400/80">NÃO É PRA VOCÊ SE:</p>
-          <ul className="space-y-3">
+        <div
+          className="rounded-xl p-3"
+          style={{ border: "0.5px solid #5a2d2d", background: "rgba(90,45,45,0.05)" }}
+        >
+          <p className="mb-2.5 text-[11px] font-bold tracking-[0.14em]" style={{ color: "#E85A5A" }}>
+            NÃO É PRA VOCÊ SE:
+          </p>
+          <ul className="space-y-2">
             {notForYou.map((item) => (
-              <li
-                key={item}
-                className="flex items-start gap-3 rounded-xl border border-white/8 bg-white/[0.03] p-4 backdrop-blur-sm"
-              >
-                <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-red-500/15 text-red-400/80">
-                  <X className="h-4 w-4" aria-hidden="true" />
-                </span>
-                <span className="text-sm leading-6 text-secondary-foreground">{item}</span>
+              <li key={item} className="flex items-start gap-2">
+                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: "#E85A5A" }} />
+                <span className="text-[12px] leading-[1.35] text-secondary-foreground">{item}</span>
               </li>
             ))}
           </ul>
@@ -1181,28 +1250,32 @@ function WhoItsForSection({ onOpenModal }: { onOpenModal: () => void }) {
 
 function DifferentialsSection() {
   const items = [
-    { t: "Não enferruja", d: "Inox 304 alimentício" },
-    { t: "Produção Artesanal", d: " Acabamento Premium" },
-    { t: "+7 anos de mercado", d: "Referência no Brasil" },
-    { t: "Alto Padrão", d: "15 anos de garantia" },
-    { t: "Compra com Segurança", d: "Suporte pós-venda 100%" },
+    { t: "Não enferruja", d: "Inox 304 alimentício", Icon: ShieldCheck },
+    { t: "Produção Artesanal", d: "Acabamento Premium", Icon: Hammer },
+    { t: "+7 anos de mercado", d: "Referência no Brasil", Icon: Factory },
+    { t: "Alto Padrão", d: "15 anos de garantia", Icon: Award },
+    { t: "Compra com Segurança", d: "Suporte pós-venda 100%", Icon: Lock, wide: true },
   ];
   return (
     <RevealSection className="section-dark">
-      <div className="mx-auto grid max-w-(--container-max) grid-cols-2 gap-3 px-5 md:grid-cols-4">
-        {items.map((i) => (
+      <div className="mx-auto grid max-w-(--container-max) grid-cols-2 gap-2.5 px-4 md:grid-cols-5">
+        {items.map(({ t, d, Icon, wide }) => (
           <div
-            key={i.t}
-            className="flex flex-col items-center rounded-2xl border border-white/8 bg-white/[0.02] p-4 text-center backdrop-blur-sm"
+            key={t}
+            className={cn(
+              "flex flex-col items-center rounded-xl border p-3.5 text-center backdrop-blur-sm",
+              wide ? "col-span-2 md:col-span-1" : "",
+            )}
+            style={{ background: "#1a1a1a", borderColor: "#2a2a2a", borderWidth: "0.5px" }}
           >
             <span
-              className="grid h-11 w-11 place-items-center rounded-full"
-              style={{ background: "rgba(255,107,0,0.15)", color: "#FF6B00" }}
+              className="grid h-10 w-10 place-items-center rounded-full"
+              style={{ background: "rgba(255,107,0,0.12)", color: "#E8913A" }}
             >
-              <Check className="h-5 w-5" />
+              <Icon className="h-[22px] w-[22px]" strokeWidth={1.75} />
             </span>
-            <p className="mt-3 text-sm font-semibold text-foreground">{i.t}</p>
-            <p className="mt-1 text-xs text-secondary-foreground">{i.d}</p>
+            <p className="mt-2.5 text-[13px] font-medium text-foreground">{t}</p>
+            <p className="mt-0.5 text-[11px]" style={{ color: "#888" }}>{d}</p>
           </div>
         ))}
       </div>

@@ -29,19 +29,25 @@ export function PhotoUpload({ onPhotoUploaded }: PhotoUploadProps) {
     setError(null);
 
     const reader = new FileReader();
-    reader.onload = (ev) => setPreview((ev.target?.result as string) ?? null);
+    const dataUrlPromise = new Promise<string>((resolve) => {
+      reader.onload = (ev) => {
+        const url = (ev.target?.result as string) ?? "";
+        setPreview(url);
+        resolve(url);
+      };
+    });
     reader.readAsDataURL(file);
 
     setUploading(true);
     setUploaded(false);
     try {
       const timestamp = Date.now();
-      const ext = file.name.split(".").pop() || "jpg";
+      const ext = (file.name.split(".").pop() || "jpg").toLowerCase();
       const fileName = `churrasqueira_${timestamp}.${ext}`;
 
       const { error: uploadError } = await supabase.storage
         .from("churrasqueira-fotos")
-        .upload(fileName, file, { cacheControl: "3600", upsert: false });
+        .upload(fileName, file, { cacheControl: "3600", upsert: false, contentType: file.type });
 
       if (uploadError) throw uploadError;
 
@@ -53,9 +59,12 @@ export function PhotoUpload({ onPhotoUploaded }: PhotoUploadProps) {
       setUploading(false);
       onPhotoUploaded(urlData.publicUrl);
     } catch (err) {
-      console.error("Upload error:", err);
-      setError("Erro ao enviar foto. Você pode continuar sem foto.");
+      // Fallback: usa o data URL local para o fluxo continuar (vendedor recebe via WhatsApp).
+      console.warn("Upload para storage falhou, usando fallback local:", err);
+      const dataUrl = await dataUrlPromise;
+      setUploaded(true);
       setUploading(false);
+      onPhotoUploaded(dataUrl);
     }
   };
 
