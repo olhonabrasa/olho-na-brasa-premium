@@ -5,6 +5,7 @@ import {
   Award,
   Check,
   CheckCircle2,
+  ChevronLeft,
   ChevronRight,
   Download,
   ExternalLink,
@@ -787,11 +788,12 @@ function BeforeAfterSlider({
         style={{ left: `${pct}%`, width: "3px", background: "#E8913A", transform: "translateX(-1.5px)" }}
       >
         <div
-          className="absolute left-1/2 top-1/2 flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white"
+          className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-1 rounded-full border-2 border-white px-2.5 py-1"
           style={{ background: "#E8913A" }}
         >
-          <ChevronRight className="h-3.5 w-3.5 text-black -ml-2" strokeWidth={3} />
-          <ChevronRight className="h-3.5 w-3.5 rotate-180 text-black -ml-3" strokeWidth={3} />
+          <ChevronLeft className="h-4 w-4 text-black" strokeWidth={3} />
+          <span className="text-[9px] font-bold uppercase tracking-wider text-black">arraste</span>
+          <ChevronRight className="h-4 w-4 text-black" strokeWidth={3} />
         </div>
       </div>
     </div>
