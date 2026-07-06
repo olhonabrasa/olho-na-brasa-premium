@@ -205,20 +205,20 @@ const processSteps: ProcessStep[] = [
 
 const beforeAfterPairs: BeforeAfterPair[] = [
   {
-    before: antesNovo.url,
-    after: depoisNovo.url,
-    title: "Churrasqueira em granito, renovada com Kit Premium",
-    subtitle: "Saiu o ferro velho enferrujado, entrou suporte suspenso e grelhas em inox 304 espelhado.",
-    beforeAlt: "Churrasqueira em granito com grelhas e suportes enferrujados",
-    afterAlt: "Mesma churrasqueira com Kit Premium Olho na Brasa em inox 304 instalado",
-  },
-  {
     before: card5Antes.url,
     after: card5Depois.url,
     title: "Churrasqueira de tijolo refratário, transformada com inox 304",
     subtitle: "Saiu o ferro enferrujado, entrou suporte suspenso premium com acabamento espelhado.",
     beforeAlt: "Churrasqueira de tijolo refratário com grelhas antigas enferrujadas",
     afterAlt: "Mesma churrasqueira com suporte suspenso Olho na Brasa em inox 304",
+  },
+  {
+    before: antesNovo.url,
+    after: depoisNovo.url,
+    title: "Churrasqueira em granito, renovada com Kit Premium",
+    subtitle: "Saiu o ferro velho enferrujado, entrou suporte suspenso e grelhas em inox 304 espelhado.",
+    beforeAlt: "Churrasqueira em granito com grelhas e suportes enferrujados",
+    afterAlt: "Mesma churrasqueira com Kit Premium Olho na Brasa em inox 304 instalado",
   },
   {
     before: card1Antes.url,
@@ -689,7 +689,6 @@ function HeroSection({ onOpenModal: _onOpenModal }: { onOpenModal: () => void })
   );
 }
 
-
 /* ===================== BENEFITS MARQUEE ===================== */
 function BenefitsMarquee() {
   const items = [...benefits, ...benefits];
@@ -759,7 +758,13 @@ function BeforeAfterSlider({
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
     >
-      <img src={before} alt={beforeAlt} className="absolute inset-0 h-full w-full object-cover" loading="lazy" draggable={false} />
+      <img
+        src={before}
+        alt={beforeAlt}
+        className="absolute inset-0 h-full w-full object-cover"
+        loading="lazy"
+        draggable={false}
+      />
       <img
         src={after}
         alt={afterAlt}
@@ -852,7 +857,6 @@ function BeforeAfterSection({
   );
 }
 
-
 function ExpandableImage({
   src,
   alt,
@@ -916,11 +920,7 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
           className="glass-panel relative overflow-hidden rounded-2xl border border-border bg-black"
           style={{ aspectRatio: "9 / 16", height: "58svh", maxHeight: "58svh", maxWidth: "78vw" }}
         >
-          <AutoPauseVideo
-            className="h-full w-full object-cover"
-            src={fabricaVideo.url}
-            poster={processCutAsset.url}
-          />
+          <AutoPauseVideo className="h-full w-full object-cover" src={fabricaVideo.url} poster={processCutAsset.url} />
         </div>
       </div>
 
@@ -1178,7 +1178,9 @@ function DifferentialsSection() {
               <Icon className="h-[22px] w-[22px]" strokeWidth={1.75} />
             </span>
             <p className="mt-2.5 text-[13px] font-medium text-foreground">{t}</p>
-            <p className="mt-0.5 text-[11px]" style={{ color: "#888" }}>{d}</p>
+            <p className="mt-0.5 text-[11px]" style={{ color: "#888" }}>
+              {d}
+            </p>
           </div>
         ))}
       </div>
