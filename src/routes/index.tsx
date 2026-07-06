@@ -154,7 +154,7 @@ const SITE_URL = "https://www.olhonabrasa.com.br";
 const KITS_URL = "https://www.olhonabrasa.com.br/kits-premium/";
 const INSTAGRAM_URL = "https://www.instagram.com/olhonabrasa/";
 
-/*const processSteps: ProcessStep[] = [
+const processSteps: ProcessStep[] = [
   {
     number: "01",
     title: "Corte do Inox",
@@ -197,7 +197,7 @@ const INSTAGRAM_URL = "https://www.instagram.com/olhonabrasa/";
     image: processPackagingAsset.url,
     alt: "Kit embalado com proteção reforçada",
   },
-];*/
+];
 
 const beforeAfterPairs: BeforeAfterPair[] = [
   {
