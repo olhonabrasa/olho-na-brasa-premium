@@ -597,12 +597,13 @@ function HeroVideo({ videoSrc }: { videoSrc: string }) {
 
   return (
     <div
-      className="relative -mx-5 w-auto overflow-hidden md:mx-0 md:rounded-2xl border-y border-white/10 md:border bg-black shadow-fire cursor-pointer"
+      className="relative w-full overflow-hidden bg-black cursor-pointer"
       onClick={showSoundPrompt ? handleActivateSound : undefined}
+      style={{ height: "100svh", maxHeight: "100svh" }}
     >
       <video
         ref={videoRef}
-        className="block h-auto w-full max-h-[62vh] md:max-h-none"
+        className="absolute inset-0 h-full w-full object-cover"
         src={videoSrc}
         autoPlay
         loop
@@ -612,6 +613,42 @@ function HeroVideo({ videoSrc }: { videoSrc: string }) {
         disablePictureInPicture
         controlsList="nodownload noplaybackrate nofullscreen"
       />
+
+      {/* Gradiente escuro na base para leitura da headline */}
+      <div className="hero-gradient" aria-hidden="true" />
+
+      {/* Conteúdo sobreposto: headline + subtítulo + marquee — dentro da viewport */}
+      <div className="absolute inset-x-0 bottom-0 z-[3] px-4 pb-6" style={{ paddingBottom: "max(20px, env(safe-area-inset-bottom))" }}>
+        <h1
+          className="font-display text-foreground"
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontWeight: 800,
+            fontSize: "clamp(1.5rem, 6.5vw, 3.25rem)",
+            lineHeight: 1.08,
+            letterSpacing: "-0.03em",
+          }}
+        >
+          O Kit de Churrasqueira <span style={{ color: "#FF6B00" }}>mais Vendido do Brasil!</span>
+        </h1>
+
+        <p
+          className="mt-2 text-secondary-foreground"
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontWeight: 400,
+            fontSize: "clamp(0.85rem, 3.2vw, 1.15rem)",
+            lineHeight: 1.35,
+            color: "#B0B0B0",
+          }}
+        >
+          O Kit Suporte Suspenso da <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Olho na Brasa</span>
+        </p>
+
+        <div className="mt-3">
+          <BenefitsMarquee />
+        </div>
+      </div>
 
       {showSoundPrompt && (
         <button
@@ -634,7 +671,7 @@ function HeroVideo({ videoSrc }: { videoSrc: string }) {
           type="button"
           onClick={toggleMute}
           aria-label={isMuted ? "Ativar som" : "Silenciar"}
-          className="absolute bottom-3 right-3 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-white/30 bg-black/55 text-white backdrop-blur-md hover:bg-black/70 transition-colors"
+          className="absolute bottom-4 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/55 text-white backdrop-blur-md hover:bg-black/70 transition-colors"
         >
           {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
         </button>
@@ -651,60 +688,26 @@ function HeroVideo({ videoSrc }: { videoSrc: string }) {
 }
 
 /* ===================== HERO ===================== */
-function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
+function HeroSection({ onOpenModal: _onOpenModal }: { onOpenModal: () => void }) {
   return (
-    <section id="top" className="relative overflow-hidden bg-background pb-8 md:pb-16">
-      {/* Vídeo cinematográfico em loop — autoplay muted, com ativação de som — colado no topo */}
+    <section id="top" className="relative overflow-hidden bg-background">
       <HeroVideo videoSrc={videoHeadlineAsset.url} />
-      <div className="relative z-[3] mx-auto w-full max-w-(--container-max) px-5">
-        {/* Headline abaixo do vídeo */}
-        <h1
-          className="mt-8 font-display text-foreground"
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontWeight: 800,
-            fontSize: "clamp(1.75rem, 7.5vw, 3.5rem)",
-            lineHeight: 1.1,
-            letterSpacing: "-0.03em",
-          }}
-        >
-          O Kit de Churrasqueira <span style={{ color: "#FF6B00" }}>mais Vendido do Brasil!</span>
-        </h1>
-
-        <p
-          className="text-secondary-foreground"
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontWeight: 400,
-            fontSize: "clamp(0.95rem, 3.5vw, 1.35rem)",
-            lineHeight: 1.4,
-            letterSpacing: "0.02em",
-            color: "#B0B0B0",
-            marginTop: "12px",
-          }}
-        >
-          O Kit Suporte Suspenso da <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Olho na Brasa</span>
-        </p>
-
-        <BenefitsMarquee />
-      </div>
     </section>
   );
 }
 
 /* ===================== BENEFITS MARQUEE ===================== */
 function BenefitsMarquee() {
-  // Duplica a lista para criar loop infinito sem corte
   const items = [...benefits, ...benefits];
   return (
-    <div className="marquee-mask mt-6 -mx-5 overflow-hidden md:mx-0">
-      <div className="marquee-track flex gap-3 py-1">
+    <div className="marquee-mask overflow-hidden">
+      <div className="marquee-track flex gap-2 py-1">
         {items.map((item, idx) => (
           <span
             key={`${item}-${idx}`}
-            className="flex shrink-0 items-center gap-2 rounded-full border border-white/12 bg-black/55 px-4 py-2 text-xs font-medium text-foreground backdrop-blur-md md:text-sm"
+            className="flex shrink-0 items-center gap-1.5 rounded-full border border-white/15 bg-black/55 px-3 py-1.5 text-[11px] font-medium text-foreground backdrop-blur-md md:text-sm"
           >
-            <Check className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden="true" />
+            <Check className="h-3 w-3 shrink-0 text-primary" aria-hidden="true" />
             {item}
           </span>
         ))}
