@@ -597,8 +597,9 @@ function HeroVideo({ videoSrc }: { videoSrc: string }) {
 
   return (
     <div
-      className="absolute inset-0 w-full h-full overflow-hidden bg-black cursor-pointer"
+      className="relative w-full overflow-hidden bg-black cursor-pointer"
       onClick={showSoundPrompt ? handleActivateSound : undefined}
+      style={{ aspectRatio: "9 / 16" }}
     >
       <video
         ref={videoRef}
@@ -654,50 +655,36 @@ function HeroVideo({ videoSrc }: { videoSrc: string }) {
 function HeroSection({ onOpenModal: _onOpenModal }: { onOpenModal: () => void }) {
   return (
     <section id="top" className="relative overflow-hidden bg-background">
-      <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>
-        <HeroVideo videoSrc={videoHeadlineAsset.url} />
-
-        {/* Gradiente escuro para leitura */}
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-10"
+      <HeroVideo videoSrc={videoHeadlineAsset.url} />
+      <div className="px-4 pb-6 pt-5">
+        <h1
+          className="font-display text-foreground"
           style={{
-            height: "65%",
-            background:
-              "linear-gradient(to top, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.78) 35%, rgba(0,0,0,0.38) 70%, rgba(0,0,0,0) 100%)",
+            fontFamily: "Inter, sans-serif",
+            fontWeight: 800,
+            fontSize: "clamp(1.5rem, 6.5vw, 3.25rem)",
+            lineHeight: 1.08,
+            letterSpacing: "-0.03em",
           }}
-        />
+        >
+          O Kit de Churrasqueira <span style={{ color: "#FF6B00" }}>mais Vendido do Brasil!</span>
+        </h1>
 
-        {/* Subtítulo + marquee sobrepostos no rodapé */}
-        <div className="absolute inset-x-0 bottom-0 z-10 px-4 pb-4 pt-6">
-          <h1
-            className="font-display text-white"
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontWeight: 800,
-              fontSize: "clamp(1.25rem, 5.2vw, 2.75rem)",
-              lineHeight: 1.1,
-              letterSpacing: "-0.03em",
-            }}
-          >
-            O Kit de Churrasqueira <span style={{ color: "#FF6B00" }}>mais Vendido do Brasil!</span>
-          </h1>
+        <p
+          className="mt-2 text-secondary-foreground"
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontWeight: 400,
+            fontSize: "clamp(0.85rem, 3.2vw, 1.15rem)",
+            lineHeight: 1.35,
+            color: "#B0B0B0",
+          }}
+        >
+          O Kit Suporte Suspenso da <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Olho na Brasa</span>
+        </p>
 
-          <p
-            className="mt-1.5"
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontWeight: 400,
-              fontSize: "clamp(0.8rem, 3vw, 1.05rem)",
-              lineHeight: 1.35,
-              color: "#D8D8D8",
-            }}
-          >
-            O Kit Suporte Suspenso da <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Olho na Brasa</span>
-          </p>
-
-          <div className="mt-3">
-            <BenefitsMarquee />
-          </div>
+        <div className="mt-4">
+          <BenefitsMarquee />
         </div>
       </div>
     </section>
@@ -912,15 +899,29 @@ function ExpandableImage({
 /* ===================== PROCESSO / FÁBRICA ===================== */
 function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
-    <RevealSection className="section-dark section-glow">
-      <SectionHeading
-        eyebrow="POR DENTRO DA FÁBRICA"
-        title="Cada kit passa por dezenas de etapas antes de chegar na sua casa."
-      />
+    <RevealSection
+      className="section-dark section-glow flex flex-col justify-center !py-8 md:!py-14"
+      style={{ minHeight: "100svh" }}
+    >
+      <div className="mx-auto mb-4 max-w-(--container-max) px-5">
+        <p className="section-label">POR DENTRO DA FÁBRICA</p>
+        <h2
+          className="mt-2 max-w-3xl font-display font-semibold leading-[1.05] text-balance text-foreground md:max-w-4xl"
+          style={{ fontSize: "clamp(1.25rem, 4.6vw, 2.5rem)" }}
+        >
+          Cada kit passa por dezenas de etapas antes de chegar na sua casa.
+        </h2>
+      </div>
 
-      <div className="mx-auto mb-8 flex max-w-(--container-max) flex-col items-center px-5">
-        <div className="glass-panel w-full max-w-[360px] overflow-hidden rounded-2xl border border-border">
-          <div className="relative aspect-[9/16] overflow-hidden bg-black">
+      <div className="mx-auto mb-5 flex w-full max-w-(--container-max) flex-col items-center px-5">
+        <div
+          className="glass-panel w-full overflow-hidden rounded-2xl border border-border"
+          style={{ maxWidth: "min(320px, 78vw)" }}
+        >
+          <div
+            className="relative overflow-hidden bg-black"
+            style={{ aspectRatio: "9 / 16", maxHeight: "58svh" }}
+          >
             <AutoPauseVideo
               className="h-full w-full object-cover"
               src={fabricaVideo.url}
@@ -928,12 +929,8 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
             />
           </div>
         </div>
-        <p className="mt-3 text-center text-sm text-secondary-foreground">
-          Acompanhe o processo completo de fabricação do seu Kit Premium.
-        </p>
       </div>
 
-      {/* Carrossel de etapas removido — o vídeo da fábrica já mostra o processo completo. */}
       <BlockCta label="QUERO UM KIT DESSES" onClick={onOpenModal} />
     </RevealSection>
   );
