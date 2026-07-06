@@ -37,7 +37,6 @@ import fabricaVideo from "@/assets/fabrica.mp4.asset.json";
 import kitCompletoAsset from "@/assets/kit-completo.png.asset.json";
 import suporteSuspensoAsset from "@/assets/suporte-suspenso.png.asset.json";
 
-
 import card1Antes from "@/assets/card1-antes.jpg.asset.json";
 import card1Depois from "@/assets/card1-depois.jpg.asset.json";
 import card2Antes from "@/assets/card2-antes.jpg.asset.json";
@@ -123,7 +122,6 @@ type ContactForm = {
   photoUrl: string;
 };
 
-
 type RevealProps = {
   id?: string;
   className?: string;
@@ -156,7 +154,7 @@ const SITE_URL = "https://www.olhonabrasa.com.br";
 const KITS_URL = "https://www.olhonabrasa.com.br/kits-premium/";
 const INSTAGRAM_URL = "https://www.instagram.com/olhonabrasa/";
 
-const processSteps: ProcessStep[] = [
+/*const processSteps: ProcessStep[] = [
   {
     number: "01",
     title: "Corte do Inox",
@@ -199,7 +197,7 @@ const processSteps: ProcessStep[] = [
     image: processPackagingAsset.url,
     alt: "Kit embalado com proteção reforçada",
   },
-];
+];*/
 
 const beforeAfterPairs: BeforeAfterPair[] = [
   {
@@ -333,7 +331,7 @@ const benefits = [
   "Inox 304 alimentício",
   "Sob medida",
   "15 anos de garantia",
-  "Frete grátis Sul/Sudeste",
+  "Produção Artesanal",
   "★★★★★ 100.000+ churrasqueiras entregues",
   "Acabamento premium",
 ];
@@ -447,9 +445,7 @@ function LandingPage() {
 
   const formattedWhatsapp = formatWhatsapp(contactForm.whatsapp);
 
-  const cityState = contactForm.state
-    ? `${contactForm.city}/${contactForm.state.toUpperCase()}`
-    : contactForm.city;
+  const cityState = contactForm.state ? `${contactForm.city}/${contactForm.state.toUpperCase()}` : contactForm.city;
 
   const specialistMessage = buildWhatsappMessage({
     intro: "Olá! Quero montar meu Kit Premium.",
@@ -468,9 +464,6 @@ function LandingPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }} />
 
       <div className="bg-background text-foreground">
-        
-
-
         <main>
           <HeroSection onOpenModal={openConsultiveModal} />
           <Divider />
@@ -526,17 +519,12 @@ function LandingPage() {
         measurementHelpMessage={measurementHelpMessage}
       />
 
-      <WhatsappChatSimulado
-        open={chatOpen}
-        onClose={() => setChatOpen(false)}
-        onSwitchToForm={openConsultiveModal}
-      />
+      <WhatsappChatSimulado open={chatOpen} onClose={() => setChatOpen(false)} onSwitchToForm={openConsultiveModal} />
 
       {lightboxImage ? <Lightbox image={lightboxImage} onClose={() => setLightboxImage(null)} /> : null}
     </>
   );
 }
-
 
 function Divider() {
   return <hr className="section-divider" aria-hidden="true" />;
@@ -559,7 +547,6 @@ function StickyHeader({ visible }: { visible: boolean }) {
     </header>
   );
 }
-
 
 /* ===================== HERO VIDEO ===================== */
 function HeroVideo({ videoSrc }: { videoSrc: string }) {
@@ -634,9 +621,7 @@ function HeroVideo({ videoSrc }: { videoSrc: string }) {
           }}
         >
           <Volume2 className="h-5 w-5" />
-          <span className="text-sm font-semibold uppercase tracking-wide">
-            Toque para ativar o som
-          </span>
+          <span className="text-sm font-semibold uppercase tracking-wide">Toque para ativar o som</span>
         </button>
       )}
 
@@ -668,8 +653,6 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
       {/* Vídeo cinematográfico em loop — autoplay muted, com ativação de som — colado no topo */}
       <HeroVideo videoSrc={videoHeadlineAsset.url} />
       <div className="relative z-[3] mx-auto w-full max-w-(--container-max) px-5">
-
-
         {/* Headline abaixo do vídeo */}
         <h1
           className="mt-8 font-display text-foreground"
@@ -700,7 +683,6 @@ function HeroSection({ onOpenModal }: { onOpenModal: () => void }) {
         </p>
 
         <BenefitsMarquee />
-
       </div>
     </section>
   );
@@ -780,7 +762,6 @@ function BeforeAfterSection({
           </article>
         ))}
       </div>
-      
     </RevealSection>
   );
 }
@@ -1105,10 +1086,11 @@ function AutoPauseVideo({ src, poster, className }: { src: string; poster?: stri
 /* ===================== PARA QUEM É ===================== */
 function WhoItsForSection({ onOpenModal }: { onOpenModal: () => void }) {
   const forYou = [
-    "Está construindo ou reformando a área gourmet",
+    "Está construindo ou reformando a sua área gourmet",
     "Quer equipamento profissional dentro de casa",
-    "Valoriza inox que dura décadas, não meses",
+    "Valoriza a saúde de familiares e amigos",
     "Recebe família e amigos e leva o churrasco a sério",
+    "Faz escolhas na sua vida para não se arrepender",
   ];
   const notForYou = [
     "Procura o mais barato sem se importar com qualidade",
@@ -1130,7 +1112,8 @@ function WhoItsForSection({ onOpenModal }: { onOpenModal: () => void }) {
           className="mt-3 font-display font-semibold leading-[1.05] text-balance text-foreground"
           style={{ fontSize: "clamp(1.6rem, 5.5vw, 2.75rem)" }}
         >
-          Não é pra qualquer um.<br />
+          Não é pra qualquer um.
+          <br />
           <span style={{ color: "#FF6B00" }}>É pra quem entende de churrasco.</span>
         </h2>
       </div>
@@ -1185,9 +1168,7 @@ function WhoItsForSection({ onOpenModal }: { onOpenModal: () => void }) {
               >
                 {s.n}
               </p>
-              <p className="mt-2 text-[11px] uppercase tracking-wider text-secondary-foreground md:text-xs">
-                {s.l}
-              </p>
+              <p className="mt-2 text-[11px] uppercase tracking-wider text-secondary-foreground md:text-xs">{s.l}</p>
             </div>
           ))}
         </div>
@@ -1201,13 +1182,10 @@ function WhoItsForSection({ onOpenModal }: { onOpenModal: () => void }) {
 function DifferentialsSection() {
   const items = [
     { t: "Não enferruja", d: "Inox 304 alimentício" },
-    { t: "Sob medida", d: "Fabricado no seu tamanho" },
-    { t: "Prazo de entrega", d: "Rápido e confiável" },
-    { t: "Fábrica própria", d: "Direto do fabricante" },
-    { t: "+7 anos de mercado", d: "Referência em SC" },
-    { t: "Tempo de produção", d: "Otimizado por etapa" },
-    { t: "Qualidade garantida", d: "15 anos de garantia" },
-    { t: "Melhor pós-venda", d: "Suporte real do time" },
+    { t: "Produção Artesanal", d: " Acabamento Premium" },
+    { t: "+7 anos de mercado", d: "Referência no Brasil" },
+    { t: "Alto Padrão", d: "15 anos de garantia" },
+    { t: "Compra com Segurança", d: "Suporte pós-venda 100%" },
   ];
   return (
     <RevealSection className="section-dark">
@@ -1515,9 +1493,7 @@ function ConsultiveModal({
   if (!open) return null;
 
   void cityState;
-  const canContinueContact = Boolean(
-    form.name.trim() && form.whatsapp.trim() && form.city.trim() && form.state.trim(),
-  );
+  const canContinueContact = Boolean(form.name.trim() && form.whatsapp.trim() && form.city.trim() && form.state.trim());
 
   const handleFinalAction = async (url: string) => {
     await sendLeadToDataCrazy(
@@ -1750,7 +1726,6 @@ function ConsultiveModal({
   );
 }
 
-
 function Lightbox({
   image,
   onClose,
@@ -1916,7 +1891,6 @@ function ProjectTypeCard({
   );
 }
 
-
 function LabelField({ label, children }: { label: string; children: ReactNode }) {
   return (
     <label className="grid gap-2 text-sm font-medium text-foreground">
@@ -1964,4 +1938,3 @@ function buildWhatsappMessage({
   lines.push("", "Vim pela landing page.");
   return buildWhatsappHref(lines.join("\n"));
 }
-
