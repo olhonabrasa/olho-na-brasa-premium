@@ -1125,36 +1125,36 @@ function WhoItsForSection({ onOpenModal }: { onOpenModal: () => void }) {
         </h2>
       </div>
 
-      <div className="relative mx-auto mt-10 grid max-w-(--container-max) gap-6 px-5 md:grid-cols-2">
-        <div>
-          <p className="mb-4 text-sm font-bold tracking-[0.14em] text-emerald-400">É PRA VOCÊ SE:</p>
-          <ul className="space-y-3">
+      <div className="relative mx-auto mt-8 grid max-w-(--container-max) grid-cols-2 gap-3 px-4">
+        <div
+          className="rounded-xl p-3"
+          style={{ border: "0.5px solid #2d5a2d", background: "rgba(45,90,45,0.05)" }}
+        >
+          <p className="mb-2.5 text-[11px] font-bold tracking-[0.14em]" style={{ color: "#5DC88F" }}>
+            É PRA VOCÊ SE:
+          </p>
+          <ul className="space-y-2">
             {forYou.map((item) => (
-              <li
-                key={item}
-                className="flex items-start gap-3 rounded-xl border border-white/8 bg-white/[0.03] p-4 backdrop-blur-sm"
-              >
-                <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-emerald-500/20 text-emerald-400">
-                  <Check className="h-4 w-4" aria-hidden="true" />
-                </span>
-                <span className="text-sm leading-6 text-foreground">{item}</span>
+              <li key={item} className="flex items-start gap-2">
+                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: "#5DC88F" }} />
+                <span className="text-[12px] leading-[1.35] text-foreground">{item}</span>
               </li>
             ))}
           </ul>
         </div>
 
-        <div>
-          <p className="mb-4 text-sm font-bold tracking-[0.14em] text-red-400/80">NÃO É PRA VOCÊ SE:</p>
-          <ul className="space-y-3">
+        <div
+          className="rounded-xl p-3"
+          style={{ border: "0.5px solid #5a2d2d", background: "rgba(90,45,45,0.05)" }}
+        >
+          <p className="mb-2.5 text-[11px] font-bold tracking-[0.14em]" style={{ color: "#E85A5A" }}>
+            NÃO É PRA VOCÊ SE:
+          </p>
+          <ul className="space-y-2">
             {notForYou.map((item) => (
-              <li
-                key={item}
-                className="flex items-start gap-3 rounded-xl border border-white/8 bg-white/[0.03] p-4 backdrop-blur-sm"
-              >
-                <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-red-500/15 text-red-400/80">
-                  <X className="h-4 w-4" aria-hidden="true" />
-                </span>
-                <span className="text-sm leading-6 text-secondary-foreground">{item}</span>
+              <li key={item} className="flex items-start gap-2">
+                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: "#E85A5A" }} />
+                <span className="text-[12px] leading-[1.35] text-secondary-foreground">{item}</span>
               </li>
             ))}
           </ul>
