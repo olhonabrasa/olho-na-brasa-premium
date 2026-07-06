@@ -1188,28 +1188,32 @@ function WhoItsForSection({ onOpenModal }: { onOpenModal: () => void }) {
 
 function DifferentialsSection() {
   const items = [
-    { t: "Não enferruja", d: "Inox 304 alimentício" },
-    { t: "Produção Artesanal", d: " Acabamento Premium" },
-    { t: "+7 anos de mercado", d: "Referência no Brasil" },
-    { t: "Alto Padrão", d: "15 anos de garantia" },
-    { t: "Compra com Segurança", d: "Suporte pós-venda 100%" },
+    { t: "Não enferruja", d: "Inox 304 alimentício", Icon: ShieldCheck },
+    { t: "Produção Artesanal", d: "Acabamento Premium", Icon: Hammer },
+    { t: "+7 anos de mercado", d: "Referência no Brasil", Icon: Factory },
+    { t: "Alto Padrão", d: "15 anos de garantia", Icon: Award },
+    { t: "Compra com Segurança", d: "Suporte pós-venda 100%", Icon: Lock, wide: true },
   ];
   return (
     <RevealSection className="section-dark">
-      <div className="mx-auto grid max-w-(--container-max) grid-cols-2 gap-3 px-5 md:grid-cols-4">
-        {items.map((i) => (
+      <div className="mx-auto grid max-w-(--container-max) grid-cols-2 gap-2.5 px-4 md:grid-cols-5">
+        {items.map(({ t, d, Icon, wide }) => (
           <div
-            key={i.t}
-            className="flex flex-col items-center rounded-2xl border border-white/8 bg-white/[0.02] p-4 text-center backdrop-blur-sm"
+            key={t}
+            className={cn(
+              "flex flex-col items-center rounded-xl border p-3.5 text-center backdrop-blur-sm",
+              wide ? "col-span-2 md:col-span-1" : "",
+            )}
+            style={{ background: "#1a1a1a", borderColor: "#2a2a2a", borderWidth: "0.5px" }}
           >
             <span
-              className="grid h-11 w-11 place-items-center rounded-full"
-              style={{ background: "rgba(255,107,0,0.15)", color: "#FF6B00" }}
+              className="grid h-10 w-10 place-items-center rounded-full"
+              style={{ background: "rgba(255,107,0,0.12)", color: "#E8913A" }}
             >
-              <Check className="h-5 w-5" />
+              <Icon className="h-[22px] w-[22px]" strokeWidth={1.75} />
             </span>
-            <p className="mt-3 text-sm font-semibold text-foreground">{i.t}</p>
-            <p className="mt-1 text-xs text-secondary-foreground">{i.d}</p>
+            <p className="mt-2.5 text-[13px] font-medium text-foreground">{t}</p>
+            <p className="mt-0.5 text-[11px]" style={{ color: "#888" }}>{d}</p>
           </div>
         ))}
       </div>
