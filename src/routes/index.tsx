@@ -838,31 +838,7 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
         </p>
       </div>
 
-      <div className="mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 xl:grid-cols-6 md:overflow-visible">
-        {processSteps.map((step) => (
-          <article
-            key={step.number}
-            className="group min-w-[80%] snap-start rounded-2xl border border-border bg-card p-4 shadow-soft md:min-w-0"
-          >
-            <div className="mb-4 flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-sm font-bold text-primary">
-                {step.number}
-              </span>
-              <div className="h-px flex-1 bg-border" aria-hidden="true" />
-            </div>
-            <div className="overflow-hidden rounded-xl border border-border bg-background/40">
-              <img
-                src={step.image}
-                alt={step.alt}
-                className="aspect-square w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                loading="lazy"
-              />
-            </div>
-            <h3 className="mt-4 text-base font-semibold text-foreground">{step.title}</h3>
-            <p className="mt-2 text-sm leading-6 text-secondary-foreground">{step.description}</p>
-          </article>
-        ))}
-      </div>
+      {/* Carrossel de etapas removido — o vídeo da fábrica já mostra o processo completo. */}
       <BlockCta label="QUERO UM KIT DESSES" onClick={onOpenModal} />
     </RevealSection>
   );
