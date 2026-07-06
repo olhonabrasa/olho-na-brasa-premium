@@ -899,15 +899,29 @@ function ExpandableImage({
 /* ===================== PROCESSO / FÁBRICA ===================== */
 function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
-    <RevealSection className="section-dark section-glow">
-      <SectionHeading
-        eyebrow="POR DENTRO DA FÁBRICA"
-        title="Cada kit passa por dezenas de etapas antes de chegar na sua casa."
-      />
+    <RevealSection
+      className="section-dark section-glow flex flex-col justify-center !py-8 md:!py-14"
+      style={{ minHeight: "100svh" }}
+    >
+      <div className="mx-auto mb-4 max-w-(--container-max) px-5">
+        <p className="section-label">POR DENTRO DA FÁBRICA</p>
+        <h2
+          className="mt-2 max-w-3xl font-display font-semibold leading-[1.05] text-balance text-foreground md:max-w-4xl"
+          style={{ fontSize: "clamp(1.25rem, 4.6vw, 2.5rem)" }}
+        >
+          Cada kit passa por dezenas de etapas antes de chegar na sua casa.
+        </h2>
+      </div>
 
-      <div className="mx-auto mb-8 flex max-w-(--container-max) flex-col items-center px-5">
-        <div className="glass-panel w-full max-w-[360px] overflow-hidden rounded-2xl border border-border">
-          <div className="relative aspect-[9/16] overflow-hidden bg-black">
+      <div className="mx-auto mb-5 flex w-full max-w-(--container-max) flex-col items-center px-5">
+        <div
+          className="glass-panel w-full overflow-hidden rounded-2xl border border-border"
+          style={{ maxWidth: "min(320px, 78vw)" }}
+        >
+          <div
+            className="relative overflow-hidden bg-black"
+            style={{ aspectRatio: "9 / 16", maxHeight: "58svh" }}
+          >
             <AutoPauseVideo
               className="h-full w-full object-cover"
               src={fabricaVideo.url}
@@ -915,12 +929,8 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
             />
           </div>
         </div>
-        <p className="mt-3 text-center text-sm text-secondary-foreground">
-          Acompanhe o processo completo de fabricação do seu Kit Premium.
-        </p>
       </div>
 
-      {/* Carrossel de etapas removido — o vídeo da fábrica já mostra o processo completo. */}
       <BlockCta label="QUERO UM KIT DESSES" onClick={onOpenModal} />
     </RevealSection>
   );
