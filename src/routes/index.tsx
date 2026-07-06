@@ -599,7 +599,7 @@ function HeroVideo({ videoSrc }: { videoSrc: string }) {
     <div
       className="relative w-full overflow-hidden bg-black cursor-pointer"
       onClick={showSoundPrompt ? handleActivateSound : undefined}
-      style={{ height: "100svh", maxHeight: "100svh" }}
+      style={{ aspectRatio: "9 / 16" }}
     >
       <video
         ref={videoRef}
@@ -613,42 +613,6 @@ function HeroVideo({ videoSrc }: { videoSrc: string }) {
         disablePictureInPicture
         controlsList="nodownload noplaybackrate nofullscreen"
       />
-
-      {/* Gradiente escuro na base para leitura da headline */}
-      <div className="hero-gradient" aria-hidden="true" />
-
-      {/* Conteúdo sobreposto: headline + subtítulo + marquee — dentro da viewport */}
-      <div className="absolute inset-x-0 bottom-0 z-[3] px-4 pb-6" style={{ paddingBottom: "max(20px, env(safe-area-inset-bottom))" }}>
-        <h1
-          className="font-display text-foreground"
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontWeight: 800,
-            fontSize: "clamp(1.5rem, 6.5vw, 3.25rem)",
-            lineHeight: 1.08,
-            letterSpacing: "-0.03em",
-          }}
-        >
-          O Kit de Churrasqueira <span style={{ color: "#FF6B00" }}>mais Vendido do Brasil!</span>
-        </h1>
-
-        <p
-          className="mt-2 text-secondary-foreground"
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontWeight: 400,
-            fontSize: "clamp(0.85rem, 3.2vw, 1.15rem)",
-            lineHeight: 1.35,
-            color: "#B0B0B0",
-          }}
-        >
-          O Kit Suporte Suspenso da <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Olho na Brasa</span>
-        </p>
-
-        <div className="mt-3">
-          <BenefitsMarquee />
-        </div>
-      </div>
 
       {showSoundPrompt && (
         <button
@@ -692,9 +656,41 @@ function HeroSection({ onOpenModal: _onOpenModal }: { onOpenModal: () => void })
   return (
     <section id="top" className="relative overflow-hidden bg-background">
       <HeroVideo videoSrc={videoHeadlineAsset.url} />
+      <div className="px-4 pb-6 pt-5">
+        <h1
+          className="font-display text-foreground"
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontWeight: 800,
+            fontSize: "clamp(1.5rem, 6.5vw, 3.25rem)",
+            lineHeight: 1.08,
+            letterSpacing: "-0.03em",
+          }}
+        >
+          O Kit de Churrasqueira <span style={{ color: "#FF6B00" }}>mais Vendido do Brasil!</span>
+        </h1>
+
+        <p
+          className="mt-2 text-secondary-foreground"
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontWeight: 400,
+            fontSize: "clamp(0.85rem, 3.2vw, 1.15rem)",
+            lineHeight: 1.35,
+            color: "#B0B0B0",
+          }}
+        >
+          O Kit Suporte Suspenso da <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Olho na Brasa</span>
+        </p>
+
+        <div className="mt-4">
+          <BenefitsMarquee />
+        </div>
+      </div>
     </section>
   );
 }
+
 
 /* ===================== BENEFITS MARQUEE ===================== */
 function BenefitsMarquee() {
