@@ -138,7 +138,7 @@ type SectionHeadingProps = {
   centered?: boolean;
 };
 
-//type ProcessStep = { number: string; title: string; description: string; image: string; alt: string };
+type ProcessStep = { number: string; title: string; description: string; image: string; alt: string };
 type GalleryItem = { title: string; location: string; image?: string; alt: string; featured?: boolean };
 type BeforeAfterPair = {
   before: string;
@@ -154,7 +154,7 @@ const SITE_URL = "https://www.olhonabrasa.com.br";
 const KITS_URL = "https://www.olhonabrasa.com.br/kits-premium/";
 const INSTAGRAM_URL = "https://www.instagram.com/olhonabrasa/";
 
-//const processSteps: ProcessStep[] = [
+const processSteps: ProcessStep[] = [
   {
     number: "01",
     title: "Corte do Inox",
