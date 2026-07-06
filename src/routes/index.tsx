@@ -486,8 +486,6 @@ function LandingPage() {
           <Divider />
           <ClientVideosSection onOpenModal={openConsultiveModal} />
           <Divider />
-          <WhoItsForSection onOpenModal={openConsultiveModal} />
-          <Divider />
           <GoogleReviewsSection onOpenModal={openConsultiveModal} />
           <Divider />
           <FaqSection onOpenModal={openConsultiveModal} />
@@ -913,21 +911,16 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
         </h2>
       </div>
 
-      <div className="mx-auto mb-5 flex w-full max-w-(--container-max) flex-col items-center px-5">
+      <div className="mx-auto mb-5 flex w-full max-w-(--container-max) justify-center px-5">
         <div
-          className="glass-panel w-full overflow-hidden rounded-2xl border border-border"
-          style={{ maxWidth: "min(320px, 78vw)" }}
+          className="glass-panel relative overflow-hidden rounded-2xl border border-border bg-black"
+          style={{ aspectRatio: "9 / 16", height: "58svh", maxHeight: "58svh", maxWidth: "78vw" }}
         >
-          <div
-            className="relative overflow-hidden bg-black"
-            style={{ aspectRatio: "9 / 16", maxHeight: "58svh" }}
-          >
-            <AutoPauseVideo
-              className="h-full w-full object-cover"
-              src={fabricaVideo.url}
-              poster={processCutAsset.url}
-            />
-          </div>
+          <AutoPauseVideo
+            className="h-full w-full object-cover"
+            src={fabricaVideo.url}
+            poster={processCutAsset.url}
+          />
         </div>
       </div>
 
@@ -1155,102 +1148,6 @@ function AutoPauseVideo({ src, poster, className }: { src: string; poster?: stri
         )}
       </button>
     </>
-  );
-}
-
-/* ===================== PARA QUEM É ===================== */
-function WhoItsForSection({ onOpenModal }: { onOpenModal: () => void }) {
-  const forYou = [
-    "Está construindo ou reformando a área gourmet",
-    "Quer equipamento profissional em casa",
-    "Valoriza a saúde da família",
-    "Leva o churrasco a sério",
-    "Faz escolhas para não se arrepender",
-  ];
-  const notForYou = [
-    "Procura o mais barato sem se importar com qualidade",
-    "Quer solução descartável de supermercado",
-    "Não liga se enferruja em 6 meses",
-  ];
-
-  return (
-    <RevealSection className="section-alt relative overflow-hidden">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40 blur-3xl"
-        style={{ background: "radial-gradient(circle, rgba(255,107,0,0.25), transparent 70%)" }}
-      />
-
-      <div className="relative mx-auto max-w-(--container-max) px-5 text-center">
-        <p className="section-label inline-flex justify-center">FEITO PARA QUEM LEVA A SÉRIO</p>
-        <h2
-          className="mt-3 font-display font-semibold leading-[1.05] text-balance text-foreground"
-          style={{ fontSize: "clamp(1.6rem, 5.5vw, 2.75rem)" }}
-        >
-          Não é pra qualquer um.
-          <br />
-          <span style={{ color: "#FF6B00" }}>É pra quem entende de churrasco.</span>
-        </h2>
-      </div>
-
-      <div className="relative mx-auto mt-8 grid max-w-(--container-max) grid-cols-2 gap-3 px-4">
-        <div
-          className="rounded-xl p-3"
-          style={{ border: "0.5px solid #2d5a2d", background: "rgba(45,90,45,0.05)" }}
-        >
-          <p className="mb-2.5 text-[11px] font-bold tracking-[0.14em]" style={{ color: "#5DC88F" }}>
-            É PRA VOCÊ SE:
-          </p>
-          <ul className="space-y-2">
-            {forYou.map((item) => (
-              <li key={item} className="flex items-start gap-2">
-                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: "#5DC88F" }} />
-                <span className="text-[12px] leading-[1.35] text-foreground">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div
-          className="rounded-xl p-3"
-          style={{ border: "0.5px solid #5a2d2d", background: "rgba(90,45,45,0.05)" }}
-        >
-          <p className="mb-2.5 text-[11px] font-bold tracking-[0.14em]" style={{ color: "#E85A5A" }}>
-            NÃO É PRA VOCÊ SE:
-          </p>
-          <ul className="space-y-2">
-            {notForYou.map((item) => (
-              <li key={item} className="flex items-start gap-2">
-                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: "#E85A5A" }} />
-                <span className="text-[12px] leading-[1.35] text-secondary-foreground">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <div className="relative mx-auto mt-12 max-w-(--container-max) px-5">
-        <div className="grid grid-cols-3 gap-4 rounded-2xl border border-white/8 bg-black/40 px-4 py-6 backdrop-blur-md">
-          {[
-            { n: "100.000+", l: "clientes atendidos" },
-            { n: "15 anos", l: "de garantia" },
-            { n: "Inox 304", l: "alimentício" },
-          ].map((s) => (
-            <div key={s.l} className="text-center">
-              <p
-                className="font-display font-bold leading-none"
-                style={{ color: "#FF6B00", fontSize: "clamp(1.25rem, 5vw, 2.25rem)" }}
-              >
-                {s.n}
-              </p>
-              <p className="mt-2 text-[11px] uppercase tracking-wider text-secondary-foreground md:text-xs">{s.l}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <BlockCta label="QUERO RECEBER O MEU" onClick={onOpenModal} />
-    </RevealSection>
   );
 }
 
