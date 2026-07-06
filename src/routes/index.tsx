@@ -1093,11 +1093,11 @@ function AutoPauseVideo({ src, poster, className }: { src: string; poster?: stri
 /* ===================== PARA QUEM É ===================== */
 function WhoItsForSection({ onOpenModal }: { onOpenModal: () => void }) {
   const forYou = [
-    "Está construindo ou reformando a sua área gourmet",
-    "Quer equipamento profissional dentro de casa",
-    "Valoriza a saúde de familiares e amigos",
-    "Recebe família e amigos e leva o churrasco a sério",
-    "Faz escolhas na sua vida para não se arrepender",
+    "Está construindo ou reformando a área gourmet",
+    "Quer equipamento profissional em casa",
+    "Valoriza a saúde da família",
+    "Leva o churrasco a sério",
+    "Faz escolhas para não se arrepender",
   ];
   const notForYou = [
     "Procura o mais barato sem se importar com qualidade",
