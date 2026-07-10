@@ -932,6 +932,36 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
 }
 
 /* ===================== GALERIA ===================== */
+function CarouselArrows({ targetRef }: { targetRef: React.RefObject<HTMLDivElement | null> }) {
+  const scroll = (dir: -1 | 1) => {
+    const el = targetRef.current;
+    if (!el) return;
+    const first = el.firstElementChild as HTMLElement | null;
+    const amount = first ? first.offsetWidth + 16 : el.clientWidth * 0.8;
+    el.scrollBy({ left: dir * amount, behavior: "smooth" });
+  };
+  return (
+    <>
+      <button
+        type="button"
+        aria-label="Anterior"
+        onClick={() => scroll(-1)}
+        className="absolute left-0 top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card/90 text-foreground backdrop-blur transition-colors hover:bg-card lg:flex"
+      >
+        <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+      </button>
+      <button
+        type="button"
+        aria-label="Próximo"
+        onClick={() => scroll(1)}
+        className="absolute right-0 top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card/90 text-foreground backdrop-blur transition-colors hover:bg-card lg:flex"
+      >
+        <ChevronRight className="h-5 w-5" aria-hidden="true" />
+      </button>
+    </>
+  );
+}
+
 function GallerySection({
   onOpenLightbox,
   onOpenModal,
@@ -939,49 +969,53 @@ function GallerySection({
   onOpenLightbox: (item: GalleryItem) => void;
   onOpenModal: () => void;
 }) {
+  const galleryRef = useRef<HTMLDivElement>(null);
   return (
     <RevealSection className="section-alt section-glow">
       <SectionHeading eyebrow="PROJETOS ENTREGUES" title="Galeria de churrasqueiras transformadas." centered />
 
-      <div className="gallery-grid mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible">
-        {galleryItems.map((item) => (
-          <button
-            key={`${item.title}-${item.location}`}
-            type="button"
-            onClick={() => onOpenLightbox(item)}
-            className={cn(
-              "gallery-item group relative min-w-[85%] snap-start overflow-hidden rounded-2xl border border-border bg-card text-left shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:min-w-0",
-              item.featured ? "md:col-span-2" : "",
-            )}
-          >
-            <div
-              className="absolute inset-0 z-10 bg-linear-to-t from-background via-background/20 to-transparent opacity-90"
-              aria-hidden="true"
-            />
-            {item.image ? (
-              <img
-                src={item.image}
-                alt={item.alt}
-                className={cn(
-                  "w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]",
-                  item.featured ? "aspect-[4/3]" : "aspect-square",
-                )}
-                loading="lazy"
+      <div className="relative mx-auto max-w-(--container-max)">
+        <div ref={galleryRef} className="gallery-grid flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {galleryItems.map((item) => (
+            <button
+              key={`${item.title}-${item.location}`}
+              type="button"
+              onClick={() => onOpenLightbox(item)}
+              className={cn(
+                "gallery-item group relative min-w-[85%] snap-start overflow-hidden rounded-2xl border border-border bg-card text-left shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:min-w-[46%] lg:min-w-[calc(33.333%-11px)]",
+                "",
+              )}
+            >
+              <div
+                className="absolute inset-0 z-10 bg-linear-to-t from-background via-background/20 to-transparent opacity-90"
+                aria-hidden="true"
               />
-            ) : (
-              <div className="grid aspect-square place-items-center bg-card-hover text-muted-foreground">
-                <ImageIcon className="h-8 w-8" aria-hidden="true" />
+              {item.image ? (
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  className={cn(
+                    "w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]",
+                    "aspect-[4/3]",
+                  )}
+                  loading="lazy"
+                />
+              ) : (
+                <div className="grid aspect-square place-items-center bg-card-hover text-muted-foreground">
+                  <ImageIcon className="h-8 w-8" aria-hidden="true" />
+                </div>
+              )}
+              <span className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/60 text-foreground backdrop-blur">
+                <Maximize2 className="h-4 w-4" aria-hidden="true" />
+              </span>
+              <div className="absolute inset-x-0 bottom-0 z-20 p-4">
+                <p className="text-sm font-semibold text-foreground">{item.title}</p>
+                <p className="mt-1 text-sm text-secondary-foreground">{item.location}</p>
               </div>
-            )}
-            <span className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/60 text-foreground backdrop-blur">
-              <Maximize2 className="h-4 w-4" aria-hidden="true" />
-            </span>
-            <div className="absolute inset-x-0 bottom-0 z-20 p-4">
-              <p className="text-sm font-semibold text-foreground">{item.title}</p>
-              <p className="mt-1 text-sm text-secondary-foreground">{item.location}</p>
-            </div>
-          </button>
-        ))}
+            </button>
+          ))}
+        </div>
+        <CarouselArrows targetRef={galleryRef} />
       </div>
       <BlockCta label="COMEÇAR MEU PROJETO" onClick={onOpenModal} />
     </RevealSection>
