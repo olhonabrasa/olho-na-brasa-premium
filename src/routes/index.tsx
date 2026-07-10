@@ -542,9 +542,9 @@ function StickyHeader({ visible }: { visible: boolean }) {
       )}
       style={{ background: "rgb(10 10 10 / 0.9)" }}
     >
-      <div className="mx-auto flex h-full max-w-(--container-max) items-center justify-center gap-3 px-5">
+      <div className="header-sticky mx-auto flex h-full max-w-(--container-max) items-center justify-center gap-3 px-5">
         <a href="#top" aria-label="Olho na Brasa — Início" className="flex items-center gap-2">
-          <img src={logoOlhoNaBrasa.url} alt="Olho na Brasa" className="h-8 w-auto md:h-9" />
+          <img src={logoOlhoNaBrasa.url} alt="Olho na Brasa" className="header-logo h-8 w-auto md:h-9" />
         </a>
       </div>
     </header>
@@ -596,7 +596,7 @@ function HeroVideo({ videoSrc }: { videoSrc: string }) {
 
   return (
     <div
-      className="relative w-full overflow-hidden bg-black cursor-pointer"
+      className="hero-video-container relative w-full overflow-hidden bg-black cursor-pointer"
       onClick={showSoundPrompt ? handleActivateSound : undefined}
       style={{ aspectRatio: "4 / 3" }}
     >
@@ -653,11 +653,11 @@ function HeroVideo({ videoSrc }: { videoSrc: string }) {
 /* ===================== HERO ===================== */
 function HeroSection({ onOpenModal: _onOpenModal }: { onOpenModal: () => void }) {
   return (
-    <section id="top" className="relative overflow-hidden bg-background">
+    <section id="top" className="hero-section relative overflow-hidden bg-background">
       <HeroVideo videoSrc={videoHeadlineAsset.url} />
-      <div className="px-4 pb-6 pt-5">
+      <div className="hero-content px-4 pb-6 pt-5">
         <h1
-          className="font-display text-foreground"
+          className="hero-headline font-display text-foreground"
           style={{
             fontFamily: "Inter, sans-serif",
             fontWeight: 800,
@@ -670,7 +670,7 @@ function HeroSection({ onOpenModal: _onOpenModal }: { onOpenModal: () => void })
         </h1>
 
         <p
-          className="mt-2 text-secondary-foreground"
+          className="hero-subtitle mt-2 text-secondary-foreground"
           style={{
             fontFamily: "Inter, sans-serif",
             fontWeight: 400,
@@ -682,7 +682,7 @@ function HeroSection({ onOpenModal: _onOpenModal }: { onOpenModal: () => void })
           O Kit Suporte Suspenso da <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Olho na Brasa</span>
         </p>
 
-        <div className="mt-4">
+        <div className="mt-4 badges-marquee">
           <BenefitsMarquee />
         </div>
       </div>
@@ -819,7 +819,7 @@ function BeforeAfterSection({
 
       <div className="mx-auto max-w-(--container-max) px-4">
         <div
-          className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="before-after-carousel flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           style={{ WebkitOverflowScrolling: "touch" }}
           onScroll={(e) => {
             const el = e.currentTarget;
@@ -828,7 +828,7 @@ function BeforeAfterSection({
           }}
         >
           {beforeAfterPairs.map((pair) => (
-            <article key={pair.title} className="w-full shrink-0 snap-center">
+            <article key={pair.title} className="before-after-card w-full shrink-0 snap-center">
               <BeforeAfterSlider
                 before={pair.before}
                 after={pair.after}
@@ -904,7 +904,7 @@ function ExpandableImage({
 function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <RevealSection
-      className="section-dark section-glow flex flex-col justify-center !py-8 md:!py-14"
+      className="factory-section section-dark section-glow flex flex-col justify-center !py-8 md:!py-14"
       style={{ minHeight: "100svh" }}
     >
       <div className="mx-auto mb-4 max-w-(--container-max) px-5">
@@ -919,7 +919,7 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
 
       <div className="mx-auto mb-5 flex w-full max-w-(--container-max) justify-center px-5">
         <div
-          className="glass-panel relative overflow-hidden rounded-2xl border border-border bg-black"
+          className="factory-video glass-panel relative overflow-hidden rounded-2xl border border-border bg-black"
           style={{ aspectRatio: "9 / 16", height: "58svh", maxHeight: "58svh", maxWidth: "78vw" }}
         >
           <AutoPauseVideo className="h-full w-full object-cover" src={fabricaVideo.url} poster={processCutAsset.url} />
@@ -943,14 +943,14 @@ function GallerySection({
     <RevealSection className="section-alt section-glow">
       <SectionHeading eyebrow="PROJETOS ENTREGUES" title="Galeria de churrasqueiras transformadas." centered />
 
-      <div className="mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible">
+      <div className="gallery-grid mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible">
         {galleryItems.map((item) => (
           <button
             key={`${item.title}-${item.location}`}
             type="button"
             onClick={() => onOpenLightbox(item)}
             className={cn(
-              "group relative min-w-[85%] snap-start overflow-hidden rounded-2xl border border-border bg-card text-left shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:min-w-0",
+              "gallery-item group relative min-w-[85%] snap-start overflow-hidden rounded-2xl border border-border bg-card text-left shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:min-w-0",
               item.featured ? "md:col-span-2" : "",
             )}
           >
@@ -993,7 +993,7 @@ function ClientVideosSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <RevealSection className="section-alt section-glow">
       <SectionHeading eyebrow="CLIENTES REAIS" title="Veja a reação de quem recebeu o Kit Olho na Brasa." centered />
-      <div className="mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible lg:grid-cols-5">
+      <div className="client-videos-container mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible lg:grid-cols-3">
         {clientVideos.map((video, idx) => (
           <ClientVideoCard key={video.src} video={video} index={idx} />
         ))}
@@ -1163,12 +1163,12 @@ function DifferentialsSection() {
   ];
   return (
     <RevealSection className="section-dark">
-      <div className="mx-auto grid max-w-(--container-max) grid-cols-2 gap-2.5 px-4 md:grid-cols-5">
+      <div className="trust-grid mx-auto grid max-w-(--container-max) grid-cols-2 gap-2.5 px-4 md:grid-cols-5">
         {items.map(({ t, d, Icon, wide }) => (
           <div
             key={t}
             className={cn(
-              "flex flex-col items-center rounded-xl border p-3.5 text-center backdrop-blur-sm",
+              "trust-card flex flex-col items-center rounded-xl border p-3.5 text-center backdrop-blur-sm",
               wide ? "col-span-2 md:col-span-1" : "",
             )}
             style={{ background: "#1a1a1a", borderColor: "#2a2a2a", borderWidth: "0.5px" }}
@@ -1287,11 +1287,11 @@ function GoogleReviewsSection({ onOpenModal }: { onOpenModal: () => void }) {
         </a>
       </div>
 
-      <div className="mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible">
+      <div className="google-reviews-carousel mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible">
         {googleReviews.map((review, idx) => (
           <article
             key={idx}
-            className="min-w-[85%] snap-start rounded-xl bg-white p-6 md:min-w-0"
+            className="google-review-card min-w-[85%] snap-start rounded-xl bg-white p-6 md:min-w-0"
             style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }}
           >
             <div className="mb-3 flex items-center justify-between">
@@ -1331,7 +1331,7 @@ function GoogleReviewsSection({ onOpenModal }: { onOpenModal: () => void }) {
 
 function FaqSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
-    <RevealSection className="section-dark">
+    <RevealSection className="faq-section section-dark">
       <SectionHeading title="Dúvidas frequentes" centered />
       <div className="mx-auto max-w-4xl px-5">
         <Accordion type="single" collapsible className="rounded-2xl border border-border bg-card px-5 py-2 shadow-soft">
@@ -1355,7 +1355,7 @@ function FaqSection({ onOpenModal }: { onOpenModal: () => void }) {
 /* ===================== CTA FINAL ===================== */
 function FinalCtaSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
-    <RevealSection className="section-cta">
+    <RevealSection className="final-cta-section section-cta">
       <section className="mx-auto max-w-4xl px-5 text-center">
         <div className="relative overflow-hidden rounded-3xl border border-border-strong bg-card px-6 py-10 shadow-fire md:px-10 md:py-14">
           <div
@@ -1384,7 +1384,7 @@ function FinalCtaSection({ onOpenModal }: { onOpenModal: () => void }) {
 function Footer() {
   return (
     <footer className="bg-footer pb-28 pt-12 text-center md:pb-12">
-      <div className="mx-auto max-w-(--container-max) px-5">
+      <div className="footer-content mx-auto max-w-(--container-max) px-5">
         <img src={logoOlhoNaBrasa.url} alt="Olho na Brasa" className="mx-auto h-12 w-auto" />
         <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-secondary-foreground">
           Olho na Brasa, fábrica de grelhas e acessórios premium em inox 304. Santa Catarina, Brasil.
@@ -1421,12 +1421,12 @@ function FloatingWhatsappButton({ onOpenChat }: { onOpenChat: () => void }) {
 
 function BlockCta({ label, onClick, fullWidth }: { label: string; onClick: () => void; fullWidth?: boolean }) {
   return (
-    <div className={cn("mx-auto mt-8 flex max-w-(--container-max) justify-center px-5", fullWidth ? "px-0" : "")}>
+    <div className={cn("mx-auto mt-8 flex max-w-(--container-max) justify-center px-5 block-cta-wrap", fullWidth ? "px-0" : "")}>
       <Button
         size="lg"
         onClick={onClick}
         className={cn(
-          "min-h-14 rounded-xl bg-primary px-4 text-[13px] font-bold uppercase tracking-[0.03em] text-primary-foreground shadow-fire transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-strong sm:px-6 sm:text-sm sm:tracking-[0.05em]",
+          "block-cta min-h-14 rounded-xl bg-primary px-4 text-[13px] font-bold uppercase tracking-[0.03em] text-primary-foreground shadow-fire transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-strong sm:px-6 sm:text-sm sm:tracking-[0.05em]",
           fullWidth ? "w-full" : "w-full max-w-md md:w-auto md:min-w-[320px]",
         )}
       >
