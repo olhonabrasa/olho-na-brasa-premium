@@ -1287,11 +1287,11 @@ function GoogleReviewsSection({ onOpenModal }: { onOpenModal: () => void }) {
         </a>
       </div>
 
-      <div className="mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible">
+      <div className="google-reviews-carousel mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible">
         {googleReviews.map((review, idx) => (
           <article
             key={idx}
-            className="min-w-[85%] snap-start rounded-xl bg-white p-6 md:min-w-0"
+            className="google-review-card min-w-[85%] snap-start rounded-xl bg-white p-6 md:min-w-0"
             style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }}
           >
             <div className="mb-3 flex items-center justify-between">
