@@ -1884,14 +1884,25 @@ function SectionHeading({ eyebrow, title, description, centered }: SectionHeadin
         </p>
       ) : null}
       <h2
-        className="mt-2 max-w-3xl font-display font-semibold leading-[1.05] text-balance text-foreground md:max-w-4xl"
+        className={cn(
+          "mt-2 max-w-3xl font-display font-semibold leading-[1.05] text-balance text-foreground md:max-w-4xl",
+          centered ? "mx-auto" : "",
+        )}
         style={{ fontSize: "clamp(1.5rem, 5vw, 2.75rem)" }}
       >
         {title}
       </h2>
       {description ? (
-        <p className="mt-3 max-w-2xl text-sm leading-6 text-secondary-foreground md:text-base">{description}</p>
+        <p
+          className={cn(
+            "mt-3 max-w-2xl text-sm leading-6 text-secondary-foreground md:text-base",
+            centered ? "mx-auto" : "",
+          )}
+        >
+          {description}
+        </p>
       ) : null}
+
     </div>
   );
 }
