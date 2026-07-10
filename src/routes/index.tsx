@@ -911,7 +911,7 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <RevealSection className="factory-section section-dark section-glow flex flex-col justify-center !py-8 md:!py-14">
       <div className="factory-inner mx-auto w-full max-w-(--container-max) px-5">
-        <div className="factory-text">
+        <div className="factory-text hidden lg:block">
           <p className="section-label">POR DENTRO DA FÁBRICA</p>
           <h2
             className="mt-2 max-w-3xl font-display font-semibold leading-[1.05] text-balance text-foreground md:max-w-4xl"
@@ -941,6 +941,7 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
             ))}
           </ul>
         </div>
+
 
         <div className="factory-media mt-6 flex w-full justify-center">
           <div
