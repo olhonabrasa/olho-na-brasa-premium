@@ -904,7 +904,7 @@ function ExpandableImage({
 function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
     <RevealSection
-      className="section-dark section-glow flex flex-col justify-center !py-8 md:!py-14"
+      className="factory-section section-dark section-glow flex flex-col justify-center !py-8 md:!py-14"
       style={{ minHeight: "100svh" }}
     >
       <div className="mx-auto mb-4 max-w-(--container-max) px-5">
@@ -919,7 +919,7 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
 
       <div className="mx-auto mb-5 flex w-full max-w-(--container-max) justify-center px-5">
         <div
-          className="glass-panel relative overflow-hidden rounded-2xl border border-border bg-black"
+          className="factory-video glass-panel relative overflow-hidden rounded-2xl border border-border bg-black"
           style={{ aspectRatio: "9 / 16", height: "58svh", maxHeight: "58svh", maxWidth: "78vw" }}
         >
           <AutoPauseVideo className="h-full w-full object-cover" src={fabricaVideo.url} poster={processCutAsset.url} />
