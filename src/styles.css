@@ -322,184 +322,55 @@
    DESKTOP OVERRIDES (>= 1024px) — mobile intentionally untouched
    ================================================================ */
 @media (min-width: 1024px) {
-  /* Section rhythm */
-  section {
-    padding-top: 80px;
-    padding-bottom: 80px;
-  }
+  section { padding-top: 80px; padding-bottom: 80px; }
 
-  /* Header */
-  .header-sticky {
-    padding-left: 48px;
-    padding-right: 48px;
-  }
-  .header-logo {
-    height: 40px !important;
-  }
+  .header-sticky { padding-left: 48px; padding-right: 48px; }
+  .header-logo { height: 40px !important; }
 
-  /* HERO — split layout */
+  /* HERO — split: texto à esquerda, vídeo à direita (mantém o 4/3 do mobile) */
   .hero-section {
     display: grid !important;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.05fr 0.95fr;
     align-items: center;
-    gap: 48px;
-    min-height: 90vh;
+    gap: 56px;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 32px 48px;
+    padding: 40px 48px;
+    min-height: 88vh;
   }
+  .hero-content { order: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 !important; }
+  .hero-headline { font-size: 3.1rem !important; line-height: 1.05 !important; }
+  .hero-subtitle { font-size: 1.2rem !important; }
   .hero-video-container {
     order: 2;
-    max-height: 70vh;
+    width: 100%;
+    max-width: 520px;
+    margin-inline: auto;
     border-radius: 20px;
-    aspect-ratio: 9 / 16 !important;
-    margin: 0 auto;
-    width: auto;
-    max-width: 420px;
-  }
-  .hero-video-container video {
-    object-fit: cover;
-    max-height: 70vh;
-  }
-  .hero-content {
-    order: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 !important;
-  }
-  .hero-headline {
-    font-size: 3rem !important;
-    line-height: 1.05 !important;
-  }
-  .hero-subtitle {
-    font-size: 1.25rem !important;
   }
 
-  /* Badges: kill marquee animation on desktop, static wrap */
-  .badges-marquee .marquee-track {
-    animation: none !important;
-    flex-wrap: wrap;
-    width: auto !important;
-    justify-content: flex-start;
-    gap: 10px;
-  }
-  .badges-marquee .marquee-mask {
-    mask-image: none;
-    -webkit-mask-image: none;
-    overflow: visible;
-  }
-  /* hide the duplicated set used for marquee loop */
-  .badges-marquee .marquee-track > *:nth-child(n+7) {
-    display: none;
-  }
+  /* Badges estáticos no desktop (sem marquee) */
+  .badges-marquee .marquee-track { animation: none !important; flex-wrap: wrap; width: auto !important; justify-content: flex-start; gap: 10px; }
+  .badges-marquee .marquee-mask { mask-image: none; -webkit-mask-image: none; overflow: visible; }
+  .badges-marquee .marquee-track > *:nth-child(n+7) { display: none; }
 
-  /* Trust cards — force single row of 5 */
-  .trust-grid {
-    grid-template-columns: repeat(5, 1fr) !important;
-    gap: 20px;
-  }
-  .trust-card.col-span-2 {
-    grid-column: auto !important;
-  }
-
-  /* Before/After — 2 sliders per row, no horizontal scroll */
-  .before-after-carousel {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    overflow: visible !important;
-    scroll-snap-type: none !important;
-  }
-  .before-after-card {
-    width: 100% !important;
-    min-width: 0 !important;
-  }
-
-  /* Factory video — centered, controlled width */
-  .factory-section {
-    text-align: center;
-  }
+  /* FÁBRICA — vídeo vertical MAIOR e sem vazio (mantém 9/16 inline do componente) */
+  .factory-section { min-height: auto !important; }
   .factory-video {
-    max-width: 800px !important;
-    max-height: none !important;
-    height: auto !important;
-    aspect-ratio: 16 / 9 !important;
-    margin: 0 auto;
-    border-radius: 20px;
+    height: 70svh !important;
+    max-height: 660px !important;
+    max-width: none !important;
   }
 
-  /* Gallery — assymetric premium grid */
-  .gallery-grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 16px;
-    overflow: visible !important;
-  }
-  .gallery-item {
-    min-width: 0 !important;
-  }
-  .gallery-item:nth-child(1),
-  .gallery-item:nth-child(4) {
-    grid-column: span 2 !important;
-  }
+  /* Trust cards em uma linha (já é md:grid-cols-5) */
+  .trust-card.col-span-2 { grid-column: auto !important; }
 
-  /* Client videos — 3 per row on desktop */
-  .client-videos-container {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 20px;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-  .client-video-card:nth-child(n+4) {
-    display: none;
-  }
+  /* Antes/Depois — 2 por linha */
+  .before-after-carousel { display: grid !important; grid-template-columns: 1fr 1fr; gap: 24px; overflow: visible !important; scroll-snap-type: none !important; }
+  .before-after-card { width: 100% !important; min-width: 0 !important; }
 
-  /* Google reviews — 3 cards visible, horizontal carousel */
-  .google-reviews-carousel {
-    display: flex !important;
-    grid-template-columns: none !important;
-    gap: 20px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 8px;
-  }
-  .google-review-card {
-    flex: 0 0 calc(33.333% - 14px);
-    min-width: calc(33.333% - 14px) !important;
-    scroll-snap-align: start;
-  }
-
-  /* FAQ — narrower for readability */
-  .faq-section {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  /* Final CTA */
-  .final-cta-section {
-    text-align: center;
-  }
-
-  /* All CTA buttons: auto width, centered, never full width */
-  .block-cta {
-    width: auto !important;
-    max-width: 400px !important;
-    min-width: 260px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-
-  /* Footer */
-  .footer-content {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 48px;
-    text-align: left;
-    align-items: start;
-  }
-  .footer-content > * {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
+  /* FAQ / CTA final / Footer */
+  .faq-section { max-width: 800px; margin: 0 auto; }
+  .final-cta-section { text-align: center; }
+  .footer-content { max-width: 720px; }
 }

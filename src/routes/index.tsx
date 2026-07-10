@@ -932,6 +932,36 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
 }
 
 /* ===================== GALERIA ===================== */
+function CarouselArrows({ targetRef }: { targetRef: React.RefObject<HTMLDivElement | null> }) {
+  const scroll = (dir: -1 | 1) => {
+    const el = targetRef.current;
+    if (!el) return;
+    const first = el.firstElementChild as HTMLElement | null;
+    const amount = first ? first.offsetWidth + 16 : el.clientWidth * 0.8;
+    el.scrollBy({ left: dir * amount, behavior: "smooth" });
+  };
+  return (
+    <>
+      <button
+        type="button"
+        aria-label="Anterior"
+        onClick={() => scroll(-1)}
+        className="absolute left-0 top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card/90 text-foreground backdrop-blur transition-colors hover:bg-card lg:flex"
+      >
+        <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+      </button>
+      <button
+        type="button"
+        aria-label="Próximo"
+        onClick={() => scroll(1)}
+        className="absolute right-0 top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card/90 text-foreground backdrop-blur transition-colors hover:bg-card lg:flex"
+      >
+        <ChevronRight className="h-5 w-5" aria-hidden="true" />
+      </button>
+    </>
+  );
+}
+
 function GallerySection({
   onOpenLightbox,
   onOpenModal,
@@ -939,49 +969,53 @@ function GallerySection({
   onOpenLightbox: (item: GalleryItem) => void;
   onOpenModal: () => void;
 }) {
+  const galleryRef = useRef<HTMLDivElement>(null);
   return (
     <RevealSection className="section-alt section-glow">
       <SectionHeading eyebrow="PROJETOS ENTREGUES" title="Galeria de churrasqueiras transformadas." centered />
 
-      <div className="gallery-grid mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible">
-        {galleryItems.map((item) => (
-          <button
-            key={`${item.title}-${item.location}`}
-            type="button"
-            onClick={() => onOpenLightbox(item)}
-            className={cn(
-              "gallery-item group relative min-w-[85%] snap-start overflow-hidden rounded-2xl border border-border bg-card text-left shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:min-w-0",
-              item.featured ? "md:col-span-2" : "",
-            )}
-          >
-            <div
-              className="absolute inset-0 z-10 bg-linear-to-t from-background via-background/20 to-transparent opacity-90"
-              aria-hidden="true"
-            />
-            {item.image ? (
-              <img
-                src={item.image}
-                alt={item.alt}
-                className={cn(
-                  "w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]",
-                  item.featured ? "aspect-[4/3]" : "aspect-square",
-                )}
-                loading="lazy"
+      <div className="relative mx-auto max-w-(--container-max)">
+        <div ref={galleryRef} className="gallery-grid flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {galleryItems.map((item) => (
+            <button
+              key={`${item.title}-${item.location}`}
+              type="button"
+              onClick={() => onOpenLightbox(item)}
+              className={cn(
+                "gallery-item group relative min-w-[85%] snap-start overflow-hidden rounded-2xl border border-border bg-card text-left shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:min-w-[46%] lg:min-w-[calc(33.333%-11px)]",
+                "",
+              )}
+            >
+              <div
+                className="absolute inset-0 z-10 bg-linear-to-t from-background via-background/20 to-transparent opacity-90"
+                aria-hidden="true"
               />
-            ) : (
-              <div className="grid aspect-square place-items-center bg-card-hover text-muted-foreground">
-                <ImageIcon className="h-8 w-8" aria-hidden="true" />
+              {item.image ? (
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  className={cn(
+                    "w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]",
+                    "aspect-[4/3]",
+                  )}
+                  loading="lazy"
+                />
+              ) : (
+                <div className="grid aspect-square place-items-center bg-card-hover text-muted-foreground">
+                  <ImageIcon className="h-8 w-8" aria-hidden="true" />
+                </div>
+              )}
+              <span className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/60 text-foreground backdrop-blur">
+                <Maximize2 className="h-4 w-4" aria-hidden="true" />
+              </span>
+              <div className="absolute inset-x-0 bottom-0 z-20 p-4">
+                <p className="text-sm font-semibold text-foreground">{item.title}</p>
+                <p className="mt-1 text-sm text-secondary-foreground">{item.location}</p>
               </div>
-            )}
-            <span className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/60 text-foreground backdrop-blur">
-              <Maximize2 className="h-4 w-4" aria-hidden="true" />
-            </span>
-            <div className="absolute inset-x-0 bottom-0 z-20 p-4">
-              <p className="text-sm font-semibold text-foreground">{item.title}</p>
-              <p className="mt-1 text-sm text-secondary-foreground">{item.location}</p>
-            </div>
-          </button>
-        ))}
+            </button>
+          ))}
+        </div>
+        <CarouselArrows targetRef={galleryRef} />
       </div>
       <BlockCta label="COMEÇAR MEU PROJETO" onClick={onOpenModal} />
     </RevealSection>
@@ -990,13 +1024,17 @@ function GallerySection({
 
 /* ===================== VÍDEOS DE CLIENTES ===================== */
 function ClientVideosSection({ onOpenModal }: { onOpenModal: () => void }) {
+  const clientsRef = useRef<HTMLDivElement>(null);
   return (
     <RevealSection className="section-alt section-glow">
       <SectionHeading eyebrow="CLIENTES REAIS" title="Veja a reação de quem recebeu o Kit Olho na Brasa." centered />
-      <div className="client-videos-container mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible lg:grid-cols-3">
-        {clientVideos.map((video, idx) => (
-          <ClientVideoCard key={video.src} video={video} index={idx} />
-        ))}
+      <div className="relative mx-auto max-w-(--container-max)">
+        <div ref={clientsRef} className="client-videos-container flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {clientVideos.map((video, idx) => (
+            <ClientVideoCard key={video.src} video={video} index={idx} />
+          ))}
+        </div>
+        <CarouselArrows targetRef={clientsRef} />
       </div>
       <p className="mx-auto mt-6 max-w-2xl px-5 text-center text-sm text-secondary-foreground md:text-base">
         Mais de 100.000 kits entregues em todo o Brasil.
@@ -1052,7 +1090,7 @@ function ClientVideoCard({ video, index }: { video: ClientVideo; index: number }
   return (
     <article
       ref={cardRef}
-      className="client-video-card group min-w-[70%] snap-start overflow-hidden rounded-2xl border border-border bg-card shadow-soft md:min-w-0"
+      className="client-video-card group min-w-[70%] snap-start overflow-hidden rounded-2xl border border-border bg-card shadow-soft md:min-w-[40%] lg:min-w-[calc(33.333%-11px)]"
     >
       <div className="relative aspect-[9/16] overflow-hidden bg-black">
         <video
@@ -1251,6 +1289,7 @@ function GoogleLogo({ className }: { className?: string }) {
 }
 
 function GoogleReviewsSection({ onOpenModal }: { onOpenModal: () => void }) {
+  const reviewsRef = useRef<HTMLDivElement>(null);
   const mapsUrl =
     "https://www.google.com/maps/place/Olho+na+Brasa/@-27.1016701,-48.6187495,738m/data=!3m1!1e3!4m8!3m7!1s0x94d8b100c4230f17:0x899b6cbbbfaceb99!8m2!3d-27.1016701!4d-48.6161746!9m1!1b1!16s%2Fg%2F11rzr1kln5?entry=ttu&g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D";
   return (
@@ -1287,41 +1326,44 @@ function GoogleReviewsSection({ onOpenModal }: { onOpenModal: () => void }) {
         </a>
       </div>
 
-      <div className="google-reviews-carousel mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible">
-        {googleReviews.map((review, idx) => (
-          <article
-            key={idx}
-            className="google-review-card min-w-[85%] snap-start rounded-xl bg-white p-6 md:min-w-0"
-            style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }}
-          >
-            <div className="mb-3 flex items-center justify-between">
-              <GoogleLogo className="h-5 w-5" />
-              <div className="flex gap-0.5">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-current" style={{ color: "#FFB800" }} aria-hidden="true" />
-                ))}
+      <div className="relative mx-auto max-w-(--container-max)">
+        <div ref={reviewsRef} className="google-reviews-carousel flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {googleReviews.map((review, idx) => (
+            <article
+              key={idx}
+              className="google-review-card min-w-[85%] snap-start rounded-xl bg-white p-6 md:min-w-[46%] lg:min-w-[calc(33.333%-11px)]"
+              style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }}
+            >
+              <div className="mb-3 flex items-center justify-between">
+                <GoogleLogo className="h-5 w-5" />
+                <div className="flex gap-0.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-current" style={{ color: "#FFB800" }} aria-hidden="true" />
+                  ))}
+                </div>
               </div>
-            </div>
-            <blockquote className="text-sm leading-[1.6]" style={{ color: "#333" }}>
-              “{review.quote}”
-            </blockquote>
-            <div className="mt-5 flex items-center gap-3 border-t border-neutral-200 pt-4">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-neutral-200 text-neutral-500">
-                <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
-                  <path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-4 0-8 2-8 6v2h16v-2c0-4-4-6-8-6z" />
-                </svg>
+              <blockquote className="text-sm leading-[1.6]" style={{ color: "#333" }}>
+                “{review.quote}”
+              </blockquote>
+              <div className="mt-5 flex items-center gap-3 border-t border-neutral-200 pt-4">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-neutral-200 text-neutral-500">
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
+                    <path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-4 0-8 2-8 6v2h16v-2c0-4-4-6-8-6z" />
+                  </svg>
+                </div>
+                <div className="leading-tight">
+                  <p className="text-sm font-semibold" style={{ color: "#222" }}>
+                    {review.author}
+                  </p>
+                  <p className="text-xs" style={{ color: "#888" }}>
+                    Avaliação do Google
+                  </p>
+                </div>
               </div>
-              <div className="leading-tight">
-                <p className="text-sm font-semibold" style={{ color: "#222" }}>
-                  {review.author}
-                </p>
-                <p className="text-xs" style={{ color: "#888" }}>
-                  Avaliação do Google
-                </p>
-              </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))}
+        </div>
+        <CarouselArrows targetRef={reviewsRef} />
       </div>
 
       <BlockCta label="QUERO MEU PROJETO" onClick={onOpenModal} />
