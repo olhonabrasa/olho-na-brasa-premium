@@ -909,9 +909,7 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
     { Icon: Award, t: "15 anos de garantia", d: "O maior compromisso de durabilidade do mercado." },
   ];
   return (
-    <RevealSection
-      className="factory-section section-dark section-glow flex flex-col justify-center !py-8 md:!py-14"
-    >
+    <RevealSection className="factory-section section-dark section-glow flex flex-col justify-center !py-8 md:!py-14">
       <div className="factory-inner mx-auto w-full max-w-(--container-max) px-5">
         <div className="factory-text">
           <p className="section-label">POR DENTRO DA FÁBRICA</p>
@@ -922,12 +920,12 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
             Cada kit passa por dezenas de etapas antes de chegar na sua casa.
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-            Fábrica própria em Santa Catarina, aço inox 304 e produção sob medida: do corte à
-            solda, cada detalhe é feito à mão para durar a vida toda.
+            Fábrica própria em Santa Catarina, aço inox 304 e produção sob medida: do corte à solda, cada detalhe é
+            feito à mão para durar a vida toda.
           </p>
           <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-            Desde 2019 já transformamos mais de 100 mil churrasqueiras Brasil afora. Aqui nada é
-            de prateleira: seu kit é fabricado só depois do pedido — e sai com 15 anos de garantia.
+            Desde 2019 já transformamos mais de 100 mil churrasqueiras Brasil afora. Aqui nada é de prateleira: seu kit
+            é fabricado só depois do pedido — e sai com 15 anos de garantia.
           </p>
           <ul className="mt-6 grid gap-4 sm:grid-cols-2">
             {proof.map(({ Icon, t, d }) => (
@@ -949,7 +947,11 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
             className="factory-video glass-panel relative overflow-hidden rounded-2xl border border-border bg-black"
             style={{ aspectRatio: "9 / 16", height: "58svh", maxHeight: "58svh", maxWidth: "78vw" }}
           >
-            <AutoPauseVideo className="h-full w-full object-cover" src={fabricaVideo.url} poster={processCutAsset.url} />
+            <AutoPauseVideo
+              className="h-full w-full object-cover"
+              src={fabricaVideo.url}
+              poster={processCutAsset.url}
+            />
           </div>
         </div>
 
@@ -1005,7 +1007,10 @@ function GallerySection({
       <SectionHeading eyebrow="PROJETOS ENTREGUES" title="Galeria de churrasqueiras transformadas." centered />
 
       <div className="relative mx-auto max-w-(--container-max)">
-        <div ref={galleryRef} className="gallery-grid flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div
+          ref={galleryRef}
+          className="gallery-grid flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
           {galleryItems.map((item) => (
             <button
               key={`${item.title}-${item.location}`}
@@ -1059,7 +1064,10 @@ function ClientVideosSection({ onOpenModal }: { onOpenModal: () => void }) {
     <RevealSection className="section-alt section-glow">
       <SectionHeading eyebrow="CLIENTES REAIS" title="Veja a reação de quem recebeu o Kit Olho na Brasa." centered />
       <div className="relative mx-auto max-w-(--container-max)">
-        <div ref={clientsRef} className="client-videos-container flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div
+          ref={clientsRef}
+          className="client-videos-container flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
           {clientVideos.map((video, idx) => (
             <ClientVideoCard key={video.src} video={video} index={idx} />
           ))}
@@ -1331,7 +1339,6 @@ function GoogleReviewsSection({ onOpenModal }: { onOpenModal: () => void }) {
           <GoogleLogo className="h-6 w-6" />
           <span className="text-lg font-semibold text-foreground">Google</span>
         </div>
-        <div className="text-[32px] font-bold leading-none text-foreground">4.7</div>
         <div className="flex items-center gap-0.5" aria-label="4.7 de 5 estrelas">
           {[0, 1, 2, 3].map((i) => (
             <Star key={i} className="h-5 w-5 fill-current" style={{ color: "#FFB800" }} aria-hidden="true" />
@@ -1357,7 +1364,10 @@ function GoogleReviewsSection({ onOpenModal }: { onOpenModal: () => void }) {
       </div>
 
       <div className="relative mx-auto max-w-(--container-max)">
-        <div ref={reviewsRef} className="google-reviews-carousel flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div
+          ref={reviewsRef}
+          className="google-reviews-carousel flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
           {googleReviews.map((review, idx) => (
             <article
               key={idx}
@@ -1493,7 +1503,12 @@ function FloatingWhatsappButton({ onOpenChat }: { onOpenChat: () => void }) {
 
 function BlockCta({ label, onClick, fullWidth }: { label: string; onClick: () => void; fullWidth?: boolean }) {
   return (
-    <div className={cn("mx-auto mt-8 flex max-w-(--container-max) justify-center px-5 block-cta-wrap", fullWidth ? "px-0" : "")}>
+    <div
+      className={cn(
+        "mx-auto mt-8 flex max-w-(--container-max) justify-center px-5 block-cta-wrap",
+        fullWidth ? "px-0" : "",
+      )}
+    >
       <Button
         size="lg"
         onClick={onClick}
