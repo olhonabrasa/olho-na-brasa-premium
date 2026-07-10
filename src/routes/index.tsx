@@ -1326,41 +1326,44 @@ function GoogleReviewsSection({ onOpenModal }: { onOpenModal: () => void }) {
         </a>
       </div>
 
-      <div className="google-reviews-carousel mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible">
-        {googleReviews.map((review, idx) => (
-          <article
-            key={idx}
-            className="google-review-card min-w-[85%] snap-start rounded-xl bg-white p-6 md:min-w-0"
-            style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }}
-          >
-            <div className="mb-3 flex items-center justify-between">
-              <GoogleLogo className="h-5 w-5" />
-              <div className="flex gap-0.5">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-current" style={{ color: "#FFB800" }} aria-hidden="true" />
-                ))}
+      <div className="relative mx-auto max-w-(--container-max)">
+        <div ref={reviewsRef} className="google-reviews-carousel flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {googleReviews.map((review, idx) => (
+            <article
+              key={idx}
+              className="google-review-card min-w-[85%] snap-start rounded-xl bg-white p-6 md:min-w-[46%] lg:min-w-[calc(33.333%-11px)]"
+              style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }}
+            >
+              <div className="mb-3 flex items-center justify-between">
+                <GoogleLogo className="h-5 w-5" />
+                <div className="flex gap-0.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-current" style={{ color: "#FFB800" }} aria-hidden="true" />
+                  ))}
+                </div>
               </div>
-            </div>
-            <blockquote className="text-sm leading-[1.6]" style={{ color: "#333" }}>
-              “{review.quote}”
-            </blockquote>
-            <div className="mt-5 flex items-center gap-3 border-t border-neutral-200 pt-4">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-neutral-200 text-neutral-500">
-                <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
-                  <path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-4 0-8 2-8 6v2h16v-2c0-4-4-6-8-6z" />
-                </svg>
+              <blockquote className="text-sm leading-[1.6]" style={{ color: "#333" }}>
+                “{review.quote}”
+              </blockquote>
+              <div className="mt-5 flex items-center gap-3 border-t border-neutral-200 pt-4">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-neutral-200 text-neutral-500">
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
+                    <path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-4 0-8 2-8 6v2h16v-2c0-4-4-6-8-6z" />
+                  </svg>
+                </div>
+                <div className="leading-tight">
+                  <p className="text-sm font-semibold" style={{ color: "#222" }}>
+                    {review.author}
+                  </p>
+                  <p className="text-xs" style={{ color: "#888" }}>
+                    Avaliação do Google
+                  </p>
+                </div>
               </div>
-              <div className="leading-tight">
-                <p className="text-sm font-semibold" style={{ color: "#222" }}>
-                  {review.author}
-                </p>
-                <p className="text-xs" style={{ color: "#888" }}>
-                  Avaliação do Google
-                </p>
-              </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))}
+        </div>
+        <CarouselArrows targetRef={reviewsRef} />
       </div>
 
       <BlockCta label="QUERO MEU PROJETO" onClick={onOpenModal} />
