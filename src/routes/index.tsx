@@ -653,11 +653,11 @@ function HeroVideo({ videoSrc }: { videoSrc: string }) {
 /* ===================== HERO ===================== */
 function HeroSection({ onOpenModal: _onOpenModal }: { onOpenModal: () => void }) {
   return (
-    <section id="top" className="relative overflow-hidden bg-background">
+    <section id="top" className="hero-section relative overflow-hidden bg-background">
       <HeroVideo videoSrc={videoHeadlineAsset.url} />
-      <div className="px-4 pb-6 pt-5">
+      <div className="hero-content px-4 pb-6 pt-5">
         <h1
-          className="font-display text-foreground"
+          className="hero-headline font-display text-foreground"
           style={{
             fontFamily: "Inter, sans-serif",
             fontWeight: 800,
@@ -670,7 +670,7 @@ function HeroSection({ onOpenModal: _onOpenModal }: { onOpenModal: () => void })
         </h1>
 
         <p
-          className="mt-2 text-secondary-foreground"
+          className="hero-subtitle mt-2 text-secondary-foreground"
           style={{
             fontFamily: "Inter, sans-serif",
             fontWeight: 400,
@@ -682,7 +682,7 @@ function HeroSection({ onOpenModal: _onOpenModal }: { onOpenModal: () => void })
           O Kit Suporte Suspenso da <span style={{ color: "#FFFFFF", fontWeight: 600 }}>Olho na Brasa</span>
         </p>
 
-        <div className="mt-4">
+        <div className="mt-4 badges-marquee">
           <BenefitsMarquee />
         </div>
       </div>
