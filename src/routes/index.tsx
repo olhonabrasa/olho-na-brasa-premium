@@ -902,31 +902,61 @@ function ExpandableImage({
 
 /* ===================== PROCESSO / FÁBRICA ===================== */
 function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
+  const proof = [
+    { Icon: ShieldCheck, t: "Aço inox 304 alimentício", d: "Não enferruja, não oxida, não contamina." },
+    { Icon: Factory, t: "Feito sob medida", d: "Fabricado após o pedido, nas medidas exatas do seu espaço." },
+    { Icon: Hammer, t: "Acabamento feito à mão", d: "Solda invisível e 6 etapas de polimento." },
+    { Icon: Award, t: "15 anos de garantia", d: "O maior compromisso de durabilidade do mercado." },
+  ];
   return (
     <RevealSection
       className="factory-section section-dark section-glow flex flex-col justify-center !py-8 md:!py-14"
-      style={{ minHeight: "100svh" }}
     >
-      <div className="mx-auto mb-4 max-w-(--container-max) px-5">
-        <p className="section-label">POR DENTRO DA FÁBRICA</p>
-        <h2
-          className="mt-2 max-w-3xl font-display font-semibold leading-[1.05] text-balance text-foreground md:max-w-4xl"
-          style={{ fontSize: "clamp(1.25rem, 4.6vw, 2.5rem)" }}
-        >
-          Cada kit passa por dezenas de etapas antes de chegar na sua casa.
-        </h2>
-      </div>
+      <div className="factory-inner mx-auto w-full max-w-(--container-max) px-5">
+        <div className="factory-text">
+          <p className="section-label">POR DENTRO DA FÁBRICA</p>
+          <h2
+            className="mt-2 max-w-3xl font-display font-semibold leading-[1.05] text-balance text-foreground md:max-w-4xl"
+            style={{ fontSize: "clamp(1.25rem, 4.6vw, 2.5rem)" }}
+          >
+            Cada kit passa por dezenas de etapas antes de chegar na sua casa.
+          </h2>
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+            Fábrica própria em Santa Catarina, aço inox 304 e produção sob medida: do corte à
+            solda, cada detalhe é feito à mão para durar a vida toda.
+          </p>
+          <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+            Desde 2019 já transformamos mais de 100 mil churrasqueiras Brasil afora. Aqui nada é
+            de prateleira: seu kit é fabricado só depois do pedido — e sai com 15 anos de garantia.
+          </p>
+          <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+            {proof.map(({ Icon, t, d }) => (
+              <li key={t} className="flex items-start gap-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-card text-primary">
+                  <Icon className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <div>
+                  <p className="font-semibold text-foreground">{t}</p>
+                  <p className="text-sm text-muted-foreground">{d}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      <div className="mx-auto mb-5 flex w-full max-w-(--container-max) justify-center px-5">
-        <div
-          className="factory-video glass-panel relative overflow-hidden rounded-2xl border border-border bg-black"
-          style={{ aspectRatio: "9 / 16", height: "58svh", maxHeight: "58svh", maxWidth: "78vw" }}
-        >
-          <AutoPauseVideo className="h-full w-full object-cover" src={fabricaVideo.url} poster={processCutAsset.url} />
+        <div className="factory-media mt-6 flex w-full justify-center">
+          <div
+            className="factory-video glass-panel relative overflow-hidden rounded-2xl border border-border bg-black"
+            style={{ aspectRatio: "9 / 16", height: "58svh", maxHeight: "58svh", maxWidth: "78vw" }}
+          >
+            <AutoPauseVideo className="h-full w-full object-cover" src={fabricaVideo.url} poster={processCutAsset.url} />
+          </div>
+        </div>
+
+        <div className="factory-cta mt-6">
+          <BlockCta label="QUERO UM KIT DESSES" onClick={onOpenModal} />
         </div>
       </div>
-
-      <BlockCta label="QUERO UM KIT DESSES" onClick={onOpenModal} />
     </RevealSection>
   );
 }
