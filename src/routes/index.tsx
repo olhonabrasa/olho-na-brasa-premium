@@ -1163,12 +1163,12 @@ function DifferentialsSection() {
   ];
   return (
     <RevealSection className="section-dark">
-      <div className="mx-auto grid max-w-(--container-max) grid-cols-2 gap-2.5 px-4 md:grid-cols-5">
+      <div className="trust-grid mx-auto grid max-w-(--container-max) grid-cols-2 gap-2.5 px-4 md:grid-cols-5">
         {items.map(({ t, d, Icon, wide }) => (
           <div
             key={t}
             className={cn(
-              "flex flex-col items-center rounded-xl border p-3.5 text-center backdrop-blur-sm",
+              "trust-card flex flex-col items-center rounded-xl border p-3.5 text-center backdrop-blur-sm",
               wide ? "col-span-2 md:col-span-1" : "",
             )}
             style={{ background: "#1a1a1a", borderColor: "#2a2a2a", borderWidth: "0.5px" }}
