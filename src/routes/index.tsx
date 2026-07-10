@@ -942,6 +942,18 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
           </ul>
         </div>
 
+        <div className="factory-text-mobile lg:hidden text-center">
+          <p className="section-label" style={{ display: "inline-flex" }}>POR DENTRO DA FÁBRICA</p>
+          <h2
+            className="mx-auto mt-2 max-w-3xl font-display font-semibold leading-[1.05] text-balance text-foreground"
+            style={{ fontSize: "clamp(1.5rem, 5vw, 2.75rem)" }}
+          >
+            Cada kit passa por dezenas de etapas antes de chegar na sua casa.
+          </h2>
+        </div>
+
+
+
 
         <div className="factory-media mt-6 flex w-full justify-center">
           <div
