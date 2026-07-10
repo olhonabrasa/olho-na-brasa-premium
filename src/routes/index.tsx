@@ -1090,7 +1090,7 @@ function ClientVideoCard({ video, index }: { video: ClientVideo; index: number }
   return (
     <article
       ref={cardRef}
-      className="client-video-card group min-w-[70%] snap-start overflow-hidden rounded-2xl border border-border bg-card shadow-soft md:min-w-0"
+      className="client-video-card group min-w-[70%] snap-start overflow-hidden rounded-2xl border border-border bg-card shadow-soft md:min-w-[40%] lg:min-w-[calc(33.333%-11px)]"
     >
       <div className="relative aspect-[9/16] overflow-hidden bg-black">
         <video
