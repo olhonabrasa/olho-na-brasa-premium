@@ -1421,7 +1421,7 @@ function FloatingWhatsappButton({ onOpenChat }: { onOpenChat: () => void }) {
 
 function BlockCta({ label, onClick, fullWidth }: { label: string; onClick: () => void; fullWidth?: boolean }) {
   return (
-    <div className={cn("mx-auto mt-8 flex max-w-(--container-max) justify-center px-5", fullWidth ? "px-0" : "")}>
+    <div className={cn("mx-auto mt-8 flex max-w-(--container-max) justify-center px-5 block-cta-wrap", fullWidth ? "px-0" : "")}>
       <Button
         size="lg"
         onClick={onClick}
