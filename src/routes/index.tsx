@@ -819,7 +819,7 @@ function BeforeAfterSection({
 
       <div className="mx-auto max-w-(--container-max) px-4">
         <div
-          className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="before-after-carousel flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           style={{ WebkitOverflowScrolling: "touch" }}
           onScroll={(e) => {
             const el = e.currentTarget;
@@ -828,7 +828,7 @@ function BeforeAfterSection({
           }}
         >
           {beforeAfterPairs.map((pair) => (
-            <article key={pair.title} className="w-full shrink-0 snap-center">
+            <article key={pair.title} className="before-after-card w-full shrink-0 snap-center">
               <BeforeAfterSlider
                 before={pair.before}
                 after={pair.after}
