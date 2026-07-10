@@ -1331,7 +1331,7 @@ function GoogleReviewsSection({ onOpenModal }: { onOpenModal: () => void }) {
 
 function FaqSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
-    <RevealSection className="section-dark">
+    <RevealSection className="faq-section section-dark">
       <SectionHeading title="Dúvidas frequentes" centered />
       <div className="mx-auto max-w-4xl px-5">
         <Accordion type="single" collapsible className="rounded-2xl border border-border bg-card px-5 py-2 shadow-soft">
