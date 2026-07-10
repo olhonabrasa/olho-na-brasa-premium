@@ -1289,6 +1289,7 @@ function GoogleLogo({ className }: { className?: string }) {
 }
 
 function GoogleReviewsSection({ onOpenModal }: { onOpenModal: () => void }) {
+  const reviewsRef = useRef<HTMLDivElement>(null);
   const mapsUrl =
     "https://www.google.com/maps/place/Olho+na+Brasa/@-27.1016701,-48.6187495,738m/data=!3m1!1e3!4m8!3m7!1s0x94d8b100c4230f17:0x899b6cbbbfaceb99!8m2!3d-27.1016701!4d-48.6161746!9m1!1b1!16s%2Fg%2F11rzr1kln5?entry=ttu&g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D";
   return (
