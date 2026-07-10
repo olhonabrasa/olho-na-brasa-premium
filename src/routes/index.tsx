@@ -1355,7 +1355,7 @@ function FaqSection({ onOpenModal }: { onOpenModal: () => void }) {
 /* ===================== CTA FINAL ===================== */
 function FinalCtaSection({ onOpenModal }: { onOpenModal: () => void }) {
   return (
-    <RevealSection className="section-cta">
+    <RevealSection className="final-cta-section section-cta">
       <section className="mx-auto max-w-4xl px-5 text-center">
         <div className="relative overflow-hidden rounded-3xl border border-border-strong bg-card px-6 py-10 shadow-fire md:px-10 md:py-14">
           <div
