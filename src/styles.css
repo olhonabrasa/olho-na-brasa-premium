@@ -354,12 +354,28 @@
   .badges-marquee .marquee-mask { mask-image: none; -webkit-mask-image: none; overflow: visible; }
   .badges-marquee .marquee-track > *:nth-child(n+7) { display: none; }
 
-  /* FÁBRICA — vídeo vertical MAIOR e sem vazio (mantém 9/16 inline do componente) */
+  /* FÁBRICA — split: texto + copy + CTA à esquerda, vídeo à direita */
   .factory-section { min-height: auto !important; }
+  .factory-inner {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    grid-template-areas:
+      "text  media"
+      "cta   media";
+    column-gap: 64px;
+    align-items: center;
+  }
+  .factory-text { grid-area: text; text-align: left !important; }
+  .factory-text > h2,
+  .factory-text > p,
+  .factory-text > ul { margin-left: 0 !important; margin-right: 0 !important; }
+  .factory-media { grid-area: media; margin-top: 0 !important; justify-content: flex-end; align-self: center; }
+  .factory-cta   { grid-area: cta; margin-top: 24px !important; justify-content: flex-start; }
   .factory-video {
-    height: 70svh !important;
-    max-height: 660px !important;
-    max-width: none !important;
+    height: auto !important;
+    width: 100% !important;
+    max-width: 340px !important;
+    max-height: 74svh !important;
   }
 
   /* Trust cards em uma linha (já é md:grid-cols-5) */
