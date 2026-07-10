@@ -1024,13 +1024,17 @@ function GallerySection({
 
 /* ===================== VÍDEOS DE CLIENTES ===================== */
 function ClientVideosSection({ onOpenModal }: { onOpenModal: () => void }) {
+  const clientsRef = useRef<HTMLDivElement>(null);
   return (
     <RevealSection className="section-alt section-glow">
       <SectionHeading eyebrow="CLIENTES REAIS" title="Veja a reação de quem recebeu o Kit Olho na Brasa." centered />
-      <div className="client-videos-container mx-auto flex max-w-(--container-max) snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible lg:grid-cols-3">
-        {clientVideos.map((video, idx) => (
-          <ClientVideoCard key={video.src} video={video} index={idx} />
-        ))}
+      <div className="relative mx-auto max-w-(--container-max)">
+        <div ref={clientsRef} className="client-videos-container flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {clientVideos.map((video, idx) => (
+            <ClientVideoCard key={video.src} video={video} index={idx} />
+          ))}
+        </div>
+        <CarouselArrows targetRef={clientsRef} />
       </div>
       <p className="mx-auto mt-6 max-w-2xl px-5 text-center text-sm text-secondary-foreground md:text-base">
         Mais de 100.000 kits entregues em todo o Brasil.
