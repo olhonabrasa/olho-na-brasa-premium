@@ -596,7 +596,7 @@ function HeroVideo({ videoSrc }: { videoSrc: string }) {
 
   return (
     <div
-      className="relative w-full overflow-hidden bg-black cursor-pointer"
+      className="hero-video-container relative w-full overflow-hidden bg-black cursor-pointer"
       onClick={showSoundPrompt ? handleActivateSound : undefined}
       style={{ aspectRatio: "4 / 3" }}
     >
