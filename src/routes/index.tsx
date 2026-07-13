@@ -328,7 +328,7 @@ const faqItems = [
   {
     question: "O Kit Premium inclui o quê?",
     answer:
-      "Grelha Uruguaia Premium (quadro 6mm, varões 5mm), Grelha de Descanso, Suporte Suspenso e Espetos Duplos de brinde. Tudo em Inox 304 alimentício, sob medida.",
+      "Grelha Uruguaia Premium (quadro 6mm, varões 5mm), Grelha de Descanso, Suporte Suspenso e Espetos. Tudo em Inox 304 alimentício, sob medida.",
   },
 ];
 
@@ -943,7 +943,9 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
         </div>
 
         <div className="factory-text-mobile lg:hidden text-center">
-          <p className="section-label" style={{ display: "inline-flex" }}>POR DENTRO DA FÁBRICA</p>
+          <p className="section-label" style={{ display: "inline-flex" }}>
+            POR DENTRO DA FÁBRICA
+          </p>
           <h2
             className="mx-auto mt-2 max-w-3xl font-display font-semibold leading-[1.05] text-balance text-foreground"
             style={{ fontSize: "clamp(1.5rem, 5vw, 2.75rem)" }}
@@ -951,9 +953,6 @@ function ProcessSection({ onOpenModal }: { onOpenModal: () => void }) {
             Cada kit passa por dezenas de etapas antes de chegar na sua casa.
           </h2>
         </div>
-
-
-
 
         <div className="factory-media mt-6 flex w-full justify-center">
           <div
@@ -1442,7 +1441,6 @@ function FaqSection({ onOpenModal }: { onOpenModal: () => void }) {
           ))}
         </Accordion>
       </div>
-      
     </RevealSection>
   );
 }
@@ -1914,7 +1912,6 @@ function SectionHeading({ eyebrow, title, description, centered }: SectionHeadin
           {description}
         </p>
       ) : null}
-
     </div>
   );
 }
